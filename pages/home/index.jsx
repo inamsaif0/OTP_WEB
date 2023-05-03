@@ -226,14 +226,14 @@ export default function MiniDrawer() {
               </ListItemButton>
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemButton sx={{ pl: 4 }} href='/users/userList'>
                     <ListItemIcon>
                       <StarBorder />
                     </ListItemIcon>
                     <ListItemText primary="User List" />
 
                   </ListItemButton>
-                  <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemButton sx={{ pl: 4 }} href='/users/createUser'>
                     <ListItemIcon>
                       <StarBorder />
                     </ListItemIcon>
@@ -279,14 +279,14 @@ export default function MiniDrawer() {
               </ListItemButton>
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemButton sx={{ pl: 4 }} href='/content/contentList'>
                     <ListItemIcon>
                       <StarBorder />
                     </ListItemIcon>
                     <ListItemText primary="List" />
 
                   </ListItemButton>
-                  <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemButton sx={{ pl: 4 }} href='/content/addFiles'>
                     
                     <ListItemIcon>
                       <StarBorder />
@@ -317,6 +317,7 @@ export default function MiniDrawer() {
                   px: 2.5,
                 }}
                 onClick={handleClick}
+                href="../login/Login"
               >
                 <ListItemIcon
                   sx={{

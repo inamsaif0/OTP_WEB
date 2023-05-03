@@ -6,6 +6,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Button, Stack } from '@mui/material';
+import Link from '@mui/material/Link';
+
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -21,15 +26,18 @@ const rows = [
 
 export default function BasicTable() {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 850 }} aria-label="simple table">
+    <Stack>
+    <TableContainer component={Paper} sx={{borderRadius:'15px 15px 15px 15px'}}>
+      <Table sx={{ minWidth: 900 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+          <TableCell>No</TableCell>
+
+            <TableCell>Student Name</TableCell>
+            <TableCell align="right">StudentID&nbsp;(email)</TableCell>
+            <TableCell align="right">Level</TableCell>
+            <TableCell align="right">Status</TableCell>
+            <TableCell align="center">Options</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -45,10 +53,20 @@ export default function BasicTable() {
               <TableCell align="right">{row.fat}</TableCell>
               <TableCell align="right">{row.carbs}</TableCell>
               <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">
+                <Stack flexDirection='row'>
+                <Button><Link><EditIcon/></Link></Button>
+                <Button><Link><DeleteIcon/></Link> 
+</Button>
+{/* <Button color="tertiary" /> */}
+                </Stack>
+              </TableCell>
+
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+    </Stack>
   );
 }

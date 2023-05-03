@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Paper, Avatar, TextField, Button, Typography, Link } from '@mui/material'
+import { Grid, Paper, Avatar, TextField, Button, Typography, Link, Stack} from '@mui/material'
 import Checkbox from '@mui/material/Checkbox';
 import { FormControlLabel } from '@mui/material';
 
@@ -10,7 +10,7 @@ import { redirect } from 'next/dist/server/api-utils';
 const Login = ({ handleChange }) => {
 
     //STYLING
-    const paperStyle = { padding: 20, height: '73vh', width: 300, margin: "0 auto", marginTop:'5rem' }
+    const paperStyle = { padding: 20, height: '73vh', width: 300, margin: "0 auto", marginTop:'5rem', borderRadius:'15px 15px 15px 15px' }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btnstyle = { margin: '8px 0' }
     //STATE
@@ -44,6 +44,7 @@ const Login = ({ handleChange }) => {
                 <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                     {(props) => (
                         <Form action='../api/login' method='post'>
+                            <Stack gap="1rem">
                             <Field as={TextField} label='Username' name="username"
                                 placeholder='Enter username' fullWidth required
                                 helperText={<ErrorMessage name="username" />}
@@ -61,7 +62,8 @@ const Login = ({ handleChange }) => {
                                 label="Remember me"
                             />
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
-                                style={btnstyle} fullWidth href="../dashboard">{props.isSubmitting ? "Loading" : "Log in"}</Button>
+                                style={btnstyle} fullWidth href="../home">{props.isSubmitting ? "Loading" : "Log in"}</Button>
+                        </Stack>
                         </Form>
                     )}
                 </Formik>
