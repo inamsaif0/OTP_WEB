@@ -19,7 +19,15 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+import ClearAllOutlinedIcon from '@mui/icons-material/ClearAllOutlined';
+import ChecklistOutlinedIcon from '@mui/icons-material/ChecklistOutlined';
+import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
 ///
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import Collapse from '@mui/material/Collapse';
 import StarBorder from '@mui/icons-material/StarBorder';
@@ -184,7 +192,7 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  <MailIcon />
+                  <DashboardIcon color="primary" />
                 </ListItemIcon>
                 <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
 
@@ -219,7 +227,7 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  <MailIcon />
+                  <GroupAddIcon color='primary' />
                 </ListItemIcon>
                 <ListItemText primary="Users" sx={{ opacity: open ? 1 : 0 }} />
 
@@ -228,14 +236,14 @@ export default function MiniDrawer() {
                 <List component="div" disablePadding>
                   <ListItemButton sx={{ pl: 4 }} href='/users/userList'>
                     <ListItemIcon>
-                      <StarBorder />
+                    <ClearAllOutlinedIcon color="primary"/>
                     </ListItemIcon>
                     <ListItemText primary="User List" />
 
                   </ListItemButton>
                   <ListItemButton sx={{ pl: 4 }} href='/users/createUser'>
                     <ListItemIcon>
-                      <StarBorder />
+                      <AddOutlinedIcon color="primary"/>
                     </ListItemIcon>
                     <ListItemText primary="Create User" />
 
@@ -272,7 +280,8 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  <MailIcon />
+
+                  < ContentPasteIcon color='primary'/>
                 </ListItemIcon>
                 <ListItemText primary="Content" sx={{ opacity: open ? 1 : 0 }} />
 
@@ -281,7 +290,7 @@ export default function MiniDrawer() {
                 <List component="div" disablePadding>
                   <ListItemButton sx={{ pl: 4 }} href='/content/contentList'>
                     <ListItemIcon>
-                      <StarBorder />
+                      <ChecklistOutlinedIcon color='primary'/>
                     </ListItemIcon>
                     <ListItemText primary="List" />
 
@@ -289,7 +298,7 @@ export default function MiniDrawer() {
                   <ListItemButton sx={{ pl: 4 }} href='/content/addFiles'>
                     
                     <ListItemIcon>
-                      <StarBorder />
+                      <PictureAsPdfOutlinedIcon color='primary'/>
                     </ListItemIcon>
                     <ListItemText primary="Add Files" />
 
@@ -326,7 +335,7 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  <MailIcon />
+                  <LogoutIcon color='primary'/>
                 </ListItemIcon>
                 <ListItemText primary="Log Out" sx={{ opacity: open ? 1 : 0 }} />
 

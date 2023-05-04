@@ -8,7 +8,7 @@ import * as Yup from 'yup'
 import { redirect } from 'next/dist/server/api-utils';
 import Select from '../component/Select';
 
-const CreateUserForm = ( props,{ handleChange }) => {
+const CreateUserForm = ( props) => {
 
     //STYLING
     const paperStyle = { padding: 20, height: '73vh', width: 400, margin: "0 auto", marginTop:'5rem', borderRadius:'15px 15px 15px 15px' }

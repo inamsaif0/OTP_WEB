@@ -47,9 +47,7 @@ export default function Dashboard() {
                         }}
                     />
                     <Button variant="contained" onClick={handleOpen} sx={{width:'150px',height:'50px'}}>Add New</Button>
-
-                </Stack>
-                <Modal
+                    <Modal
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
@@ -61,7 +59,12 @@ export default function Dashboard() {
 
                     </Box>
                 </Modal>
-                <Table />
+                </Stack>
+
+                <Stack>
+                    <Table />
+                </Stack>
+                
             </Stack>
         </Layout>
     )

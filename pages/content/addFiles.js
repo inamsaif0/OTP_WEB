@@ -6,7 +6,7 @@ import AddFilesSource from '../../component/AddFilesSource'
 export default function Dashboard(){
     return (
         <Layout>
-            <Stack flexDirection={'column'} alignItems='center' justifyContent='center' gap='2rem' ml="20rem" >
+            <Stack flexDirection={'column'} alignItems='center' justifyContent='center' gap='2rem' >
                 <AddFilesSource/>
             </Stack>
         </Layout>
