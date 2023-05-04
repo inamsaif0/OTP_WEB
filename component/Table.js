@@ -31,8 +31,7 @@ export default function BasicTable() {
       <Table sx={{ minWidth: 900 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-          <TableCell>No</TableCell>
-
+            <TableCell>No</TableCell>
             <TableCell>Student Name</TableCell>
             <TableCell align="right">StudentID&nbsp;(email)</TableCell>
             <TableCell align="right">Level</TableCell>

@@ -28,6 +28,12 @@ const names = [
   'Virginia Andrews',
   'Kelly Snyder',
 ];
+const initialValues = {
+  student: '',
+  teacher: '',
+  level:'',
+
+}
 
 function getStyles(name, personName, theme) {
   return {
@@ -50,13 +56,14 @@ export default function MultipleSelectPlaceholder(props) {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
+    console.log(value);
+    return value;
   };
 
   return (
     <div>
-      <FormControl sx={{  width: 360 }}>
+      <FormControl sx={{  width: 360 }} initialValues={initialValues}>
         <Select
-          multiple
           displayEmpty
           value={personName}
           onChange={handleChange}
@@ -70,7 +77,10 @@ export default function MultipleSelectPlaceholder(props) {
           }}
           MenuProps={MenuProps}
           inputProps={{ 'aria-label': 'Without label' }}
+          name={props.name}
+          label={props.label}
         >
+          
           <MenuItem disabled value="">
             <em>{props.level}</em>
           </MenuItem>

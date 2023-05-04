@@ -58,10 +58,9 @@ const CreateUserForm = ( props) => {
                                 placeholder='Enter password' type='password' fullWidth required
                                 helperText={<ErrorMessage name="password" />} />
                             
-                            
                             <Select level="Level"/>
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
-                                style={btnstyle} fullWidth href="/users/userList">{props.isSubmitting ? "Loading" : "Create User"}</Button>
+                                style={btnstyle} fullWidth>{props.isSubmitting ? "Loading" : "Create User"}</Button>
 
                             </Stack>
                             {/* <Field as={TextField} label='Name ' name="Name"
