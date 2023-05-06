@@ -1,6 +1,5 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
+module.exports = {
+    env:{
+       MONGO_URI:"mongodb+srv://otp:inamsaif@cluster0.jnbirzy.mongodb.net/"
+    }
 }
-
-module.exports = nextConfig
