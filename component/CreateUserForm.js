@@ -11,9 +11,9 @@ import Select from '../component/Select';
 const CreateUserForm = ( props) => {
 
     //STYLING
-    const paperStyle = { padding: 20, height: '73vh', width: 400, margin: "0 auto", marginTop:'5rem', borderRadius:'15px 15px 15px 15px' }
+    const paperStyle = { padding: 20, height: 'auto', width: 400, margin: "0 auto", marginTop:'5rem', borderRadius:'15px 15px 15px 15px' }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
-    const btnstyle = { margin: '8px 0' }
+    const btnstyle = { margin: '8px 0',background:'' }
     //STATE
     const initialValues = {
         username: '',
@@ -36,7 +36,7 @@ const CreateUserForm = ( props) => {
 
     }
     return (
-        <Grid>
+        <Grid sm='2' lg='1' sx={{display:'flex', ml:'20rem'}}>
             <Paper style={paperStyle}>
                 <Grid align='center'>
                 
@@ -59,10 +59,11 @@ const CreateUserForm = ( props) => {
                                 helperText={<ErrorMessage name="password" />} />
                             
                             <Select level="Level"/>
-                            <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
+                            <Button type='submit' disabled={props.isSubmitting}
                                 style={btnstyle} fullWidth>{props.isSubmitting ? "Loading" : "Create User"}</Button>
 
                             </Stack>
+                        
                             {/* <Field as={TextField} label='Name ' name="Name"
                                 placeholder='Enter Name' fullWidth required
                                 helperText={<ErrorMessage name="Name" />}

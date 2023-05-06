@@ -46,7 +46,10 @@ export default function Dashboard() {
                             )
                         }}
                     />
-                    <Button variant="contained" onClick={handleOpen} sx={{width:'150px',height:'50px'}}>Add New</Button>
+                    {/* <Button onClick={handleOpen} sx={{width:'150px',height:'50px'}}>Add New</Button> */}
+                    <Button 
+    style={{background:'linear-gradient(to right top, #430089, #82ffa1)', color: '#FFFFFF',width:'150px',height:'50px'}}
+    >Add New</Button>
                     <Modal
                     open={open}
                     onClose={handleClose}

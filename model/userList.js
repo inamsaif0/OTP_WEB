@@ -23,4 +23,4 @@ const userListSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model.userList || mongoose.model('userList',userListSchema);
+module.exports = mongoose.models['userList'] || mongoose.model('userList',userListSchema);

@@ -10,31 +10,7 @@ import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
+import Select from '../component/Select'
 
 const initialValues = {
   student: '',
@@ -55,7 +31,7 @@ const CreateUserForm = (props) => {
     //STYLING
     const [personName, setPersonName] = React.useState([]);
 
-    const paperStyle = { padding: 20, height: '73vh', width: 400, margin: "0 auto", marginTop: '5rem', borderRadius: '15px 15px 15px 15px' }
+    const paperStyle = { padding: 20, height: 'auto', width: 400, margin: "0 auto", marginTop: '5rem', borderRadius: '15px 15px 15px 15px' }
     // const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btnstyle = { margin: '8px 0' }
     //STATE
@@ -96,112 +72,9 @@ const CreateUserForm = (props) => {
                         <Form action='../api/login' method='post' >
                             <Stack gap='1rem'>
 
-                                <Stack>
-                                    <FormControl sx={{ width: 360 }}>
-                                        <Select
-                                            displayEmpty
-                                            value={personName}
-                                            onChange={handleChange}
-                                            input={<OutlinedInput />}
-                                            renderValue={(selected) => {
-                                                if (selected.length === 0) {
-                                                    return <em>{props.level}</em>;
-                                                }
-
-                                                return selected.join(', ');
-                                            }}
-                                            MenuProps={MenuProps}
-                                            inputProps={{ 'aria-label': 'Without label' }}
-                                            name={props.name}
-                                            label={props.label}
-                                        >
-
-                                            <MenuItem disabled value="">
-                                                <em>{props.level}</em>
-                                            </MenuItem>
-                                            {names.map((name) => (
-                                                <MenuItem
-                                                    key={name}
-                                                    value={name}
-                                                    style={getStyles(name, personName, theme)}
-                                                >
-                                                    {name}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </Stack>
-                                <Stack>
-                                    <FormControl sx={{ width: 360 }} >
-                                        <Select
-                                            displayEmpty
-                                            value={personName}
-                                            onChange={handleChange}
-                                            input={<OutlinedInput />}
-                                            renderValue={(selected) => {
-                                                if (selected.length === 0) {
-                                                    return <em>{props.level}</em>;
-                                                }
-
-                                                return selected.join(', ');
-                                            }}
-                                            MenuProps={MenuProps}
-                                            inputProps={{ 'aria-label': 'Without label' }}
-                                            name={props.name}
-                                            label={props.label}
-                                        >
-
-                                            <MenuItem disabled value="">
-                                                <em>{props.level}</em>
-                                            </MenuItem>
-                                            {names.map((name) => (
-                                                <MenuItem
-                                                    key={name}
-                                                    value={name}
-                                                    style={getStyles(name, personName, theme)}
-                                                >
-                                                    {name}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </Stack>
-                                <Stack>
-                                    <FormControl sx={{ width: 360 }} >
-                                        <Select
-                                            displayEmpty
-                                            value={personName}
-                                            onChange={handleChange}
-                                            input={<OutlinedInput />}
-                                            renderValue={(selected) => {
-                                                if (selected.length === 0) {
-                                                    return <em>{props.level}</em>;
-                                                }
-
-                                                return selected.join(', ');
-                                            }}
-                                            MenuProps={MenuProps}
-                                            inputProps={{ 'aria-label': 'Without label' }}
-                                            name={personName}
-                                            label={personName}
-                                        >
-
-                                            <MenuItem disabled value="">
-                                                <em>{props.level}</em>
-                                            </MenuItem>
-                                            {names.map((name) => (
-                                                <MenuItem
-                                                    key={name}
-                                                    value={name}
-                                                    style={getStyles(name, personName, theme)}
-                                                >
-                                                    {name}
-                                                </MenuItem>
-                                            ))}  
-                                        </Select>
-                                    </FormControl>
-                                </Stack>
-
+                                <Select label='Teacher'/>
+                                <Select label='Student'/>
+                                <Select label='level'/>
                                 {/* <DatePicker label="Basic date picker" /> */}
 
                                 <label htmlFor="upload-photo">
@@ -211,7 +84,7 @@ const CreateUserForm = (props) => {
                                         name="upload-photo"
                                         type="file"
                                     />
-
+ 
                                     <Button color="secondary" variant="contained" component="span" fullWidth>
                                         Files
                                     </Button>{" "}

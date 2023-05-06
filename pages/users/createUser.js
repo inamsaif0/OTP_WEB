@@ -6,7 +6,7 @@ import CreateUserForm from '../../component/CreateUserForm';
 export default function Dashboard(){
     return (
         <Layout>
-            <Stack flexDirection={'column'} alignItems='center' justifyContent='center' gap='2rem' marginLeft='20rem'>
+            <Stack flexDirection={'column'} alignItems='center' justifyContent='center' gap='2rem'>
                 <CreateUserForm level="Level"/>
             </Stack>
         </Layout>

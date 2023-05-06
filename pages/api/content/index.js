@@ -1,5 +1,5 @@
 import connect from '../../../lib/mongodb'
-import userList from '../../../model/userList'
+import contentList from '../../../model/contentList'
 
 connect();
 
@@ -9,7 +9,7 @@ export default async (req, res) => {
     switch(method) {
         case 'GET':
             try{
-                const list = await userList.find({});
+                const list = await contentList.find({});
                 res.status(200).json({success: true, data: list})
             } catch(error){
                 res.status(400).json({success: false})
@@ -18,7 +18,7 @@ export default async (req, res) => {
 
         case 'POST':
             try {
-                const list = await userList.create(req.body);
+                const list = await contentList.create(req.body);
                 res.status(201).json({ success: true, data: list})
             }    
             catch (error){

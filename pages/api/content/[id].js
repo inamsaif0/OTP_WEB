@@ -1,6 +1,6 @@
 
 import connect from '../../../lib/mongodb'
-import userList from '../../../model/userList';
+import contentList from '../../../model/contentList';
 
 connect();
 
@@ -10,7 +10,7 @@ export default async (req, res) => {
     switch (method) {
         case 'GET':
             try {
-                const list = await userList.findbyId(id);
+                const list = await contentList.findbyId(id);
                 if(!list){
                     res.status(400).json({ success: false })
 
@@ -23,7 +23,7 @@ export default async (req, res) => {
 
         case 'PUT':
             try {
-                const updateList = await userList.findByIdAndUpdate(id, req.body, {
+                const updateList = await contentList.findByIdAndUpdate(id, req.body, {
                     new: true,
                     runValidators: true
                 });
@@ -38,7 +38,7 @@ export default async (req, res) => {
 
          case 'DELETE':
             try {
-                const deleteList = await userList.deleteOne({_id: id});
+                const deleteList = await contentList.deleteOne({_id: id});
                 if(!deleteList) {
                     res.status(400).json({success:false})
                 }

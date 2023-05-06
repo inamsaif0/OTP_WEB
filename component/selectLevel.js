@@ -54,7 +54,7 @@ function getStyles(name, personName, theme) {
 
 export default function MultipleSelectChip(props) {
   const theme = useTheme();
-  const [   personName, setPersonName] = React.useState([]);
+  const [ personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
     const {
@@ -73,6 +73,7 @@ export default function MultipleSelectChip(props) {
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
+          multiple
           value={personName}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label={props.label} />}
@@ -100,7 +101,7 @@ export default function MultipleSelectChip(props) {
               value={level}
               style={getStyles(level, personName, theme)}
             >
-              {level}
+              {name}
             </MenuItem>
           ))}
         </Select>

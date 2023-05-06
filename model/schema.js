@@ -13,8 +13,8 @@ const userSchema = new mongoose.Schema({
     remember:{
         type:Boolean,
         required:[true,'please check it'],
-        
+
     }
 })
 
-module.exports = mongoose.models.User || mongoose.model('User',userSchema);
+module.exports = mongoose.models['User'] || mongoose.model('User',userSchema);

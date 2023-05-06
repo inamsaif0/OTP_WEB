@@ -139,11 +139,11 @@ export default function MiniDrawer() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex'}}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} sx={{background: 'linear-gradient(to right bottom, #430089, #82ffa1)'}}> 
         <Toolbar>
-          <IconButton
+          <IconButton   
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -163,7 +163,7 @@ export default function MiniDrawer() {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -190,9 +190,10 @@ export default function MiniDrawer() {
                     minWidth: 0,
                     mr: open ? 3 : 'auto',
                     justifyContent: 'center',
+                    
                   }}
                 >
-                  <DashboardIcon color="primary" />
+                  <DashboardIcon  sx={{color: '#430089'}}/>
                 </ListItemIcon>
                 <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
 
@@ -227,7 +228,7 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  <GroupAddIcon color='primary' />
+                  <GroupAddIcon sx={{color: '#430089'}} />
                 </ListItemIcon>
                 <ListItemText primary="Users" sx={{ opacity: open ? 1 : 0 }} />
 
@@ -236,14 +237,14 @@ export default function MiniDrawer() {
                 <List component="div" disablePadding>
                   <ListItemButton sx={{ pl: 4 }} href='/users/userList'>
                     <ListItemIcon>
-                    <ClearAllOutlinedIcon color="primary"/>
+                    <ClearAllOutlinedIcon sx={{color: '#430089'}}/>
                     </ListItemIcon>
                     <ListItemText primary="User List" />
 
                   </ListItemButton>
                   <ListItemButton sx={{ pl: 4 }} href='/users/createUser'>
                     <ListItemIcon>
-                      <AddOutlinedIcon color="primary"/>
+                      <AddOutlinedIcon sx={{color: '#430089'}}/>
                     </ListItemIcon>
                     <ListItemText primary="Create User" />
 
@@ -281,7 +282,7 @@ export default function MiniDrawer() {
                   }}
                 >
 
-                  < ContentPasteIcon color='primary'/>
+                  < ContentPasteIcon sx={{color: '#430089'}}/>
                 </ListItemIcon>
                 <ListItemText primary="Content" sx={{ opacity: open ? 1 : 0 }} />
 
@@ -290,7 +291,7 @@ export default function MiniDrawer() {
                 <List component="div" disablePadding>
                   <ListItemButton sx={{ pl: 4 }} href='/content/contentList'>
                     <ListItemIcon>
-                      <ChecklistOutlinedIcon color='primary'/>
+                      <ChecklistOutlinedIcon sx={{color: '#430089'}}/>
                     </ListItemIcon>
                     <ListItemText primary="List" />
 
@@ -298,7 +299,7 @@ export default function MiniDrawer() {
                   <ListItemButton sx={{ pl: 4 }} href='/content/addFiles'>
                     
                     <ListItemIcon>
-                      <PictureAsPdfOutlinedIcon color='primary'/>
+                      <PictureAsPdfOutlinedIcon sx={{color: '#430089'}}/>
                     </ListItemIcon>
                     <ListItemText primary="Add Files" />
 
@@ -335,7 +336,7 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  <LogoutIcon color='primary'/>
+                  <LogoutIcon sx={{color: '#430089'}}/>
                 </ListItemIcon>
                 <ListItemText primary="Log Out" sx={{ opacity: open ? 1 : 0 }} />
 

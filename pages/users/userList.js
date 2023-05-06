@@ -6,7 +6,7 @@ import Dashboard from '../../component/Dashboard';
 export default function UserList(){
     return (
         <Layout>
-            <Stack flexDirection={'column'} alignItems='center' justifyContent='center' gap='2rem'>
+            <Stack flexDirection={'column'} alignItems='center' justifyContent='center' gap='2rem' mt='10rem' >
                 <Dashboard/>
             </Stack>
         </Layout>

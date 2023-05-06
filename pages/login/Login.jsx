@@ -2,15 +2,22 @@ import React from 'react'
 import { Grid, Paper, Avatar, TextField, Button, Typography, Link, Stack} from '@mui/material'
 import Checkbox from '@mui/material/Checkbox';
 import { FormControlLabel } from '@mui/material';
-
+import axios from 'axios'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { redirect } from 'next/dist/server/api-utils';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 
+    
 const Login = ({ handleChange }) => {
 
     //STYLING
-    const paperStyle = { padding: 20, height: '73vh', width: 300, margin: "0 auto", marginTop:'5rem', borderRadius:'15px 15px 15px 15px' }
+    const router = useRouter();
+    const [Datas, setDatas] = useState([]);
+   
+    // console.log('Data:', Datas);
+    const paperStyle = { padding: 20, height: 'auto', width: 300, margin: "0 auto", marginTop:'5rem', borderRadius:'15px 15px 15px 15px' }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btnstyle = { margin: '8px 0' }
     //STATE
@@ -26,7 +33,20 @@ const Login = ({ handleChange }) => {
     })
     //FUNCTION TO LOGIN
     const onSubmit = (values, props) => {
-        
+        useEffect(() => {
+            axios.post('http://localhost:3000/api/login/login', {
+                username: values.username,
+                password: values.password
+            }
+            )
+            .then(res => {
+              console.log('res', res.data);
+              router.push('/home')
+            })
+            .catch(err => {
+              console.log('error in request', err);
+            })})
+    
         console.log(values)
         setTimeout(() => {
             props.resetForm()
@@ -62,7 +82,7 @@ const Login = ({ handleChange }) => {
                                 label="Remember me"
                             />
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
-                                style={btnstyle} fullWidth href="../home">{props.isSubmitting ? "Loading" : "Log in"}</Button>
+                                style={btnstyle} fullWidth>{props.isSubmitting ? "Loading" : "Log in"}</Button>
                         </Stack>
                         </Form>
                     )}

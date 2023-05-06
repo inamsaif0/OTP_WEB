@@ -26,17 +26,17 @@ const rows = [
 
 export default function BasicTable() {
   return (
-    <Stack>
+    <Stack flexBasis={[lg=1, sm=3]}>
     <TableContainer component={Paper} sx={{borderRadius:'15px 15px 15px 15px'}}>
       <Table sx={{ minWidth: 900 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>No</TableCell>
-            <TableCell>Student Name</TableCell>
-            <TableCell align="right">StudentID&nbsp;(email)</TableCell>
+            <TableCell>File Name</TableCell>
+            <TableCell align="right">File type</TableCell>
+            <TableCell align="right">Teacher</TableCell>
             <TableCell align="right">Level</TableCell>
-            <TableCell align="right">Status</TableCell>
-            <TableCell align="center">Options</TableCell>
+            <TableCell align="center">Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -54,8 +54,8 @@ export default function BasicTable() {
               <TableCell align="right">{row.protein}</TableCell>
               <TableCell align="right">
                 <Stack flexDirection='row'>
-                <Button><Link to=""><EditIcon  sx={{color:'#430089'}}/></Link></Button>
-                <Button><Link><DeleteIcon  sx={{color:'#430089'}}/></Link> 
+                <Button><Link to="/user/editPage"><EditIcon/></Link></Button>
+                <Button><Link><DeleteIcon/></Link> 
 </Button>
 {/* <Button color="tertiary" /> */}
                 </Stack>
