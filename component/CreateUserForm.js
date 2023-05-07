@@ -8,12 +8,12 @@ import * as Yup from 'yup'
 import { redirect } from 'next/dist/server/api-utils';
 import Select from '../component/Select';
 
-const CreateUserForm = ( props) => {
+const CreateUserForm = ( props ) => {
 
     //STYLING
-    const paperStyle = { padding: 20, height: 'auto', width: 400, margin: "0 auto", marginTop:'5rem', borderRadius:'15px 15px 15px 15px' }
+    const paperStyle = { padding: 20, height: 'auto', width: 400, margin: "0 auto", marginTop:'5rem', borderRadius:'15px 15px 15px 15px', mr:'6rem' }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
-    const btnstyle = { margin: '8px 0',background:'' }
+    const btnstyle = { margin: '8px 0',background:'linear-gradient(to right bottom, #430089, #82ffa1)', color:'#FFFF' }
     //STATE
     const initialValues = {
         username: '',
@@ -36,7 +36,7 @@ const CreateUserForm = ( props) => {
 
     }
     return (
-        <Grid sm='2' lg='1' sx={{display:'flex', ml:'20rem'}}>
+        <Grid sm='1' lg='2' sx={{display:'flex', pr:'5rem', pl:'5rem', mb:'3rem'}}>
             <Paper style={paperStyle}>
                 <Grid align='center'>
                 
@@ -58,7 +58,7 @@ const CreateUserForm = ( props) => {
                                 placeholder='Enter password' type='password' fullWidth required
                                 helperText={<ErrorMessage name="password" />} />
                             
-                            <Select level="Level"/>
+                            <Select level="Level" label="Level"/>
                             <Button type='submit' disabled={props.isSubmitting}
                                 style={btnstyle} fullWidth>{props.isSubmitting ? "Loading" : "Create User"}</Button>
 

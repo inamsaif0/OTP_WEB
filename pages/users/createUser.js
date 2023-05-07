@@ -7,7 +7,7 @@ export default function Dashboard(){
     return (
         <Layout>
             <Stack flexDirection={'column'} alignItems='center' justifyContent='center' gap='2rem'>
-                <CreateUserForm level="Level"/>
+                <CreateUserForm level="Level" value="Create User"/>
             </Stack>
         </Layout>
     )

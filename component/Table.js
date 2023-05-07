@@ -10,6 +10,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, Stack } from '@mui/material';
 import Link from '@mui/material/Link';
+import TablePagination from '@mui/material/TablePagination';
+
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -25,8 +27,20 @@ const rows = [
 ];
 
 export default function BasicTable() {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   return (
-    <Stack>
+    <Stack >
     <TableContainer component={Paper} sx={{borderRadius:'15px 15px 15px 15px'}}>
       <Table sx={{ minWidth: 900 }} aria-label="simple table">
         <TableHead>
@@ -66,6 +80,15 @@ export default function BasicTable() {
         </TableBody>
       </Table>
     </TableContainer>
+    <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Stack>
   );
 }

@@ -33,20 +33,7 @@ const Login = ({ handleChange }) => {
     })
     //FUNCTION TO LOGIN
     const onSubmit = (values, props) => {
-        useEffect(() => {
-            axios.post('http://localhost:3000/api/login/login', {
-                username: values.username,
-                password: values.password
-            }
-            )
-            .then(res => {
-              console.log('res', res.data);
-              router.push('/home')
-            })
-            .catch(err => {
-              console.log('error in request', err);
-            })})
-    
+
         console.log(values)
         setTimeout(() => {
             props.resetForm()
@@ -54,6 +41,25 @@ const Login = ({ handleChange }) => {
         }, 2000)
 
     }
+
+    
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/login/login', {
+        }
+        )
+        .then(res => {
+          console.log('res', res.data);
+          if(res.data){
+            const data = res.data;
+            router.push('/home');
+          }
+
+        
+        })
+        .catch(err => {
+          console.log('error in request', err);
+        })})
+    
     return (
         <Grid>
             <Paper style={paperStyle}>
