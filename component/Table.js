@@ -9,26 +9,28 @@ import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, Stack } from '@mui/material';
-import Link from '@mui/material/Link';
 import TablePagination from '@mui/material/TablePagination';
+// import Button from '@mui/material-next/Button';
 
 
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+// function createData(name, calories, fat, carbs, protein) {
+//   return { name, calories, fat, carbs, protein };
+// }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+// const rows = [
+//   createData('1', 'Zehra', 'zehra12@mail.com', 24, 4.0),
+//   createData('2', 'Jhon', 'jhan11@mail.com', 37, 4.3),
+//   createData('3', 'Hania', 'Hania44@mail.com', 24, 6.0),
+//   createData('4', 'Saif', 'Saif3@mail.com', 67, 4.3),
+//   createData('5', 'Inam', 'Inam34@mail.com', 49, 3.9),
+// ];
 
-export default function BasicTable() {
+export default function BasicTable({data}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [active,setActive] = React.useState('active')
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -38,57 +40,80 @@ export default function BasicTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
+  const changebutton = () => {
+    if(active == "active"){
+      setActive('Inactive')
+    }
+    else{
+      setActive('active')
+    }
+  }
   return (
-    <Stack >
-    <TableContainer component={Paper} sx={{borderRadius:'15px 15px 15px 15px'}}>
-      <Table sx={{ minWidth: 900 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>No</TableCell>
-            <TableCell>Student Name</TableCell>
-            <TableCell align="right">StudentID&nbsp;(email)</TableCell>
-            <TableCell align="right">Level</TableCell>
-            <TableCell align="right">Status</TableCell>
-            <TableCell align="center">Options</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">
-                <Stack flexDirection='row'>
-                <Button><Link to=""><EditIcon  sx={{color:'#430089'}}/></Link></Button>
-                <Button><Link><DeleteIcon  sx={{color:'#430089'}}/></Link> 
-</Button>
-{/* <Button color="tertiary" /> */}
-                </Stack>
-              </TableCell>
+    <Stack>
 
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      <Stack >
+        <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px' }}>
+          <Table sx={{ minWidth: 900 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>No</TableCell>
+                <TableCell align='right'><b>Student Name</b></TableCell>
+                <TableCell align="right"><b>StudentID&nbsp;(email)</b></TableCell>
+                <TableCell align="right"><b>Level</b></TableCell>
+                <TableCell align="right"><b>Status</b></TableCell>
+                <TableCell align="center"><b>Options</b></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data?.map((curElem) => {
+                return (
+                  <TableRow
+                  key={curElem.no}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="curElement">
+                    {curElem.studentName}
+                  </TableCell>
+                  <TableCell align="right">{curElem.studentId}</TableCell>
+                  <TableCell align="right">{curElem.level}</TableCell>
+                  <TableCell align="right">{curElem.no}</TableCell>
+                  <TableCell align="right"><Button disabled={false} variant="outlined" onClick={changebutton}>{curElem.status}</Button></TableCell>
+                  <TableCell align="right">
+                    <Stack flexDirection='row'>
+                      <Button href='/users/editPage'><EditIcon sx={{ color: '#430089' }} /></Button>
+                      <Button><DeleteIcon sx={{ color: '#430089' }} />
+                      </Button>
+                      {/* <Button color="tertiary" /> */}
+                    </Stack>
+                  </TableCell>
+
+                </TableRow>
+                )
+
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Stack>
     </Stack>
   );
 }
+export const getStaticProps = async () => {
+  const res = await fetch('http://localhost:3000/api/userList')
+  const data = res.json();
+  console.log(data);
+
+  return{
+      props:{
+          data,
+      },
+  };
+};

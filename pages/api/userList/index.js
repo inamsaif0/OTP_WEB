@@ -11,6 +11,7 @@ export default async (req, res) => {
             try{
                 const list = await userList.find({});
                 res.status(200).json({success: true, data: list})
+
             } catch(error){
                 res.status(400).json({success: false})
             }

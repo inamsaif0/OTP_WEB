@@ -41,24 +41,43 @@ const Login = ({ handleChange }) => {
         }, 2000)
 
     }
+    // const router = useRouter()
+    // const [email,setEmail] = useState('')
+    // const [password,setPassword] = useState('')
+    // const [error,setError] = useState(false)
+    // const login = async () => {
+    //     const response = await axios.post('http://localhost:3000/api/login/login',{
+    //         email : initialValues.username ,
+    //         password : initialValues.password
+    //     })
+    //     if(response.data.success) {
+    //         router.replace('/home')
+    //     } 
+    //     else setError(true)
+    // }
+
+    // useEffect(()=>{
+    //     router.prefetch('/home')
+    // },[])
+
 
     
-    useEffect(() => {
-        axios.get('http://localhost:3000/api/login/login', {
-        }
-        )
-        .then(res => {
-          console.log('res', res.data);
-          if(res.data){
-            const data = res.data;
-            router.push('/home');
-          }
+    // useEffect(() => {
+    //     axios.get('http://localhost:3000/api/login/login', {
+    //     }
+    //     )
+    //     .then(res => {
+    //       console.log('res', res.data);
+    //       if(res.data){
+    //         const data = res.data;
+    //         router.push('/home');
+    //       }
 
         
-        })
-        .catch(err => {
-          console.log('error in request', err);
-        })})
+    //     })
+    //     .catch(err => {
+    //       console.log('error in request', err);
+    //     })})
     
     return (
         <Grid>
@@ -88,7 +107,7 @@ const Login = ({ handleChange }) => {
                                 label="Remember me"
                             />
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
-                                style={btnstyle} fullWidth>{props.isSubmitting ? "Loading" : "Log in"}</Button>
+                                style={btnstyle} fullWidth >{props.isSubmitting ? "Loading" : "Log in"}  </Button>
                         </Stack>
                         </Form>
                     )}

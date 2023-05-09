@@ -3,11 +3,16 @@ import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
+import Button from '@mui/material/Button';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import fetch from 'isomorphic-unfetch';
+import { Stack } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import SearchIcon from '@mui/icons-material/Search';
+import InputAdornment from '@mui/material/InputAdornment';
 const columns = [
   { id: 'no', label: 'No', minWidth: 170 },
   { id: 'filename', label: 'FileName', minWidth: 100 },
@@ -85,8 +90,27 @@ export default function StickyHeadTable({content}) {
   };
 
   return (
+    <Stack>
     
-    <Paper sx={{direction:'flex' , width: '80%', overflow: 'hidden', ml:'5rem', flexGrow:2 }}>
+      <Stack direction='row' justifyContent='space-between' marginBottom='2rem'>
+        <TextField
+          label="Search by name"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment>
+                <SearchIcon />
+              </InputAdornment>
+            )
+          }}
+        />
+        <Button
+        href='/content/addFiles'
+          style={{ background: 'linear-gradient(to right top, #430089, #82ffa1)', color: '#FFFFFF', width: '150px', height: '50px' }}
+        >Add New</Button>
+
+      </Stack>
+      <Stack>
+    <Paper sx={{direction:'flex' , overflow: 'hidden', flexGrow:2 }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -103,12 +127,11 @@ export default function StickyHeadTable({content}) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
+                    {content?.map((column) => {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
@@ -134,6 +157,8 @@ export default function StickyHeadTable({content}) {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    </Stack>
+    </Stack>
   );
 }
 
