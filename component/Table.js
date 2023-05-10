@@ -11,28 +11,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, Stack } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
+import axios from 'axios'
+import { useEffect } from 'react';
 // import Button from '@mui/material-next/Button';
 
-
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-// const rows = [
-//   createData('1', 'Zehra', 'zehra12@mail.com', 24, 4.0),
-//   createData('2', 'Jhon', 'jhan11@mail.com', 37, 4.3),
-//   createData('3', 'Hania', 'Hania44@mail.com', 24, 6.0),
-//   createData('4', 'Saif', 'Saif3@mail.com', 67, 4.3),
-//   createData('5', 'Inam', 'Inam34@mail.com', 49, 3.9),
-// ];
-
-export default function BasicTable({}) {
+export default function BasicTable({ }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [active,setActive] = React.useState('active')
+  const [active, setActive] = React.useState('active')
 
-
+  const [value, setValue] = React.useState();
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -42,22 +30,21 @@ export default function BasicTable({}) {
     setPage(0);
   };
   const changebutton = () => {
-    if(active == "active"){
+    if (active == "active") {
       setActive('Inactive')
     }
-    else{
+    else {
       setActive('active')
     }
   }
-  const fetcher = async () => {
-    const response = await axios.get(`https://jsonplaceholder.typicode.com/comments`)
-    if(response.data.success) return response.data.data;
-}
 
-const { data , isLoading } = useSWR(`https://jsonplaceholder.typicode.com/comments`,fetcher,{
-    revalidateOnFocus : true
-})
-console.log(data)
+  useEffect(() => {
+    fetch('http://localhost:3000/api/userList')
+      .then((response) => response.json())
+      .then((data) => setValue(data))
+  }, []);
+
+  console.log(value)
   return (
     <Stack>
 
@@ -75,32 +62,32 @@ console.log(data)
               </TableRow>
             </TableHead>
             <TableBody>
-              {data?.map((curElem) => {
+              {value?.data.map((curElem) => {
                 return (
                   <TableRow
-                  key={curElem.no}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="curElement">
-                    {curElem.studentName}
-                  </TableCell>
-                  <TableCell align="right">{curElem.studentName}</TableCell>
-                  <TableCell align="right">{curElem.level}</TableCell>
-                  <TableCell align="right">{curElem.no}</TableCell>
-                  <TableCell align="right"><Button disabled={false} variant="outlined" onClick={changebutton}>{curElem.status}</Button></TableCell>
-                  <TableCell align="right">
-                    <Stack flexDirection='row'>
-                      <Button href='/users/editPage'><EditIcon sx={{ color: '#430089' }} /></Button>
-                      <Button><DeleteIcon sx={{ color: '#430089' }} />
-                      </Button>
-                      {/* <Button color="tertiary" /> */}
-                    </Stack>
-                  </TableCell>
+                    key='row'
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="curElement">
+                      {curElem.no}
+                    </TableCell>
+                    <TableCell align="right">{curElem.studentName}</TableCell>
+                    <TableCell align="right">{curElem.studentId}</TableCell>
+                    <TableCell align="right">{curElem.level}</TableCell>
+                    <TableCell align="right"><Button disabled={false} variant="outlined" onClick={changebutton}>Active</Button></TableCell>
+                    <TableCell align="right">
+                      <Stack flexDirection='row'>
+                        <Button href='/users/editPage'><EditIcon sx={{ color: '#430089' }} /></Button>
+                        <Button><DeleteIcon sx={{ color: '#430089' }} />
+                        </Button>
+                        {/* <Button color="tertiary" /> */}
+                      </Stack>
+                    </TableCell>
 
-                </TableRow>
+                  </TableRow>
                 )
 
-                })}
+              })}
             </TableBody>
           </Table>
         </TableContainer>

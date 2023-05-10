@@ -5,7 +5,7 @@ import AddFiles from '../../component/AddFiles'
 export default function addingFiles(){
     return (
         <Layout>
-            <Stack flexDirection={'column'} alignItems='center' justifyContent='center' gap='2rem' ml="20rem" mr="20rem">
+            <Stack flexDirection={'column'} alignItems='center' justifyContent='center' gap='2rem' mr="20rem" m="5rem">
                 <AddFiles/>
                 
             </Stack>
