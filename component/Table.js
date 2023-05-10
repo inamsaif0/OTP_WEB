@@ -3,6 +3,7 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
+import useSWR from 'swr';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
@@ -26,7 +27,7 @@ import TablePagination from '@mui/material/TablePagination';
 //   createData('5', 'Inam', 'Inam34@mail.com', 49, 3.9),
 // ];
 
-export default function BasicTable({data}) {
+export default function BasicTable({}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [active,setActive] = React.useState('active')
@@ -48,6 +49,15 @@ export default function BasicTable({data}) {
       setActive('active')
     }
   }
+  const fetcher = async () => {
+    const response = await axios.get(`https://jsonplaceholder.typicode.com/comments`)
+    if(response.data.success) return response.data.data;
+}
+
+const { data , isLoading } = useSWR(`https://jsonplaceholder.typicode.com/comments`,fetcher,{
+    revalidateOnFocus : true
+})
+console.log(data)
   return (
     <Stack>
 
@@ -74,7 +84,7 @@ export default function BasicTable({data}) {
                   <TableCell component="th" scope="curElement">
                     {curElem.studentName}
                   </TableCell>
-                  <TableCell align="right">{curElem.studentId}</TableCell>
+                  <TableCell align="right">{curElem.studentName}</TableCell>
                   <TableCell align="right">{curElem.level}</TableCell>
                   <TableCell align="right">{curElem.no}</TableCell>
                   <TableCell align="right"><Button disabled={false} variant="outlined" onClick={changebutton}>{curElem.status}</Button></TableCell>
@@ -106,14 +116,13 @@ export default function BasicTable({data}) {
     </Stack>
   );
 }
-export const getStaticProps = async () => {
-  const res = await fetch('http://localhost:3000/api/userList')
-  const data = res.json();
-  console.log(data);
-
-  return{
-      props:{
-          data,
-      },
-  };
-};
+// BasicTable.getInitialProps = async ctx => {
+//   try {
+//     const res = await axios.get('http://localhost:3000/api/userList');
+//     console.log(res.data)
+//     const data = res.data;
+//     return { data };
+//   } catch (error) {
+//     return { error };
+//   }
+// };

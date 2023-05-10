@@ -2,10 +2,11 @@ import React from 'react'
 import { Grid, Paper, Avatar, TextField, Button, Typography, Link, Stack } from '@mui/material'
 import Checkbox from '@mui/material/Checkbox';
 import { FormControlLabel } from '@mui/material';
-
+import { useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { redirect } from 'next/dist/server/api-utils';
+import axios from 'axios';
 // import Select from '../component/Select';
 import { useRouter } from 'next/router';
 import MenuItem from '@mui/material/MenuItem';
@@ -16,6 +17,7 @@ const CreateUserForm = (props) => {
     //STYLING
     const router = useRouter();
     const [age, setAge] = React.useState('');
+    const [error, setError]= React.useState(false);
 
     const handleChange = (event) => {
         setAge(event.target.value);
@@ -24,14 +26,14 @@ const CreateUserForm = (props) => {
     // const [Datas, setDatas] = useState([]);
 
     // console.log('Data:', Datas);
-    const paperStyle = { padding: 20, height: 'auto', width: 400, margin: "0 auto", marginTop:'5rem', borderRadius:'15px 15px 15px 15px', mr:'6rem' }
+    const paperStyle = { padding: 20, height: 'auto', width: 400, margin: "0 auto", marginTop:'5rem', borderRadius:'15px 15px 15px 15px' }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btnstyle = { margin: '8px 0',background:'linear-gradient(to right bottom, #430089, #82ffa1)', color:'#FFFF' }
     //STATE
     const initialValues = {
-        username: '',
-        password: '',
         name: '',
+        email: '',
+        password: '',
         level: ''
     }
     //VALIDATION 
@@ -49,37 +51,37 @@ const CreateUserForm = (props) => {
         }, 2000)
 
     }
+    const login = async () => {
+        const response = await axios.post('http://localhost:3000/api/userList',{
+            studentName:initialValues.name,
+            studentId:initialValues.email,
+            level:initialValues.level,
+            status: true
+        })
+        console.log(response)
+        if(response.data.success) {
+            console.log(response)
+            router.replace('/users/userList')
+        } 
+        else setError(true) 
+    }
 
-
-    // useEffect(() => {
-    //     axios.get('http://localhost:3000/api/login/login', {
-    //     }
-    //     )
-    //     .then(res => {
-    //       console.log('res', res.data);
-    //       if(res.data){
-    //         const data = res.data;
-    //         router.push('/home');
-    //       }
-
-
-    //     })
-    //     .catch(err => {
-    //       console.log('error in request', err);
-    //     })})
-
+    useEffect(()=>{
+        router.prefetch('/users/userList')
+    },[])
     return (
-        <Grid container lg='4' sm='2' md="3">
+        <Grid container lg='12' sm='8' md="10">
             <Paper style={paperStyle}>
                 <Grid align='center' item>
 
-                    <h2>Admin Login</h2>
+                    <h2>Creat User</h2>
                 </Grid>
                 <Grid item>
                 <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                     {(props) => (
-                        <Form action='../api/login' method='post'>
+                        <Form>
                             <Stack gap="1rem">
+
                             <Field as={TextField} label='Name' name="name"
                                     placeholder='Enter Name' type='name' fullWidth required
                                     helperText={<ErrorMessage name="name" />} />
@@ -102,7 +104,7 @@ const CreateUserForm = (props) => {
                                     <MenuItem value='advance'>advanced</MenuItem>
                                 </Field>
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
-                                style={btnstyle} fullWidth>{props.isSubmitting ? "Loading" : "Create User"}</Button>
+                                style={btnstyle} fullWidth onClick={login}>{props.isSubmitting ? "Loading" : "Create User"}</Button>
                         </Stack>
                         </Form>
                     )}

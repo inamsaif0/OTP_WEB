@@ -2,9 +2,6 @@ import mongoose from "mongoose"
 import { StringDecoder } from "string_decoder"
 
 const userListSchema = new mongoose.Schema({
-    no:{
-        type:Number,
-    },
     studentName:{
         type:String
 

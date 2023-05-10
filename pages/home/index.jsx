@@ -149,7 +149,7 @@ export default function MiniDrawer() {
   }
   
   return (
-    <Box sx={{ display: 'flex', marginRight:'2rem', flexWrap:'wrap'}}>
+    <Box sx={{ display: 'flex', flexWrap:'wrap'}}>
       <CssBaseline />
       <AppBar position="fixed" open={open} sx={{background: 'linear-gradient(to right bottom, #430089, #82ffa1)'}}> 
         <Toolbar>

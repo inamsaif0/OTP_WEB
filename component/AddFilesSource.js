@@ -81,7 +81,7 @@ const CreateUserForm = (props) => {
                                     <input
                                         style={{ display: "none" }}
                                         id="upload-photo"
-                                        name="upload-photo"
+                                        name="uploadphoto"
                                         type="file"
                                     />
  

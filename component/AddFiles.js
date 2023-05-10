@@ -97,7 +97,7 @@ const CreateUserForm = (props) => {
                                     <MenuItem value='inter3'>inter3</MenuItem>
                                     <MenuItem value='advance'>advanced</MenuItem>
                                 </Field>
-                                <Field as={Select} id="select" label="Level" name='level' >
+                                <Field as={Select} id="select" label="Level" name='level'>
                                     <MenuItem value='beg1'>beg1</MenuItem>
                                     <MenuItem value='beg2'>beg2</MenuItem>
                                     <MenuItem value='beg3'>beg3</MenuItem>

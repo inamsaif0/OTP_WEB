@@ -9,10 +9,12 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import fetch from 'isomorphic-unfetch';
+import { useEffect } from 'react';
 import { Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
+import { comment } from 'postcss';
 const columns = [
   { id: 'no', label: 'No', minWidth: 170 },
   { id: 'filename', label: 'FileName', minWidth: 100 },
@@ -76,7 +78,8 @@ const rows = [
   createData('15', 'BR', 210147125, 8515767, 'sharukjh','inter2','12/12/23'),
 ];
 
-export default function StickyHeadTable({content}) {
+export default function StickyHeadTable({comments}) {
+  console.log(comments);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -104,7 +107,7 @@ export default function StickyHeadTable({content}) {
           }}
         />
         <Button
-        href='/content/addFiles'
+        
           style={{ background: 'linear-gradient(to right top, #430089, #82ffa1)', color: '#FFFFFF', width: '150px', height: '50px' }}
         >Add New</Button>
 
@@ -127,11 +130,11 @@ export default function StickyHeadTable({content}) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            {comments?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {content?.map((column) => {
+                    {comments?.map((column) => {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
@@ -162,10 +165,10 @@ export default function StickyHeadTable({content}) {
   );
 }
 
-StickyHeadTable.getInitialProps = async () => {
- const res = await fetch('http://localhost:3000/api/content');
- const { data } = await res.json();
- console.log(data);
- return {content: data}
+// StickyHeadTable.getInitialProps = async () => {
+//  const res = await axios.get('https://jsonplaceholder.typicode.com/comments');
+//  const { data } = await res.json();
+//  console.log(data);
+//  return {comments: data}
 
-}
+// }
