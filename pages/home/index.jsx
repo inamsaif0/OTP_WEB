@@ -26,12 +26,15 @@ import ClearAllOutlinedIcon from '@mui/icons-material/ClearAllOutlined';
 import ChecklistOutlinedIcon from '@mui/icons-material/ChecklistOutlined';
 import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
 ///
+import axios from 'axios';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import Collapse from '@mui/material/Collapse';
 import StarBorder from '@mui/icons-material/StarBorder';
 import { Router } from 'react-router-dom';
+import { useRouter } from 'next/router'
+
 // import { Main } from 'next/document';
 
 const drawerWidth = 240;
@@ -103,6 +106,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
+
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
@@ -122,9 +126,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer() {
   const theme = useTheme();
+  const router = useRouter()
+
   const [open, setOpen] = React.useState(false);
-  const [iopen, setiOpen] = React.useState(true
-    );
+  const [iopen, setiOpen] = React.useState(true);
   const handleClick = () => {
     setiOpen(!iopen);
 
@@ -137,9 +142,14 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+  
+  const logout = async () => {
+    const response = await axios.get('http://localhost:3000/api/logout')
+    if(response.data.success) router.push('/')
+  }
+  
   return (
-    <Box sx={{ display: 'flex'}}>
+    <Box sx={{ display: 'flex', marginRight:'2rem', flexWrap:'wrap'}}>
       <CssBaseline />
       <AppBar position="fixed" open={open} sx={{background: 'linear-gradient(to right bottom, #430089, #82ffa1)'}}> 
         <Toolbar>
@@ -235,19 +245,20 @@ export default function MiniDrawer() {
               </ListItemButton>
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }} href='/users/userList'>
+                  
+                  <ListItemButton
+                 href='/users/userList'>
                     <ListItemIcon>
                     <ClearAllOutlinedIcon sx={{color: '#430089'}}/>
                     </ListItemIcon>
                     <ListItemText primary="User List" />
-
                   </ListItemButton>
+
                   <ListItemButton sx={{ pl: 4 }} href='/users/createUser'>
                     <ListItemIcon>
                       <AddOutlinedIcon sx={{color: '#430089'}}/>
                     </ListItemIcon>
                     <ListItemText primary="Create User" />
-
                   </ListItemButton>
                   
                 </List>
@@ -296,7 +307,7 @@ export default function MiniDrawer() {
                     <ListItemText primary="List" />
 
                   </ListItemButton>
-                  <ListItemButton sx={{ pl: 4 }} href='/content/addFiles'>
+                  <ListItemButton sx={{ pl: 4 }} href='/content/addingFiles'>
                     
                     <ListItemIcon>
                       <PictureAsPdfOutlinedIcon sx={{color: '#430089'}}/>
@@ -326,8 +337,7 @@ export default function MiniDrawer() {
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
-                onClick={handleClick}
-                href="../login/Login"
+                onClick={logout}
               >
                 <ListItemIcon
                   sx={{

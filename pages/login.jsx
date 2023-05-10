@@ -2,10 +2,10 @@ import React from 'react'
 import { Grid, Paper, Avatar, TextField, Button, Typography, Link, Stack} from '@mui/material'
 import Checkbox from '@mui/material/Checkbox';
 import { FormControlLabel } from '@mui/material';
-import axios from 'axios'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { redirect } from 'next/dist/server/api-utils';
+import axios from 'axios'
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
@@ -42,43 +42,26 @@ const Login = ({ handleChange }) => {
 
     }
     // const router = useRouter()
-    // const [email,setEmail] = useState('')
-    // const [password,setPassword] = useState('')
-    // const [error,setError] = useState(false)
-    // const login = async () => {
-    //     const response = await axios.post('http://localhost:3000/api/login/login',{
-    //         email : initialValues.username ,
-    //         password : initialValues.password
-    //     })
-    //     if(response.data.success) {
-    //         router.replace('/home')
-    //     } 
-    //     else setError(true)
-    // }
+    const [iemail,setiEmail] = useState('')
+    const [ipassword,setiPassword] = useState('')
+    const [error,setError] = useState(false)
+    const login = async () => {
+        const response = await axios.post('http://localhost:3000/api/login/login',{
+            email :  'inam@gmail.com',
+            password: 'inam12345'
+        })
+        console.log(response)
+        if(response.data.success) {
+            console.log(response)
+            router.replace('/users/userList')
+        } 
+        else setError(true) 
+    }
 
-    // useEffect(()=>{
-    //     router.prefetch('/home')
-    // },[])
+    useEffect(()=>{
+        router.prefetch('/users/userList')
+    },[])
 
-
-    
-    // useEffect(() => {
-    //     axios.get('http://localhost:3000/api/login/login', {
-    //     }
-    //     )
-    //     .then(res => {
-    //       console.log('res', res.data);
-    //       if(res.data){
-    //         const data = res.data;
-    //         router.push('/home');
-    //       }
-
-        
-    //     })
-    //     .catch(err => {
-    //       console.log('error in request', err);
-    //     })})
-    
     return (
         <Grid>
             <Paper style={paperStyle}>
@@ -88,15 +71,19 @@ const Login = ({ handleChange }) => {
                 </Grid>
                 <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                     {(props) => (
-                        <Form action='../api/login' method='post'>
+                        <Form>
                             <Stack gap="1rem">
                             <Field as={TextField} label='Username' name="username"
+                            
                                 placeholder='Enter username' fullWidth required
                                 helperText={<ErrorMessage name="username" />}
+                              
+                                
                             />
                             <Field as={TextField} label='Password' name="password"
                                 placeholder='Enter password' type='password' fullWidth required
-                                helperText={<ErrorMessage name="password" />} />
+                                helperText={<ErrorMessage name="password" />} 
+                                 />
                             <Field as={FormControlLabel}
                                 name='remember'
                                 control={
@@ -107,7 +94,7 @@ const Login = ({ handleChange }) => {
                                 label="Remember me"
                             />
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
-                                style={btnstyle} fullWidth >{props.isSubmitting ? "Loading" : "Log in"}  </Button>
+                                style={btnstyle} fullWidth  onClick = {login}>{props.isSubmitting ? "Loading" : "Log in"}  </Button>
                         </Stack>
                         </Form>
                     )}

@@ -68,7 +68,7 @@ const CreateUserForm = (props) => {
     }
     return (
         <Grid>
-            <Paper style={paperStyle} container lg='4' sm='2' md='3'>
+            <Paper style={paperStyle} container >
                 <Grid align='center' item>
 
                     <h4>Upload Files</h4>
