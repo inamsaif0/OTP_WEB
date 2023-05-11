@@ -1,6 +1,7 @@
 .layout {
     display: flex;
-    height: 100vh;
+    height: 80vh;
     gap: 2rem;
     flex-wrap: wrap;
 }
+

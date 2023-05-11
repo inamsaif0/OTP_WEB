@@ -229,10 +229,10 @@ export default function BasicTable({ }) {
   console.log(value)
   var i = 0;
   return (
-    <Grid container lg="12" md="8" sm='2'> 
+    <Grid container> 
 
       <Grid item>
-        <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px' }}>
+        <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px', mt:{lg:'1rem', md:'3rem', sm:'4rem'} }}>
           <Table sx={{ minWidth: 900 }} aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -253,17 +253,19 @@ export default function BasicTable({ }) {
                     key='row'
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell component="th" scope="curElement">
+                    <TableCell component="th" scope="curElement" sx={{fontFamily:"inherit"}}>
                       {i}
                     </TableCell>
-                    <TableCell align="right">{curElem.teacher}</TableCell>
-                    <TableCell align="right">{curElem.student}</TableCell>
-                    <TableCell align="right">{curElem.level}</TableCell>
-                    <TableCell align="right"><Button disabled={false} variant="outlined" onClick={changebutton}>Active</Button></TableCell>
-                    <TableCell align="right">
-
+                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.teacher}</TableCell>
+                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.student}</TableCell>
+                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.level}</TableCell>
+                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.teacher}</TableCell>
+                    <TableCell align="right"sx={{fontFamily:"inherit"}}>
+                        {curElem.level}
                     </TableCell>
-
+                    <TableCell align="right"sx={{fontFamily:"inherit"}}>
+                        12/3/11
+                    </TableCell>
                   </TableRow>
                 )
 

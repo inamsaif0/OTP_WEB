@@ -4,7 +4,7 @@ import userList from '../../../model/userList';
 
 connect();
 
-export default async (req, res) => {
+const UserListOps = async (req, res) => {
     const { query: { id }, method } = req;
 
     switch (method) {
@@ -56,3 +56,5 @@ export default async (req, res) => {
     }
       
 }
+
+export default userList;

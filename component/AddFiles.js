@@ -37,7 +37,8 @@ const CreateUserForm = (props) => {
     const [student, setStudent] = React.useState('');
     const [level, setLevel] = React.useState('');
     const [value, setValue] = React.useState('');
-    const paperStyle = { padding: 20, height: 'auto', width: 400, margin: "0 auto", marginTop: '5rem', borderRadius: '15px 15px 15px 15px' }
+    // console.log(teacher, student, level, value)
+    const paperStyle = { padding: 20, height: 'auto', margin: "0 auto", marginTop: '5rem', borderRadius: '15px 15px 15px 15px' }
     // const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btnstyle = { margin: '8px 0' }
     //STATE
@@ -94,7 +95,7 @@ const CreateUserForm = (props) => {
 
     return (
         <Grid>
-            <Paper style={paperStyle} container >
+            <Paper style={paperStyle} container sx={{width:{lg:400, md:300, sm:200}}} >
                 <Grid align='center' item>
 
                     <h4>Upload Files</h4>

@@ -12,11 +12,17 @@ const uploadFileSchema = new mongoose.Schema({
     },
     level:{
         type:String,
-      
-        
     },
-    file:{
-        type:String,
+    file:
+    {
+        type:String,    
+    },
+
+    fileType:{
+            type:String
+    },
+    date:{
+        type:String
     }
 
     })

@@ -3,7 +3,7 @@ import contentList from '../../../model/contentList'
 
 connect();
 
-export default async (req, res) => {
+const content = async (req, res) => {
     const { method } = req;
 
     switch(method) {
@@ -33,3 +33,5 @@ export default async (req, res) => {
             
     }
 }
+
+export default content;

@@ -1,14 +1,15 @@
-import { Stack, Typography } from '@mui/material'
+import { Stack, Typography, Grid } from '@mui/material'
 import Layout from '../Layout'
 import Button from '@mui/material/Button';
 import Dashboard from '../../component/Dashboard';
 
+
 export default function UserList(){
     return (
         <Layout>
-            <Stack flexDirection={'column'} alignItems='center' justifyContent='center' gap='2rem' width='90%' marginLeft='5rem' flexWrap='wrap'>
+            <Grid gap='2rem' sx={{float:'left', ml:{lg:'6rem'}}} lg='8' md='2' sm='2' width={'50%'}>
                 <Dashboard/>
-            </Stack>
+            </Grid>
         </Layout>
     )
 } 

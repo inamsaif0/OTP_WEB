@@ -1,8 +1,8 @@
 
-import { Inter } from 'next/font/google'
+// import { Inter } from 'next/font/google'
 import Login from './login'
 
-const inter = Inter({ subsets: ['greek'] })
+// const inter = Inter({ subsets: ['greek'] })
 
 export default function Home() {
   return (

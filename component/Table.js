@@ -45,14 +45,15 @@ export default function BasicTable({ }) {
   }, []);
 
   console.log(value)
+  
   return (
     <Stack>
 
       <Stack >
         <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px' }}>
-          <Table sx={{ minWidth: 900 }} aria-label="simple table">
+          <Table sx={{ minWidth: 900 }} aria-label="simple table" stickyHeader={true}>
             <TableHead>
-              <TableRow>
+              <TableRow>    
                 <TableCell>No</TableCell>
                 <TableCell align='right'><b>Student Name</b></TableCell>
                 <TableCell align="right"><b>StudentID&nbsp;(email)</b></TableCell>
@@ -71,14 +72,14 @@ export default function BasicTable({ }) {
                     <TableCell component="th" scope="curElement">
                       {curElem.no}
                     </TableCell>
-                    <TableCell align="right">{curElem.studentName}</TableCell>
-                    <TableCell align="right">{curElem.studentId}</TableCell>
-                    <TableCell align="right">{curElem.level}</TableCell>
-                    <TableCell align="right"><Button disabled={false} variant="outlined" onClick={changebutton}>Active</Button></TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.studentName}</TableCell>
+                    <TableCell align="right" sx={{fontFamily:'inherit'}}>{curElem.studentId}</TableCell>
+                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.level}</TableCell>
+                    <TableCell align="right" sx={{fontFamily:"inherit"}}><Button disabled={false} variant="outlined" onClick={changebutton}>{active}</Button></TableCell>
+                    <TableCell align="right" sx={{fontFamily:"inherit"}}>
                       <Stack flexDirection='row'>
                         <Button href='/users/editPage'><EditIcon sx={{ color: '#430089' }} /></Button>
-                        <Button><DeleteIcon sx={{ color: '#430089' }} />
+                        <Button onClick={changebutton}><DeleteIcon sx={{ color: '#430089' }} />
                         </Button>
                         {/* <Button color="tertiary" /> */}
                       </Stack>

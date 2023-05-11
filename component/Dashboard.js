@@ -36,7 +36,7 @@ export default function Dashboard() {
         <Layout>
             <Stack direction={'column'} alignItems='center' justifyContent='center'>
                 <Stack flexDirection='row' justifyContent='space-between' gap='30rem' mb='2rem'>
-                   <TextField
+                    <TextField
                         label="Search by name"
                         InputProps={{
                             endAdornment: (
@@ -47,27 +47,29 @@ export default function Dashboard() {
                         }}
                     />
                     {/* <Button onClick={handleOpen} sx={{width:'150px',height:'50px'}}>Add New</Button> */}
-                    <Button 
-    style={{background:'linear-gradient(to right top, #430089, #82ffa1)', color: '#FFFFFF',width:'150px',height:'50px'}}
-    >Add New</Button>
+                    <Button
+                    
+                        style={{ background: 'linear-gradient(to right top, #430089, #82ffa1)', color: '#FFFFFF', width: '150px', height: '50px' }}
+                    >Add New</Button>
                     <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={style}>
-                        <CreateUserForm />
-                        <Button variant="contained" onClick={handleClose}>Close</Button>
+                        sx={{ml:'30rem', height:'auto'}}
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={style}>
+                            <CreateUserForm />
+                            <Button variant="contained" onClick={handleClose}>Close</Button>
 
-                    </Box>
-                </Modal>
+                        </Box>
+                    </Modal>
                 </Stack>
 
                 <Stack>
                     <Table />
                 </Stack>
-                
+
             </Stack>
         </Layout>
     )

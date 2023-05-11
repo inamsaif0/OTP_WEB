@@ -1,9 +1,10 @@
 import connect from '../../../lib/mongodb'
 import userList from '../../../model/userList'
+import contentOp from '../content/[id]';
 
 connect();
 
-export default async (req, res) => {
+const userLists = async (req, res) => {
     const { method } = req;
 
     switch(method) {
@@ -34,3 +35,5 @@ export default async (req, res) => {
             
     }
 }
+
+export default userLists;

@@ -5,7 +5,7 @@ import Home from './home/index'
 export default function Layout({children}){
     return (
         <div>
-            <Grid sx={{display:'flex', flexWrap:'wrap'}} lg="3" md="2" xl='4' sm='2'>
+            <Grid sx={{display:'flex', flexWrap:'wrap'}} lg="10" md="8" xl='12'  sm='4'>
             <Home />
             {   
                 children

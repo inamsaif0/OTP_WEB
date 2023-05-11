@@ -74,7 +74,7 @@ const CreateUserForm = (props) => {
             <Paper style={paperStyle}>
                 <Grid align='center' item>
 
-                    <h2>Creat User</h2>
+                    <h2>Create User</h2>
                 </Grid>
                 <Grid item>
                 <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>

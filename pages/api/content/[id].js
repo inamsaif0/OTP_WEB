@@ -4,7 +4,7 @@ import contentList from '../../../model/contentList';
 
 connect();
 
-export default async (req, res) => {
+const contentOp= async (req, res) => {
     const { query: { id }, method } = req;
 
     switch (method) {
@@ -56,3 +56,5 @@ export default async (req, res) => {
     }
       
 }
+
+export default contentOp;
