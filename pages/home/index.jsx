@@ -129,14 +129,32 @@ export default function MiniDrawer() {
   const router = useRouter()
 
   const [open, setOpen] = React.useState(false);
+  const [colopen, setColopen] = React.useState(false);
+  const [col, setCol] = React.useState(false);
+
+
   const [iopen, setiOpen] = React.useState(true);
   const handleClick = () => {
     setiOpen(!iopen);
 
   };
-
+  const handleCollapeOpen = () => {
+    if(colopen == false)
+      setColopen(true);
+    else
+      setColopen(false)
+  }
+  const handleOtherCollapeOpen = () => {
+    if(col == false)
+      setCol(true);
+    else
+      setCol(false)
+  }
   const handleDrawerOpen = () => {
-    setOpen(true);
+    if(open == false)
+      setOpen(true);
+    else
+      setOpen(false);
   };
 
   const handleDrawerClose = () => {
@@ -196,6 +214,7 @@ export default function MiniDrawer() {
                 href='/Dashboard'
               >
                 <ListItemIcon
+                onClick={handleDrawerOpen}
                   sx={{
                     minWidth: 0,
                     mr: open ? 3 : 'auto',
@@ -222,16 +241,17 @@ export default function MiniDrawer() {
           }
         >
    
-            <ListItem key="Users" disablePadding sx={{ display: 'block' }}>
+            <ListItem key="Users" disablePadding sx={{ display: 'block' }} >
               <ListItemButton
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
-                onClick={handleClick}
+                onClick={handleCollapeOpen}
               >
                 <ListItemIcon
+                  onClick={handleDrawerOpen}
                   sx={{
                     minWidth: 0,
                     mr: open ? 3 : 'auto',
@@ -243,11 +263,10 @@ export default function MiniDrawer() {
                 <ListItemText primary="Users" sx={{ opacity: open ? 1 : 0 }} />
 
               </ListItemButton>
-              <Collapse in={open} timeout="auto" unmountOnExit>
+              <Collapse in={colopen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   
-                  <ListItemButton
-                 href='/users/userList'>
+                  <ListItemButton sx={{ pl: 4 }} href='/users/userList'>
                     <ListItemIcon>
                     <ClearAllOutlinedIcon sx={{color: '#430089'}}/>
                     </ListItemIcon>
@@ -283,7 +302,7 @@ export default function MiniDrawer() {
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
-                onClick={handleClick}
+                onClick={handleOtherCollapeOpen}
               >
                 <ListItemIcon
                   sx={{
@@ -298,7 +317,7 @@ export default function MiniDrawer() {
                 <ListItemText primary="Content" sx={{ opacity: open ? 1 : 0 }} />
 
               </ListItemButton>
-              <Collapse in={open} timeout="auto" unmountOnExit>
+              <Collapse in={col} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   <ListItemButton sx={{ pl: 4 }} href='/content/contentList'>
                     <ListItemIcon>

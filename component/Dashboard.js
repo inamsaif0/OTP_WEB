@@ -28,9 +28,7 @@ const style = {
 };
 
 export default function Dashboard() {
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+
 
     return (
         <Layout>
@@ -51,7 +49,7 @@ export default function Dashboard() {
                     
                         style={{ background: 'linear-gradient(to right top, #430089, #82ffa1)', color: '#FFFFFF', width: '150px', height: '50px' }}
                     >Add New</Button>
-                    <Modal
+                    {/* <Modal
                         sx={{ml:'30rem', height:'auto'}}
                         open={open}
                         onClose={handleClose}
@@ -63,7 +61,7 @@ export default function Dashboard() {
                             <Button variant="contained" onClick={handleClose}>Close</Button>
 
                         </Box>
-                    </Modal>
+                    </Modal> */}
                 </Stack>
 
                 <Stack>

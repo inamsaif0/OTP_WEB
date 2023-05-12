@@ -9,7 +9,6 @@ import axios from 'axios'
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
-    
 const Login = ({ handleChange }) => {
 
     //STYLING
@@ -33,8 +32,9 @@ const Login = ({ handleChange }) => {
     })
     //FUNCTION TO LOGIN
     const onSubmit = (values, props) => {
-
-        console.log(values)
+        initialValues.username = values.username;
+        initialValues.password = values.password;
+        console.log(valu)
         setTimeout(() => {
             props.resetForm()
             props.setSubmitting(false)
@@ -47,10 +47,9 @@ const Login = ({ handleChange }) => {
     const [error,setError] = useState(false)
     const login = async () => {
         const response = await axios.post('http://localhost:3000/api/login/login',{
-            email :  'inam@gmail.com',
-            password: 'inam12345'
+            email :  `inam@gmail.com`,
+            password: `inam12345`
         })
-        console.log(response)
         if(response.data.success) {
             console.log(response)
             router.replace('/users/userList')

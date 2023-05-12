@@ -1,26 +1,26 @@
 import mongoose from "mongoose";
 
 const uploadFileSchema = new mongoose.Schema({
-    teacher:{
-        type:String,
-    
-        
+   
+    filename:
+    {
+        type:String,    
+    },
+    fileType:{
+        type:String
     },
     student:{
         type:String,
         
     },
+    teacher:{
+        type:String,
+    },
+
     level:{
         type:String,
     },
-    file:
-    {
-        type:String,    
-    },
 
-    fileType:{
-            type:String
-    },
     date:{
         type:String
     }

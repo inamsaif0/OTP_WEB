@@ -53,9 +53,9 @@ const CreateUserForm = (props) => {
     }
     const login = async () => {
         const response = await axios.post('http://localhost:3000/api/userList',{
-            studentName:initialValues.name,
-            studentId:initialValues.email,
-            level:initialValues.level,
+            studentName:`${initialValues.name}`,
+            studentId:`${initialValues.email}`,
+            level:`${initialValues.level}`,
             status: true
         })
         console.log(response)
