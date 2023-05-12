@@ -1,0 +1,23 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/api/hello": "pages/api/hello.js",
+  "/Layout": "pages/Layout.html",
+  "/api/login/login": "pages/api/login/login.js",
+  "/api/logout": "pages/api/logout.js",
+  "/Dashboard": "pages/Dashboard.html",
+  "/content/addingFiles": "pages/content/addingFiles.html",
+  "/": "pages/index.html",
+  "/login": "pages/login.html",
+  "/api/content/[id]": "pages/api/content/[id].js",
+  "/api/userList/[id]": "pages/api/userList/[id].js",
+  "/content/contentList": "pages/content/contentList.html",
+  "/users/userList": "pages/users/userList.html",
+  "/api/content": "pages/api/content.js",
+  "/api/userList": "pages/api/userList.js",
+  "/home": "pages/home.html",
+  "/users/createUser": "pages/users/createUser.html",
+  "/users/editPage": "pages/users/editPage.html",
+  "/404": "pages/404.html"
+}
