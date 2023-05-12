@@ -227,7 +227,7 @@ export default function BasicTable({ }) {
   }, []);
 
   console.log(value)
-  var i = 0;
+  var i;
   return (
     <Grid container> 
 
@@ -236,7 +236,7 @@ export default function BasicTable({ }) {
           <Table sx={{ minWidth: 900 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>No</TableCell>
+                <TableCell>Student No</TableCell>
                 <TableCell align='right'><b>File Name</b></TableCell>
                 <TableCell align="right"><b>File Type&nbsp;(PDF)</b></TableCell>
                 <TableCell align="right"><b>Student</b></TableCell>

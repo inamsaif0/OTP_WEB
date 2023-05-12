@@ -16,6 +16,10 @@ import Select from '@mui/material/Select';
 const CreateUserForm = (props) => {
     //STYLING
     const router = useRouter();
+    const [password, setPassword] = React.useState('')
+    const [name, setName] = React.useState('');
+    const [email, setEmail] = React.useState('')
+    const [level, setLevel] = React.useState('');
     const [age, setAge] = React.useState('');
     const [error, setError]= React.useState(false);
 
@@ -42,20 +46,14 @@ const CreateUserForm = (props) => {
         password: Yup.string().required("Required")
     })
     //FUNCTION TO LOGIN
-    const onSubmit = (values, props) => {
-        console.log(age)
-        console.log(values)
-        setTimeout(() => {
-            props.resetForm()
-            props.setSubmitting(false)
-        }, 2000)
 
-    }
     const login = async () => {
+    
         const response = await axios.post('http://localhost:3000/api/userList',{
-            studentName:`${initialValues.name}`,
-            studentId:`${initialValues.email}`,
-            level:`${initialValues.level}`,
+            studentName: name,
+            studentId: email,
+            password: password,
+            level: level,
             status: true
         })
         console.log(response)
@@ -64,11 +62,13 @@ const CreateUserForm = (props) => {
             router.replace('/users/userList')
         } 
         else setError(true) 
+
+        useEffect(()=>{
+            router.prefetch('/users/userList')
+        },[])
     }
 
-    useEffect(()=>{
-        router.prefetch('/users/userList')
-    },[])
+
     return (
         <Grid container lg='12' sm='8' md="10">
             <Paper style={paperStyle}>
@@ -77,32 +77,32 @@ const CreateUserForm = (props) => {
                     <h2>Create User</h2>
                 </Grid>
                 <Grid item>
-                <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+                <Formik validationSchema={validationSchema}>
                     {(props) => (
                         <Form>
                             <Stack gap="1rem">
 
                             <Field as={TextField} label='Name' name="name"
-                                    placeholder='Enter Name' type='name' fullWidth required
+                                    placeholder='Enter Name'  fullWidth required value={name} onChange={(e)=>{setName(e.target.value)}}
                                     helperText={<ErrorMessage name="name" />} />
-                                <Field as={TextField} label='Email' name="email"
-                                    placeholder='Enter email' fullWidth required
+                            <Field as={TextField} label='Email' name="email"
+                                    placeholder='Enter email' fullWidth required value={email} onChange={(e)=>{setEmail(e.target.value)}}
                                     helperText={<ErrorMessage name="email" />}
                                 />
                                
-                                <Field as={TextField} label='Password' name="password"
-                                    placeholder='Enter password' type='password' fullWidth required
+                            <Field as={TextField} label='Password' name="password"
+                                    placeholder='Enter password' type='password' fullWidth required value={password} onChange={(e)=>{setPassword(e.target.value)}}
                                     helperText={<ErrorMessage name="password" />} />
 
-                                <Field as={Select} id="select" label="Age" name='level' >
-                                    <MenuItem value='beg1'>beg1</MenuItem>
-                                    <MenuItem value='beg2'>beg2</MenuItem>
-                                    <MenuItem value='beg3'>beg3</MenuItem>
-                                    <MenuItem value='inter1'>inter1</MenuItem>
-                                    <MenuItem value='inter2'>inter2</MenuItem>
-                                    <MenuItem value='inter3'>inter3</MenuItem>
-                                    <MenuItem value='advance'>advanced</MenuItem>
-                                </Field>
+                            <Field as={Select} id="select" label="Age" name='level' value={level} onChange={(e)=>{setLevel(e.target.value)}}>
+                                    <MenuItem value={'beg1'}>beg1</MenuItem>
+                                    <MenuItem value={'beg2'}>beg2</MenuItem>
+                                    <MenuItem value={'beg3'}>beg3</MenuItem>
+                                    <MenuItem value={'inter1'}>inter1</MenuItem>
+                                    <MenuItem value={'inter2'}>inter2</MenuItem>
+                                    <MenuItem value={'inter3'}>inter3</MenuItem>
+                                    <MenuItem value={'advance'}>advanced</MenuItem>
+                            </Field>
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
                                 style={btnstyle} fullWidth onClick={login}>{props.isSubmitting ? "Loading" : "Create User"}</Button>
                         </Stack>

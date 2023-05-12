@@ -15,7 +15,7 @@ import axios from 'axios'
 import { useEffect } from 'react';
 // import Button from '@mui/material-next/Button';
 
-export default function BasicTable({ }) {
+export default function rBasicTable({ }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [active, setActive] = React.useState('active')
@@ -45,13 +45,13 @@ export default function BasicTable({ }) {
   }, []);
 
   console.log(value)
-  
+  var i =0;
   return (
     <Stack>
 
       <Stack >
-        <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px' }}>
-          <Table sx={{ minWidth: 900 }} aria-label="simple table" stickyHeader={true}>
+        <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px', width:{lg:'100%', sm:'60%'}}} >
+          <Table aria-label="simple table" stickyHeader={true} >
             <TableHead>
               <TableRow>    
                 <TableCell>No</TableCell>
@@ -63,14 +63,14 @@ export default function BasicTable({ }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {value?.data.map((curElem) => {
+              {value?.data.map((curElem) => {i++
                 return (
                   <TableRow
                     key='row'
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="curElement">
-                      {curElem.no}
+                      {i}
                     </TableCell>
                     <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.studentName}</TableCell>
                     <TableCell align="right" sx={{fontFamily:'inherit'}}>{curElem.studentId}</TableCell>

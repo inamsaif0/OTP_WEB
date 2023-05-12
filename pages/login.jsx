@@ -32,9 +32,8 @@ const Login = ({ handleChange }) => {
     })
     //FUNCTION TO LOGIN
     const onSubmit = (values, props) => {
-        initialValues.username = values.username;
-        initialValues.password = values.password;
-        console.log(valu)
+
+        console.log(values)
         setTimeout(() => {
             props.resetForm()
             props.setSubmitting(false)
@@ -42,13 +41,11 @@ const Login = ({ handleChange }) => {
 
     }
     // const router = useRouter()
-    const [iemail,setiEmail] = useState('')
-    const [ipassword,setiPassword] = useState('')
     const [error,setError] = useState(false)
-    const login = async () => {
+    const login = async (values, props) => {
         const response = await axios.post('http://localhost:3000/api/login/login',{
-            email :  `inam@gmail.com`,
-            password: `inam12345`
+            email :  values.username,
+            password: values.password
         })
         if(response.data.success) {
             console.log(response)
@@ -68,7 +65,7 @@ const Login = ({ handleChange }) => {
                 
                     <h2>Admin Login</h2>
                 </Grid>
-                <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+                <Formik initialValues={initialValues} onSubmit={login} validationSchema={validationSchema}>
                     {(props) => (
                         <Form>
                             <Stack gap="1rem">
@@ -77,7 +74,6 @@ const Login = ({ handleChange }) => {
                                 placeholder='Enter username' fullWidth required
                                 helperText={<ErrorMessage name="username" />}
                               
-                                
                             />
                             <Field as={TextField} label='Password' name="password"
                                 placeholder='Enter password' type='password' fullWidth required

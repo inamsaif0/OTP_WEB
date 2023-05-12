@@ -10,6 +10,9 @@ const userListSchema = new mongoose.Schema({
         type:String
 
     },
+    password:{
+        type:String
+    },
     level:{
         type:String
     },
