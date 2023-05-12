@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Paper, Avatar, TextField, Button, Typography, Link, Stack } from '@mui/material'
+import { Grid, Paper, Avatar, TextField, Button, Typography, Link, Stack, Autocomplete } from '@mui/material'
 import Checkbox from '@mui/material/Checkbox';
 import { FormControlLabel } from '@mui/material';
 import { useRouter } from 'next/router';
@@ -8,14 +8,13 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 // import { redirect } from 'next/dist/server/api-utils';
 import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '../component/Select'
+
+
 import { useEffect } from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { initialize } from 'next/dist/server/lib/render-server';
 
 
 
@@ -31,55 +30,28 @@ function getStyles(name, personName, theme) {
 }
 const CreateUserForm = (props) => {
     const router = useRouter();
-    const theme = useTheme();
     //STYLING
-    const [teacher, setTeacher] = React.useState('');
-    const [student, setStudent] = React.useState('');
-    const [level, setLevel] = React.useState('');
+    const [inputvalue, setInputvalue] = React.useState(null)
+    const [inputvalue1, setInputvalue1] = React.useState(null)
+    const [inputvalue2, setInputvalue2] = React.useState(null)
+    const [teacher, setTeacher] = React.useState(null);
+    const [student, setStudent] = React.useState(null);
+    const [level, setLevel] = React.useState(null);
     const [value, setValue] = React.useState('');
-    // console.log(teacher, student, level, value)
+    const [date, setDate] = React.useState('')
     const paperStyle = { padding: 20, height: 'auto', margin: "0 auto", marginTop: '5rem', borderRadius: '15px 15px 15px 15px' }
-    // const avatarStyle = { backgroundColor: '#1bbd7e' }
+
     const btnstyle = { margin: '8px 0' }
-    //STATE
-
-    //VALIDATION 
-    // const validationSchema = Yup.object().shape({
-    //     username: Yup.string().email('please enter valid email').required("Required"),
-    //     password: Yup.string().required("Required")
-    // })
-    const handleChange = (event) => {
-        const {
-            target: { value },
-        } = event;
-        setPersonName(
-            // On autofill we get a stringified value.
-            typeof value === 'string' ? value.split(',') : value,
-        );
-    };
     const initialValues = {
-        student: student,
-        teacher: teacher,
-        level: level,
-        value: value,
-        photo: 'heh'
-    }
-    //FUNCTION TO LOGIN
-    const onSubmit = (values, props) => {
-        console.log(values) //this is to print the form values
-        setTimeout(() => {
-            props.resetForm()
-            props.setSubmitting(false)
-        }, 2000)
-
+        name:''
     }
     const AddingFiles = async () => {
+
         const response = await axios.post('http://localhost:3000/api/content', {
-            teacher: teacher,
-            student: student,
-            level: level,
-            date: value,
-            photo: ''
+            teacher: teacher.teacher,
+            student: student.student,
+            level: level.level,
+            date: date,
         })
         console.log(response)
         if (response.data.success) {
@@ -87,63 +59,103 @@ const CreateUserForm = (props) => {
             router.replace('/content/contentList')
         }
         else setError(true)
+
+            router.prefetch('/content/contentList')
+        
     }
 
+
+
     useEffect(() => {
-        router.prefetch('/content/contentList')
-    }, [])
+        fetch('http://localhost:3000/api/content')
+            .then((response) => response.json())
+            .then((data) => setValue(data))
+    }, []);
+
+
+    const defaultProps = {
+        options: value.data,
+        getOptionLabel: (option) => option.teacher,
+    };
+    const defaultProps2 = {
+        options: value.data,
+        getOptionLabel: (option) => option.student,
+    };
+    const defaultProps3 = {
+        options: value.data,
+        getOptionLabel: (option) => option.level,
+    };
+
 
     return (
         <Grid>
-            <Paper style={paperStyle} container sx={{width:{lg:400, md:300, sm:200}}} >
+            <Paper style={paperStyle} container sx={{ width: { lg: 400, md: 300, sm: 200 } }} >
                 <Grid align='center' item>
 
                     <h4>Upload Files</h4>
                 </Grid>
                 <Grid item>
-                    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+                    <Formik initialValues={initialValues}>
                         {(props) => (
                             <Form>
                                 <Stack gap='1rem'>
+                                    <Autocomplete
+                                        {...defaultProps}
+                                        value={teacher}
+                                        onChange={(event, newValue) => {
+                                            setTeacher(newValue);
+                                            console.log(newValue)
+                                        }}
+                                        inputValue={inputvalue}
+                                        onInputChange={(event, newInputValue) => {
+                                            setInputvalue(newInputValue);
+                                        }}
+                                        id="controllable-states-demo"
+                                        getOptionLabel={(option) => { return option.teacher; }}
+                                        renderInput={(params) => <TextField {...params} placeholder='Teacher' />}
+                                        fullWidth
+                                    />
+                                    <Autocomplete
+                                        {...defaultProps2}
+                                        value={student}
+                                        onChange={(event, newValue) => {
+                                            setStudent(newValue);
+                                        }}
+                                        inputValue={inputvalue1}
+                                        onInputChange={(event, newInputValue) => {
+                                            setInputvalue1(newInputValue);
+                                        }}
+                                        id="controllable-states-demo"
 
-                                    <Field as={Select} id="select" label="Teacher" name='teacher' value={teacher} onChange={(e)=>{setTeacher(e.target.value)}}>
-                                        <MenuItem value='beg1'>beg1</MenuItem>
-                                        <MenuItem value='beg2'>beg2</MenuItem>
-                                        <MenuItem value='beg3'>beg3</MenuItem>
-                                        <MenuItem value='inter1'>inter1</MenuItem>
-                                        <MenuItem value='inter2'>inter2</MenuItem>
-                                        <MenuItem value='inter3'>inter3</MenuItem>
-                                        <MenuItem value='advance'>advanced</MenuItem>
-                                    </Field>
-                                    <Field as={Select} id="select" label="Student" name='student' value={student}  onChange={(e)=>{setStudent(e.target.value)}}>
-                                        <MenuItem value='beg1'>beg1</MenuItem>
-                                        <MenuItem value='beg2'>beg2</MenuItem>
-                                        <MenuItem value='beg3'>beg3</MenuItem>
-                                        <MenuItem value='inter1'>inter1</MenuItem>
-                                        <MenuItem value='inter2'>inter2</MenuItem>
-                                        <MenuItem value='inter3'>inter3</MenuItem>
-                                        <MenuItem value='advance'>advanced</MenuItem>
-                                    </Field>
-                                    <Field as={Select} id="select" label="Level" name='level' value={level} onChange={(e)=>{setLevel(e.target.value)}}>
-                                        <MenuItem value='beg1'>beg1</MenuItem>
-                                        <MenuItem value='beg2'>beg2</MenuItem>
-                                        <MenuItem value='beg3'>beg3</MenuItem>
-                                        <MenuItem value='inter1'>inter1</MenuItem>
-                                        <MenuItem value='inter2'>inter2</MenuItem>
-                                        <MenuItem value='inter3'>inter3</MenuItem>
-                                        <MenuItem value='advance'>advanced</MenuItem>
-                                    </Field>
-                                    <Field as={LocalizationProvider} dateAdapter={AdapterDayjs} name='date'>
+                                        renderInput={(params) => <TextField {...params} placeholder='Student' />}
+                                        fullWidth
+                                    />
+                                    <Autocomplete
+                                        {...defaultProps3}
+                                        value={level}
+                                        onChange={(event, newValue) => {
+                                            setLevel(newValue);
+                                        }}
+                                        inputValue={inputvalue2}
+                                        onInputChange={(event, newInputValue) => {
+                                            setInputvalue2(newInputValue);
+                                        }}
+                                        id="controllable-states-demo"
 
-                                        <DatePicker value={value} onChange={(newValue) => setValue(newValue)} />
-                                    </Field>
+                                        renderInput={(params) => <TextField {...params} placeholder='Level' />}
+                                        fullWidth
+                                    />
+                                    {/* </Field> */}
+                                    <LocalizationProvider dateAdapter={AdapterDayjs} name='date'>
+
+                                        <DatePicker value={date} onChange={(newValue) => { setDate(newValue) }} />
+                                    </LocalizationProvider>
                                     <label htmlFor="upload-photo">
                                         <input
                                             style={{ display: "none" }}
                                             id="upload-photo"
                                             name="upload-photo"
                                             type="file"
-                                        
                                         />
 
                                         <Button color="secondary" variant="contained" component="span" fullWidth>
@@ -158,9 +170,10 @@ const CreateUserForm = (props) => {
                         )}
                     </Formik>
                 </Grid>
-            </Paper>
-        </Grid>
+            </Paper >
+        </Grid >
     )
 }
+
 
 export default CreateUserForm;
