@@ -1,6 +1,5 @@
 import { Stack, Typography, Grid } from '@mui/material'
 import Layout from '../Layout'
-import Button from '@mui/material/Button';
 import CreateUserForm from '../../component/CreateUserForm';
 
 export default function Dashboard(){

@@ -1,10 +1,8 @@
 import { Stack, Typography, Grid,TextField } from '@mui/material'
 import Layout from '../Layout'
-import Dashboard from '../../component/Dashboard';
 import Table from '../../component/Table'
 import Button from '@mui/material/Button';
 import InputAdornment from '@mui/material/InputAdornment';
-import ContentTable from '../../component/ContentTable'
 import SearchIcon from '@mui/icons-material/Search';
 
 
@@ -20,7 +18,7 @@ export default function UserList(){
    
              }}>
                             <Stack direction={'column'} alignItems='center' justifyContent='center'>
-                <Stack flexDirection='row' justifyContent='space-between' gap='30rem'>
+                <Stack flexDirection='row' justifyContent='space-between' sx={{gap:{lg:'30rem', md:'30rem', sm:'30rem'}}}>
                     <TextField
                         label="Search by name"
                         InputProps={{
@@ -37,7 +35,7 @@ export default function UserList(){
                         style={{ background: 'linear-gradient(to right top, #430089, #82ffa1)', color: '#FFFFFF', width: '150px', height: '50px' }}
                     >Add New</Button></Stack></Stack>
                 <Table/>
-            </Stack>
+            </Stack>  
         </Layout>
     )
 } 

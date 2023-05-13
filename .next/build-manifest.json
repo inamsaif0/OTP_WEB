@@ -29,6 +29,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/content/contentList.js"
+    ],
+    "/users/userList": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/users/userList.js"
     ]
   },
   "ampFirstPages": []

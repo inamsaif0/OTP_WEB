@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Paper, Avatar, TextField, Button, Typography, Link, Stack } from '@mui/material'
+import { Grid, Paper, Avatar, TextField, Button, Typography, Link, Stack,Autocomplete } from '@mui/material'
 import Checkbox from '@mui/material/Checkbox';
 import { FormControlLabel } from '@mui/material';
 import { useEffect } from 'react';
@@ -19,9 +19,11 @@ const CreateUserForm = (props) => {
     const [password, setPassword] = React.useState('')
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('')
-    const [level, setLevel] = React.useState('');
+    const [level, setLevel] = React.useState(null);
     const [age, setAge] = React.useState('');
     const [error, setError]= React.useState(false);
+    const [value, setValue]= React.useState('');
+    const [inputvalue, setInputvalue] = React.useState('')
 
     const handleChange = (event) => {
         setAge(event.target.value);
@@ -53,7 +55,7 @@ const CreateUserForm = (props) => {
             studentName: name,
             studentId: email,
             password: password,
-            level: level,
+            level: level.level,
             status: true
         })
         console.log(response)
@@ -63,12 +65,16 @@ const CreateUserForm = (props) => {
         } 
         else setError(true) 
 
-        useEffect(()=>{
-            router.prefetch('/users/userList')
-        },[])
     }
-
-
+    useEffect(() => {
+        fetch('http://localhost:3000/api/userList')
+            .then((response) => response.json())
+            .then((data) => setValue(data))
+    }, []);
+    const defaultProps = {
+        options: value.data,
+        getOptionLabel: (option) => option.level,
+    };
     return (
         <Grid container lg='12' sm='8' md="10">
             <Paper style={paperStyle}>
@@ -77,7 +83,7 @@ const CreateUserForm = (props) => {
                     <h2>Create User</h2>
                 </Grid>
                 <Grid item>
-                <Formik validationSchema={validationSchema}>
+                <Formik initialValues={initialValues} validationSchema={validationSchema} >
                     {(props) => (
                         <Form>
                             <Stack gap="1rem">
@@ -94,15 +100,22 @@ const CreateUserForm = (props) => {
                                     placeholder='Enter password' type='password' fullWidth required value={password} onChange={(e)=>{setPassword(e.target.value)}}
                                     helperText={<ErrorMessage name="password" />} />
 
-                            <Field as={Select} id="select" label="Age" name='level' value={level} onChange={(e)=>{setLevel(e.target.value)}}>
-                                    <MenuItem value={'beg1'}>beg1</MenuItem>
-                                    <MenuItem value={'beg2'}>beg2</MenuItem>
-                                    <MenuItem value={'beg3'}>beg3</MenuItem>
-                                    <MenuItem value={'inter1'}>inter1</MenuItem>
-                                    <MenuItem value={'inter2'}>inter2</MenuItem>
-                                    <MenuItem value={'inter3'}>inter3</MenuItem>
-                                    <MenuItem value={'advance'}>advanced</MenuItem>
-                            </Field>
+                                    <Field as={Autocomplete} name="level"
+                                        {...defaultProps}
+                                        value={level}
+                                        onChange={(event, newValue) => {
+                                            setLevel(newValue);
+                                        }}
+                                        inputValue={inputvalue}
+                                        onInputChange={(event, newInputValue) => {
+                                            setInputvalue(newInputValue);
+                                        }}
+                                        id="controllable-states-demo"
+                                        getOptionLabel={(option) => option && option.level}
+
+                                        renderInput={(params) => <TextField {...params} placeholder='Level' />}
+                                        fullWidth
+                                    />
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
                                 style={btnstyle} fullWidth onClick={login}>{props.isSubmitting ? "Loading" : "Create User"}</Button>
                         </Stack>

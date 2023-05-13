@@ -25,17 +25,14 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import ClearAllOutlinedIcon from '@mui/icons-material/ClearAllOutlined';
 import ChecklistOutlinedIcon from '@mui/icons-material/ChecklistOutlined';
 import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
-///
 import axios from 'axios';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import Collapse from '@mui/material/Collapse';
-import StarBorder from '@mui/icons-material/StarBorder';
-import { Router } from 'react-router-dom';
 import { useRouter } from 'next/router'
 
-// import { Main } from 'next/document';
+
 
 const drawerWidth = 240;
 

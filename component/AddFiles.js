@@ -43,34 +43,35 @@ const CreateUserForm = (props) => {
 
     const btnstyle = { margin: '8px 0' }
     const initialValues = {
-        name:''
+        teacher:'',
+        student:'',
+        level:'',
+        date:''  
     }
-    const AddingFiles = async () => {
+    const AddingFiles = async () => {}
 
-        const response = await axios.post('http://localhost:3000/api/content', {
-            teacher: teacher.teacher,
-            student: student.student,
-            level: level.level,
-            date: date,
-        })
-        console.log(response)
-        if (response.data.success) {
-            console.log(response)
-            router.replace('/content/contentList')
-        }
-        else setError(true)
+    //     const response = await axios.post('http://localhost:3000/api/content', {
+    //         teacher: teacher.teacher,
+    //         student: student.student,
+    //         level: level.level,
+    //         date: date,
+    //     })
+    //     console.log(response)
+    //     if (response.data.success) {
+    //         console.log(response)
+    //         router.replace('/content/contentList')
+    //     }
+    //     else setError(true)
 
-            router.prefetch('/content/contentList')
+    //         router.prefetch('/content/contentList')
         
-    }
+    // }
 
-
-
-    useEffect(() => {
-        fetch('http://localhost:3000/api/content')
-            .then((response) => response.json())
-            .then((data) => setValue(data))
-    }, []);
+    // useEffect(() => {
+    //     fetch('http://localhost:3000/api/content')
+    //         .then((response) => response.json())
+    //         .then((data) => setValue(data))
+    // }, []);
 
 
     const defaultProps = {
@@ -95,11 +96,11 @@ const CreateUserForm = (props) => {
                     <h4>Upload Files</h4>
                 </Grid>
                 <Grid item>
-                    <Formik initialValues={initialValues}>
+                    <Formik initialValues={initialValues} onSubmit={AddingFiles}>
                         {(props) => (
                             <Form>
                                 <Stack gap='1rem'>
-                                    <Autocomplete
+                                    <Field as={Autocomplete}
                                         {...defaultProps}
                                         value={teacher}
                                         onChange={(event, newValue) => {
@@ -111,11 +112,11 @@ const CreateUserForm = (props) => {
                                             setInputvalue(newInputValue);
                                         }}
                                         id="controllable-states-demo"
-                                        getOptionLabel={(option) => { return option.teacher; }}
+                                        getOptionLabel={(option) => option && option.teacher}
                                         renderInput={(params) => <TextField {...params} placeholder='Teacher' />}
                                         fullWidth
                                     />
-                                    <Autocomplete
+                                    <Field as={Autocomplete}
                                         {...defaultProps2}
                                         value={student}
                                         onChange={(event, newValue) => {
@@ -126,11 +127,11 @@ const CreateUserForm = (props) => {
                                             setInputvalue1(newInputValue);
                                         }}
                                         id="controllable-states-demo"
-
+                                        getOptionLabel={(option) => option && option.student}
                                         renderInput={(params) => <TextField {...params} placeholder='Student' />}
                                         fullWidth
                                     />
-                                    <Autocomplete
+                                    <Field as={Autocomplete}
                                         {...defaultProps3}
                                         value={level}
                                         onChange={(event, newValue) => {
@@ -141,7 +142,7 @@ const CreateUserForm = (props) => {
                                             setInputvalue2(newInputValue);
                                         }}
                                         id="controllable-states-demo"
-
+                                        getOptionLabel={(option) => option && option.level}
                                         renderInput={(params) => <TextField {...params} placeholder='Level' />}
                                         fullWidth
                                     />

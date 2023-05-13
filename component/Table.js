@@ -50,7 +50,7 @@ export default function rBasicTable({ }) {
     <Stack>
 
       <Stack >
-        <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px', width:{lg:'100%', sm:'60%'}}} >
+        <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px', minWidth:{lg:'100%', sm:'70%'}, mr:{md:'4rem', sm:'4rem'}}}  >
           <Table aria-label="simple table" stickyHeader={true} >
             <TableHead>
               <TableRow>    

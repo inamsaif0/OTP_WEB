@@ -227,16 +227,18 @@ export default function BasicTable({ }) {
   }, []);
 
   console.log(value)
-  var i;
+  var i=0;
   return (
     <Grid container> 
 
       <Grid item>
-        <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px', mt:{lg:'1rem', md:'3rem', sm:'4rem'} }}>
-          <Table sx={{ minWidth: 900 }} aria-label="simple table">
+        <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px', mt:{lg:'1rem', md:'3rem', sm:'4rem'},minWidth:{
+          lg:900, md:700, sm:300}}} 
+        >
+          <Table sx={{ minWidth:{lg:900, md:700, sm:300}}} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Student No</TableCell>
+                <TableCell><b>Student No</b></TableCell>
                 <TableCell align='right'><b>File Name</b></TableCell>
                 <TableCell align="right"><b>File Type&nbsp;(PDF)</b></TableCell>
                 <TableCell align="right"><b>Student</b></TableCell>

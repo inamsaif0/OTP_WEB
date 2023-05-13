@@ -1,10 +1,8 @@
 
-// import { Inter } from 'next/font/google'
+
 import Login from './login'
 
-// const inter = Inter({ subsets: ['greek'] })
-
-export default function Home() {
+export default function index() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
   
