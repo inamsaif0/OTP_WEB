@@ -1,8 +1,19 @@
 import connect from '../../../lib/mongodb'
 import contentList from '../../../model/contentList'
+import multer from 'multer';
 
 connect();
 
+const upload  = multer({
+    storage: multer.diskStorage({
+        destination: function (req, file, cb){
+            cb(null, path.join(process.cwd(), "public", "upload"));
+        },
+        filename: function (req, file, cb){
+            cb(null, new Date().getTime() + "=" + file.originalname);
+        },
+    }),
+});
 const content = async (req, res) => {
     const { method } = req;
 

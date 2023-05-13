@@ -31,8 +31,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import Collapse from '@mui/material/Collapse';
 import { useRouter } from 'next/router'
-
-
+import FileOpenIcon from '@mui/icons-material/FileOpen';
+import ContentPasteGoOutlinedIcon from '@mui/icons-material/ContentPasteGoOutlined';
 
 const drawerWidth = 240;
 
@@ -309,7 +309,7 @@ export default function MiniDrawer() {
                   }}
                 >
 
-                  < ContentPasteIcon sx={{color: '#430089'}}/>
+                  < ContentPasteGoOutlinedIcon sx={{color: '#430089'}}/>
                 </ListItemIcon>
                 <ListItemText primary="Content" sx={{ opacity: open ? 1 : 0 }} />
 
@@ -323,10 +323,10 @@ export default function MiniDrawer() {
                     <ListItemText primary="List" />
 
                   </ListItemButton>
-                  <ListItemButton sx={{ pl: 4 }} href='/content/addingFiles'>
+                  <ListItemButton sx={{ pl: 4 }} href='/content/uploadFiles'>
                     
                     <ListItemIcon>
-                      <PictureAsPdfOutlinedIcon sx={{color: '#430089'}}/>
+                      <FileOpenIcon sx={{color: '#430089'}}/>
                     </ListItemIcon>
                     <ListItemText primary="Add Files" />
 

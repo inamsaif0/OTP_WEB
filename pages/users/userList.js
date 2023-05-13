@@ -17,6 +17,7 @@ export default function UserList(){
              mb:{lg:'2rem', md:'1rem',sm:'1rem'},
    
              }}>
+                <Stack alignItems='center' justifyContent="center"><Typography variant='h4' sx={{color:'purple'}}><b>USERS LIST</b></Typography></Stack>
                             <Stack direction={'column'} alignItems='center' justifyContent='center'>
                 <Stack flexDirection='row' justifyContent='space-between' sx={{gap:{lg:'30rem', md:'30rem', sm:'30rem'}}}>
                     <TextField

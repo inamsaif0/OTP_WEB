@@ -2,10 +2,11 @@ import mongoose from "mongoose";
 
 const uploadFileSchema = new mongoose.Schema({
    
-    filename:
-    {
-        type:String,    
-    },
+    source: {
+        file: { type: Buffer, required: true },
+        filename: { type: String, required: true },
+        mimetype: { type: String, required: true }
+      },
     fileType:{
         type:String
     },

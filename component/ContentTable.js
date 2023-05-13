@@ -258,8 +258,8 @@ export default function BasicTable({ }) {
                     <TableCell component="th" scope="curElement" sx={{fontFamily:"inherit"}}>
                       {i}
                     </TableCell>
-                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.teacher}</TableCell>
-                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.student}</TableCell>
+                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.filename}</TableCell>
+                    <TableCell align="right" sx={{fontFamily:"inherit"}}>file</TableCell>
                     <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.level}</TableCell>
                     <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.teacher}</TableCell>
                     <TableCell align="right"sx={{fontFamily:"inherit"}}>

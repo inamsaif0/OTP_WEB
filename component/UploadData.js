@@ -36,6 +36,8 @@ const CreateUserForm = (props) => {
     const [level, setLevel] = React.useState(null);
     const [value, setValue] = React.useState('');
     const [date, setDate] = React.useState('')
+    const [image, setImage]  = React.useState(null);
+    const [imageinput, setImageinput] = React.useState(null);
     // console.log(teacher, student, level, value)
     const paperStyle = { padding: 20, height: 'auto', margin: "0 auto", marginTop: '5rem', borderRadius: '15px 15px 15px 15px' }
     // const avatarStyle = { backgroundColor: '#1bbd7e' }
@@ -68,10 +70,12 @@ const CreateUserForm = (props) => {
         // console.log(student.student)
         // console.log(level.level)
         // console.log(date)}
+        console.log(imageinput);
         const response = await axios.post('http://localhost:3000/api/content', {
             teacher: teacher.teacher,
             student: student.student,
             level: level.level,
+            filename:imageinput,
             date: date,
         })
         console.log(response)
@@ -101,7 +105,17 @@ const CreateUserForm = (props) => {
         options: value.data,
         getOptionLabel: (option) => option.level,
     };
-
+    const handleChange = (e) => {
+        const File = e.target.files[0];
+        console.log(File)
+        setImageinput(File)
+    
+        const fileReader = new FileReader();
+        fileReader.onload = function(e){
+            setImage(e.target.result)
+        }
+        fileReader.readAsDataURL(File);
+    }
 
     return (
         <Grid>
@@ -165,20 +179,22 @@ const CreateUserForm = (props) => {
 
                                         <DatePicker value={date} onChange={(newValue)=>{setDate(newValue)}} />
                                     </Field>
-                                    {/* <label htmlFor="upload-photo">
+                                  
                                         <input
-                                            style={{ display: "none" }}
+                                            style={{backgroundColor:'ActiveCaption',color:'#FFF'}}
                                             id="upload-photo"
                                             name="upload-photo"
                                             type="file"
+                                            onChange={handleChange}
                                         />
 
                                         <Button color="secondary" variant="contained" component="span" fullWidth>
-                                            Files
+                                            Upload Files
                                         </Button>{" "}
-                                    </label> */}
+                                        
+                                   
                                     <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
-                                        style={btnstyle} fullWidth onClick={AddingFiles}>{props.isSubmitting ? "Loading" : "Upload"}</Button>
+                                        style={btnstyle} fullWidth onClick={AddingFiles}>{props.isSubmitting ? "Loading" : "Add Content"}</Button>
                                 </Stack>
 
                             </Form>

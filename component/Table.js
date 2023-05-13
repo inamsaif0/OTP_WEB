@@ -92,9 +92,8 @@ export default function rBasicTable({ }) {
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
+        <TablePagination 
           rowsPerPageOptions={[10, 25, 100]}
-          component="div"
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

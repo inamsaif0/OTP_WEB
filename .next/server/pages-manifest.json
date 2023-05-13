@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/users/userList": "pages/users/userList.js",
   "/content/contentList": "pages/content/contentList.js",
   "/api/content": "pages/api/content.js"
 }
