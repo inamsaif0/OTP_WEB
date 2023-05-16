@@ -86,8 +86,7 @@ export default function rBasicTable({ }) {
                     <TableCell align="left" sx={{fontFamily:"inherit"}}>
                       <Stack flexDirection='row'>
                         <Button href='/users/editPage'><EditIcon sx={{ color: '#430089' }} /></Button>
-                        <Button ><DeleteIcon sx={{ color: '#430089' }} />
-                        </Button>
+
                         {/* <Button color="tertiary" /> */}
                       </Stack>
                     </TableCell>
