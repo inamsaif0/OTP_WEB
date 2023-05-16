@@ -35,7 +35,8 @@ export default function UserList(){
                         href='/users/createUser'
                         style={{ background: 'linear-gradient(to right top, #430089, #82ffa1)', color: '#FFFFFF', width: '150px', height: '50px' }}
                     >Add New</Button></Stack></Stack>
-                <Table/>
+                    <Stack><Table/></Stack>
+                
             </Stack>  
         </Layout>
     )

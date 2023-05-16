@@ -20,16 +20,17 @@ const Login = ({ handleChange }) => {
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btnstyle = { margin: '8px 0' }
     //STATE
+    const validationSchema = Yup.object().shape({
+        username: Yup.string().email('please enter valid email').required("Required"),
+        password: Yup.string().required("Required")
+    })
     const initialValues = {
         username: '',
         password: '',
         remember: false
     }
     //VALIDATION 
-    const validationSchema = Yup.object().shape({
-        username: Yup.string().email('please enter valid email').required("Required"),
-        password: Yup.string().required("Required")
-    })
+
     //FUNCTION TO LOGIN
     const onSubmit = (values, props) => {
 

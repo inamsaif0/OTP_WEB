@@ -29,6 +29,13 @@ export default function rBasicTable({ }) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  // const deleted = async (id) => {
+  //   const response =  await axios.delete(`http://localhost:3000/api/userList/${id}`);
+    
+  //   if(response.data.success){
+  //     console.log('Deleted')
+  //   }
+
   const changebutton = () => {
     if (active == "active") {
       setActive('Inactive')
@@ -54,11 +61,11 @@ export default function rBasicTable({ }) {
           <Table aria-label="simple table" stickyHeader={true} >
             <TableHead>
               <TableRow>    
-                <TableCell>No</TableCell>
-                <TableCell align='right'><b>Student Name</b></TableCell>
-                <TableCell align="right"><b>StudentID&nbsp;(email)</b></TableCell>
-                <TableCell align="right"><b>Level</b></TableCell>
-                <TableCell align="right"><b>Status</b></TableCell>
+                <TableCell><b>Student No.</b></TableCell>
+                <TableCell align='left'><b>Student Name</b></TableCell>
+                <TableCell align="left"><b>StudentID&nbsp;(email)</b></TableCell>
+                <TableCell align="left"><b>Level</b></TableCell>
+                <TableCell align="center"><b>Status</b></TableCell>
                 <TableCell align="center"><b>Options</b></TableCell>
               </TableRow>
             </TableHead>
@@ -69,17 +76,17 @@ export default function rBasicTable({ }) {
                     key='row'
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell component="th" scope="curElement">
+                    <TableCell component="th" scope="curElement" align='center' >
                       {i}
                     </TableCell>
-                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.studentName}</TableCell>
-                    <TableCell align="right" sx={{fontFamily:'inherit'}}>{curElem.studentId}</TableCell>
-                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.level}</TableCell>
-                    <TableCell align="right" sx={{fontFamily:"inherit"}}><Button disabled={false} variant="outlined" onClick={changebutton}>{active}</Button></TableCell>
-                    <TableCell align="right" sx={{fontFamily:"inherit"}}>
+                    <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.studentName}</TableCell>
+                    <TableCell align="left" sx={{fontFamily:'inherit'}}>{curElem.studentId}</TableCell>
+                    <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.level}</TableCell>
+                    <TableCell align="left" sx={{fontFamily:"inherit"}}><Button disabled={false} variant="outlined" onClick={changebutton}>{active}</Button></TableCell>
+                    <TableCell align="left" sx={{fontFamily:"inherit"}}>
                       <Stack flexDirection='row'>
                         <Button href='/users/editPage'><EditIcon sx={{ color: '#430089' }} /></Button>
-                        <Button onClick={changebutton}><DeleteIcon sx={{ color: '#430089' }} />
+                        <Button ><DeleteIcon sx={{ color: '#430089' }} />
                         </Button>
                         {/* <Button color="tertiary" /> */}
                       </Stack>

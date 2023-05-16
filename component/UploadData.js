@@ -5,7 +5,7 @@ import { FormControlLabel } from '@mui/material';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-// import * as Yup from 'yup';
+import * as Yup from 'yup';
 import { useTheme } from '@mui/material/styles';
 import { useEffect } from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -35,7 +35,7 @@ const CreateUserForm = (props) => {
     const [student, setStudent] = React.useState(null);
     const [level, setLevel] = React.useState(null);
     const [value, setValue] = React.useState('');
-    const [date, setDate] = React.useState('')
+    const [date, setDate] = React.useState(new Date())
     const [image, setImage]  = React.useState(null);
     const [imageinput, setImageinput] = React.useState(null);
     // console.log(teacher, student, level, value)
@@ -44,17 +44,19 @@ const CreateUserForm = (props) => {
     const btnstyle = { margin: '8px 0' }
     //STATE
 
-    //VALIDATION 
-    // const validationSchema = Yup.object().shape({
-    //     username: Yup.string().email('please enter valid email').required("Required"),
-    //     password: Yup.string().required("Required")
-    // })
+
     const initialValues = {
         student: '',
         teacher: '',
         level: '',
         value: '',
     }
+    // const validationSchema = Yup.object().shape({
+    //     Student: Yup.string().required("Required"),
+    //     Teacher: Yup.string().required("Required"),
+    //     Level: Yup.string().required('Required'),
+    //     Value: Yup.string().required('Required')
+    // })
     //FUNCTION TO LOGIN
     const onSubmit = (values, props) => {
         console.log(values) //this is to print the form values
@@ -70,13 +72,15 @@ const CreateUserForm = (props) => {
         // console.log(student.student)
         // console.log(level.level)
         // console.log(date)}
+        
         console.log(imageinput);
         const response = await axios.post('http://localhost:3000/api/content', {
-            teacher: teacher.teacher,
-            student: student.student,
-            level: level.level,
             filename:imageinput,
-            date: date,
+            student:student.student,
+            teacher:teacher.teacher,
+            level:level.level,
+            date:date
+
         })
         console.log(response)
         if (response.data.success) {
@@ -91,6 +95,7 @@ const CreateUserForm = (props) => {
             .then((response) => response.json())
             .then((data) => setValue(data))
     }, []);
+
 
 
     const defaultProps = {
@@ -125,11 +130,11 @@ const CreateUserForm = (props) => {
                     <h4>Upload Files</h4>
                 </Grid>
                 <Grid item>
-                    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+                    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                         {(props) => (
                             <Form>
                                 <Stack gap='1rem'>
-                                    <Field as={Autocomplete} name="teacher"
+                                    <Field as={Autocomplete} name="Teacher"
                                         {...defaultProps}
                                         value={teacher}
                                         onChange={(event, newValue) => {
@@ -144,7 +149,8 @@ const CreateUserForm = (props) => {
                                         renderInput={(params) => <TextField {...params} placeholder='Teacher' />}
                                         fullWidth
                                     />
-                                    <Field as={Autocomplete} name="student"
+                                    <Field as={Autocomplete} name="Student"
+                                    
                                         {...defaultProps2}
                                         value={student}
                                         onChange={(event, newValue) => {
@@ -159,12 +165,12 @@ const CreateUserForm = (props) => {
                                         renderInput={(params) => <TextField {...params} placeholder='Student' />}
                                         fullWidth
                                     />
-                                    <Field as={Autocomplete} name="level"
+                                    <Field as={Autocomplete} name="Level"
                                         {...defaultProps3}
                                         value={level}
                                         onChange={(event, newValue) => {
                                             setLevel(newValue);
-                                        }}
+                                        }} 
                                         inputValue={inputvalue2}
                                         onInputChange={(event, newInputValue) => {
                                             setInputvalue2(newInputValue);
@@ -175,25 +181,27 @@ const CreateUserForm = (props) => {
                                         fullWidth
                                     />
                                     {/* </Field> */}
-                                    <Field as={LocalizationProvider} dateAdapter={AdapterDayjs} name='date'>
+                                    <Field as={LocalizationProvider} dateAdapter={AdapterDayjs} name='Date'>
 
-                                        <DatePicker value={date} onChange={(newValue)=>{setDate(newValue)}} />
+                                        <DatePicker format="YYYY-MM-DD" selected={date} onChange={(newValue)=>{setDate(newValue)}} />
                                     </Field>
-                                  
-                                        <input
+                                        
+                                            <input
                                             style={{backgroundColor:'ActiveCaption',color:'#FFF'}}
                                             id="upload-photo"
                                             name="upload-photo"
                                             type="file"
                                             onChange={handleChange}
                                         />
+                                        
+                                        
 
-                                        <Button color="secondary" variant="contained" component="span" fullWidth>
+                                        {/* <Button color="secondary" variant="contained" component="span" fullWidth>
                                             Upload Files
-                                        </Button>{" "}
+                                        </Button>{" "} */}
                                         
                                    
-                                    <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
+                                    <Button type='submit' color='secondary' variant="contained" disabled={props.isSubmitting}
                                         style={btnstyle} fullWidth onClick={AddingFiles}>{props.isSubmitting ? "Loading" : "Add Content"}</Button>
                                 </Stack>
 

@@ -22,21 +22,21 @@
 //     id: 'filetype',
 //     label: 'FileType',
 //     minWidth: 170,
-//     align: 'right',
+//     align: 'left',
 //     format: (value) => value.toLocaleString('en-US'),
 //   },
 //   {
 //     id: 'student',
 //     label: 'Student',
 //     minWidth: 170,
-//     align: 'right',
+//     align: 'left',
 //     format: (value) => value.toLocaleString('en-US'),
 //   },
 //   {
 //     id: 'teacher',
 //     label: 'Teacher',
 //     minWidth: 170,
-//     align: 'right',
+//     align: 'left',
 //     format: (value) => value.toFixed(2),
 //   },
 //   {
@@ -239,11 +239,11 @@ export default function BasicTable({ }) {
             <TableHead>
               <TableRow>
                 <TableCell><b>Student No</b></TableCell>
-                <TableCell align='right'><b>File Name</b></TableCell>
-                <TableCell align="right"><b>File Type&nbsp;(PDF)</b></TableCell>
-                <TableCell align="right"><b>Student</b></TableCell>
-                <TableCell align="right"><b>Teacher</b></TableCell>
-                <TableCell align="right"><b>Level</b></TableCell>
+                <TableCell align='left'><b>File Name</b></TableCell>
+                <TableCell align="left"><b>File Type&nbsp;(PDF)</b></TableCell>
+                <TableCell align="left"><b>Student</b></TableCell>
+                <TableCell align="left"><b>Teacher</b></TableCell>
+                <TableCell align="left"><b>Level</b></TableCell>
                 <TableCell align="center"><b>Date</b></TableCell>
               </TableRow>
             </TableHead>
@@ -255,18 +255,18 @@ export default function BasicTable({ }) {
                     key='row'
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell component="th" scope="curElement" sx={{fontFamily:"inherit"}}>
+                    <TableCell component="th" scope="curElement" sx={{fontFamily:"inherit"}} align='center'>
                       {i}
                     </TableCell>
-                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.filename}</TableCell>
-                    <TableCell align="right" sx={{fontFamily:"inherit"}}>file</TableCell>
-                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.level}</TableCell>
-                    <TableCell align="right" sx={{fontFamily:"inherit"}}>{curElem.teacher}</TableCell>
-                    <TableCell align="right"sx={{fontFamily:"inherit"}}>
+                    <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.filename}</TableCell>
+                    <TableCell align="left" sx={{fontFamily:"inherit"}}>file</TableCell>
+                    <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.student}</TableCell>
+                    <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.teacher}</TableCell>
+                    <TableCell align="left" sx={{fontFamily:"inherit"}}>
                         {curElem.level}
                     </TableCell>
-                    <TableCell align="right"sx={{fontFamily:"inherit"}}>
-                        12/3/11
+                    <TableCell align="left"sx={{fontFamily:"inherit"}}>
+                        {curElem.date.substring(0, 10)}
                     </TableCell>
                   </TableRow>
                 )

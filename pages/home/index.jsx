@@ -33,6 +33,7 @@ import Collapse from '@mui/material/Collapse';
 import { useRouter } from 'next/router'
 import FileOpenIcon from '@mui/icons-material/FileOpen';
 import ContentPasteGoOutlinedIcon from '@mui/icons-material/ContentPasteGoOutlined';
+import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 
 const drawerWidth = 240;
 
@@ -136,19 +137,19 @@ export default function MiniDrawer() {
 
   };
   const handleCollapeOpen = () => {
-    if(colopen == false)
+    if (colopen == false)
       setColopen(true);
     else
       setColopen(false)
   }
   const handleOtherCollapeOpen = () => {
-    if(col == false)
+    if (col == false)
       setCol(true);
     else
       setCol(false)
   }
   const handleDrawerOpen = () => {
-    if(open == false)
+    if (open == false)
       setOpen(true);
     else
       setOpen(false);
@@ -157,18 +158,18 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  
+
   const logout = async () => {
     const response = await axios.get('http://localhost:3000/api/logout')
-    if(response.data.success) router.push('/')
+    if (response.data.success) router.push('/')
   }
-  
+
   return (
-    <Box sx={{ display: 'flex', flexWrap:'wrap'}}>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} sx={{background: 'linear-gradient(to right bottom, #430089, #82ffa1)'}}> 
+      <AppBar position="fixed" open={open} sx={{ background: 'linear-gradient(to right bottom, #430089, #82ffa1)' }}>
         <Toolbar>
-          <IconButton   
+          <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -188,7 +189,7 @@ export default function MiniDrawer() {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -199,33 +200,33 @@ export default function MiniDrawer() {
 
           }
         >
-   
-            <ListItem key="dashboard" disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-                onClick={handleClick}
-                href='/Dashboard'
-              >
-                <ListItemIcon
+
+          <ListItem key="dashboard" disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              onClick={handleClick}
+              href='/Dashboard'
+            >
+              <ListItemIcon
                 onClick={handleDrawerOpen}
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                    
-                  }}
-                >
-                  <DashboardIcon  sx={{color: '#430089'}}/>
-                </ListItemIcon>
-                <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
 
-              </ListItemButton>
-            </ListItem>
-        
+                }}
+              >
+                <DashboardIcon sx={{ color: '#430089' }} />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
+
+            </ListItemButton>
+          </ListItem>
+
         </List>
         <Divider />
 
@@ -237,50 +238,52 @@ export default function MiniDrawer() {
 
           }
         >
-   
-            <ListItem key="Users" disablePadding sx={{ display: 'block' }} >
-              <ListItemButton
+
+          <ListItem key="Users" disablePadding sx={{ display: 'block' }} >
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              onClick={handleCollapeOpen}
+            >
+              <ListItemIcon
+                onClick={handleDrawerOpen}
                 sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
                 }}
-                onClick={handleCollapeOpen}
               >
-                <ListItemIcon
-                  onClick={handleDrawerOpen}
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
+
+                <PeopleOutlinedIcon sx={{ color: '#430089' }} />
+                
+              </ListItemIcon>
+              <ListItemText primary="Users" sx={{ opacity: open ? 1 : 0 }} />
+
+            </ListItemButton>
+            <Collapse in={colopen} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+
+                <ListItemButton sx={{ pl: 4 }} href='/users/userList'>
+                  <ListItemIcon>
+                    <ClearAllOutlinedIcon sx={{ color: '#430089' }} />
+                  </ListItemIcon>
+                  <ListItemText primary="User List" />
+                </ListItemButton>
+
+                <ListItemButton sx={{ pl: 4 }} href='/users/createUser'>
+                  <ListItemIcon>
                   <GroupAddIcon sx={{color: '#430089'}} />
-                </ListItemIcon>
-                <ListItemText primary="Users" sx={{ opacity: open ? 1 : 0 }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Create User" />
+                </ListItemButton>
 
-              </ListItemButton>
-              <Collapse in={colopen} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  
-                  <ListItemButton sx={{ pl: 4 }} href='/users/userList'>
-                    <ListItemIcon>
-                    <ClearAllOutlinedIcon sx={{color: '#430089'}}/>
-                    </ListItemIcon>
-                    <ListItemText primary="User List" />
-                  </ListItemButton>
+              </List>
+            </Collapse>
+          </ListItem>
 
-                  <ListItemButton sx={{ pl: 4 }} href='/users/createUser'>
-                    <ListItemIcon>
-                      <AddOutlinedIcon sx={{color: '#430089'}}/>
-                    </ListItemIcon>
-                    <ListItemText primary="Create User" />
-                  </ListItemButton>
-                  
-                </List>
-              </Collapse>
-            </ListItem>
-        
         </List>
         <Divider />
 
@@ -291,50 +294,50 @@ export default function MiniDrawer() {
 
           }
         >
-   
-            <ListItem key="Users" disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
+
+          <ListItem key="Users" disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              onClick={handleOtherCollapeOpen}
+            >
+              <ListItemIcon
                 sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
                 }}
-                onClick={handleOtherCollapeOpen}
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
 
-                  < ContentPasteGoOutlinedIcon sx={{color: '#430089'}}/>
-                </ListItemIcon>
-                <ListItemText primary="Content" sx={{ opacity: open ? 1 : 0 }} />
+                < ContentPasteGoOutlinedIcon sx={{ color: '#430089' }} />
+              </ListItemIcon>
+              <ListItemText primary="Content" sx={{ opacity: open ? 1 : 0 }} />
 
-              </ListItemButton>
-              <Collapse in={col} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }} href='/content/contentList'>
-                    <ListItemIcon>
-                      <ChecklistOutlinedIcon sx={{color: '#430089'}}/>
-                    </ListItemIcon>
-                    <ListItemText primary="List" />
+            </ListItemButton>
+            <Collapse in={col} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }} href='/content/contentList'>
+                  <ListItemIcon>
+                    <ChecklistOutlinedIcon sx={{ color: '#430089' }} />
+                  </ListItemIcon>
+                  <ListItemText primary="List" />
 
-                  </ListItemButton>
-                  <ListItemButton sx={{ pl: 4 }} href='/content/uploadFiles'>
-                    
-                    <ListItemIcon>
-                      <FileOpenIcon sx={{color: '#430089'}}/>
-                    </ListItemIcon>
-                    <ListItemText primary="Add Files" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }} href='/content/uploadFiles'>
 
-                  </ListItemButton>
-                </List>
-              </Collapse>
-            </ListItem>
-        
+                  <ListItemIcon>
+                    <FileOpenIcon sx={{ color: '#430089' }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Add Files" />
+
+                </ListItemButton>
+              </List>
+            </Collapse>
+          </ListItem>
+
         </List>
         <Divider />
 
@@ -345,31 +348,31 @@ export default function MiniDrawer() {
 
           }
         >
-   
-            <ListItem key="Log Out" disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-                onClick={logout}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <LogoutIcon sx={{color: '#430089'}}/>
-                </ListItemIcon>
-                <ListItemText primary="Log Out" sx={{ opacity: open ? 1 : 0 }} />
 
-              </ListItemButton>
-             
-            </ListItem>
-        
+          <ListItem key="Log Out" disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              onClick={logout}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <LogoutIcon sx={{ color: '#430089' }} />
+              </ListItemIcon>
+              <ListItemText primary="Log Out" sx={{ opacity: open ? 1 : 0 }} />
+
+            </ListItemButton>
+
+          </ListItem>
+
         </List>
         <Divider />
 

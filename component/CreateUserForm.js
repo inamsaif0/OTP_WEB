@@ -44,13 +44,15 @@ const CreateUserForm = (props) => {
     }
     //VALIDATION 
     const validationSchema = Yup.object().shape({
-        username: Yup.string().email('please enter valid email').required("Required"),
-        password: Yup.string().required("Required")
+        name: Yup.string().min(4,'too Short').max(50, 'too long').required("Required"),
+        email: Yup.string().required('Required'),
+        password: Yup.string().min(4,'too Short').max(50, 'too long').required("Required"),
+        password: Yup.string().required("Required"),
     })
     //FUNCTION TO LOGIN
-
+  
     const login = async () => {
-    
+    if(validationSchema){
         const response = await axios.post('http://localhost:3000/api/userList',{
             studentName: name,
             studentId: email,
@@ -65,9 +67,9 @@ const CreateUserForm = (props) => {
         } 
         else setError(true) 
 
-    }
+    }}
     useEffect(() => {
-        fetch('http://localhost:3000/api/userList')
+        fetch('http://localhost:3000/api/content')
             .then((response) => response.json())
             .then((data) => setValue(data))
     }, []);
@@ -78,27 +80,34 @@ const CreateUserForm = (props) => {
     return (
         <Grid container lg='12' sm='8' md="10">
             <Paper style={paperStyle}>
-                <Grid align='center' item>
-
-                    <h2>Create User</h2>
+                <Grid align='center' item>  
+                    <h2 style={{color:'purple'}}>Create User</h2>
                 </Grid>
                 <Grid item>
-                <Formik initialValues={initialValues} validationSchema={validationSchema} >
-                    {(props) => (
+                <Formik initialValues={initialValues} validationSchema={validationSchema}  onSubmit={login}>
+                    {({props, errors, touched}) => (
                         <Form>
                             <Stack gap="1rem">
 
                             <Field as={TextField} label='Name' name="name"
                                     placeholder='Enter Name'  fullWidth required value={name} onChange={(e)=>{setName(e.target.value)}}
-                                    helperText={<ErrorMessage name="name" />} />
+                                    helperText={<ErrorMessage name="name" />} >
+                                        {errors.firstName && touched.firstName ? (
+             <div>{errors.firstName}</div>
+           ) : null}
+                                    </Field>
                             <Field as={TextField} label='Email' name="email"
                                     placeholder='Enter email' fullWidth required value={email} onChange={(e)=>{setEmail(e.target.value)}}
                                     helperText={<ErrorMessage name="email" />}
-                                />
+                                >{errors.firstName && touched.firstName ? (
+                                    <div>{errors.firstName}</div>
+                                  ) : null}</Field>
                                
                             <Field as={TextField} label='Password' name="password"
                                     placeholder='Enter password' type='password' fullWidth required value={password} onChange={(e)=>{setPassword(e.target.value)}}
-                                    helperText={<ErrorMessage name="password" />} />
+                                    helperText={<ErrorMessage name="password" />} >{errors.password && touched.password ? (
+                                        <div>{errors.password}</div>
+                                      ) : null}</Field>
 
                                     <Field as={Autocomplete} name="level"
                                         {...defaultProps}
@@ -115,9 +124,11 @@ const CreateUserForm = (props) => {
 
                                         renderInput={(params) => <TextField {...params} placeholder='Level' />}
                                         fullWidth
-                                    />
-                            <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
-                                style={btnstyle} fullWidth onClick={login}>{props.isSubmitting ? "Loading" : "Create User"}</Button>
+                                    >{errors.level && touched.level ? (
+                                        <div>{errors.level}</div>
+                                      ) : null}</Field>
+                            <Button type='submit' color='primary' variant="contained" 
+                                style={btnstyle} fullWidth validationSchema={validationSchema} onClick={login} >Create User</Button>
                         </Stack>
                         </Form>
                     )}
