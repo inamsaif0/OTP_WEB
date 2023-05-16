@@ -130,7 +130,7 @@ const CreateUserForm = (props) => {
                     <h4>Upload Files</h4>
                 </Grid>
                 <Grid item>
-                    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+                    <Formik initialValues={initialValues} onSubmit={onSubmit} >
                         {(props) => (
                             <Form>
                                 <Stack gap='1rem'>

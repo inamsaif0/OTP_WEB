@@ -25,10 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/users/editPage": [
+    "/content/uploadFiles": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/users/editPage.js"
+      "static/chunks/pages/content/uploadFiles.js"
     ]
   },
   "ampFirstPages": []
