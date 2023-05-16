@@ -13,12 +13,11 @@ import { Button, Stack } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
 import axios from 'axios'
 import { useEffect } from 'react';
-// import Button from '@mui/material-next/Button';
 
 export default function rBasicTable({ }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [active, setActive] = React.useState('active')
+  const [active, setActive] = React.useState(true)
 
   const [value, setValue] = React.useState();
   const handleChangePage = (event, newPage) => {
@@ -36,27 +35,47 @@ export default function rBasicTable({ }) {
   //     console.log('Deleted')
   //   }
 
-  const changebutton = () => {
-    if (active == "active") {
-      setActive('Inactive')
-    }
-    else {
-      setActive('active')
-    }
-  }
-
+  // const changebutton = () => {
+  //   if (active == "active") {
+  //     setActive('Inactive')
+  //   }
+  //   else {
+  //     setActive('active')
+  //   }
+  // }
+  
+  // const handleDelete = async (post) => {
+  //   if (post.status == true) {
+  //     setActive(false)
+  //     console.log(active)
+  //   }
+  //   else {
+  //     setActive(true)
+  //     console.log(active)
+  //   }
+    
+  //   // setValue(value.data.filter((p) => p._id !== post._id));
+  //   // const res= await axios.put(`http://localhost:3000/api/userList/${post._id}`,{
+  //   //   no:post.no,
+  //   //   studentName:post.studentName,
+  //   //   studentId:post.studentId,
+  //   //   level:post.level,
+  //   //   status:active
+  //   // });
+  //   // if(res.data.success){
+  //   //   console.log(res.data)
+  //   // }
+  // };
+console.log(active)
   useEffect(() => {
     fetch('http://localhost:3000/api/userList')
       .then((response) => response.json())
       .then((data) => setValue(data))
   }, []);
 
-  console.log(value)
   var i = 0;
   return (
     <Stack>
-
-
       <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px', minWidth: { lg: '100%', sm: '70%' }, mr: { md: '4rem', sm: '4rem' } }}  >
         <Table aria-label="simple table" stickyHeader={true} >
           <TableHead>
@@ -83,18 +102,15 @@ export default function rBasicTable({ }) {
                   <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.studentName}</TableCell>
                   <TableCell align="left" sx={{ fontFamily: 'inherit' }}>{curElem.studentId}</TableCell>
                   <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.level}</TableCell>
-                  <TableCell align="left" sx={{ fontFamily: "inherit" }}><Button disabled={false} variant="outlined" onClick={changebutton}>{active}</Button></TableCell>
+                  <TableCell align="left" sx={{ fontFamily: "inherit" }}><Button disabled={false} variant="outlined"  >{curElem.status == true ? "Active" : "InActive" }</Button></TableCell>
                   <TableCell align="left" sx={{ fontFamily: "inherit" }}>
                     <Stack flexDirection='row'>
                       <Button href='/users/editPage'><EditIcon sx={{ color: '#430089' }} /></Button>
-
-                      {/* <Button color="tertiary" /> */}
                     </Stack>
                   </TableCell>
 
                 </TableRow>
               )
-
             })}
           </TableBody>
         </Table>

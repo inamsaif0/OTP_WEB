@@ -25,15 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/content/contentList": [
+    "/users/userList": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/content/contentList.js"
-    ],
-    "/content/uploadFiles": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/content/uploadFiles.js"
+      "static/chunks/pages/users/userList.js"
     ]
   },
   "ampFirstPages": []
