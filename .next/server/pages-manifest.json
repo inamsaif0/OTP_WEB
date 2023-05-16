@@ -2,5 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/users/createUser": "pages/users/createUser.js"
+  "/users/editPage": "pages/users/editPage.js",
+  "/users/userList": "pages/users/userList.js",
+  "/api/userList": "pages/api/userList.js",
+  "/api/content": "pages/api/content.js"
 }

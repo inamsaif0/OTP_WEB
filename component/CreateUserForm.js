@@ -81,7 +81,7 @@ const CreateUserForm = (props) => {
         <Grid container lg='12' sm='8' md="10">
             <Paper style={paperStyle}>
                 <Grid align='center' item>  
-                    <h2 style={{color:'purple'}}>Create User</h2>
+                    <h2 style={{color:'purple'}}>{props.title}</h2>
                 </Grid>
                 <Grid item>
                 <Formik initialValues={initialValues} validationSchema={validationSchema}  onSubmit={login}>
