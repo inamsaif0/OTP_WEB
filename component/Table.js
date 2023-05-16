@@ -31,7 +31,7 @@ export default function rBasicTable({ }) {
   };
   // const deleted = async (id) => {
   //   const response =  await axios.delete(`http://localhost:3000/api/userList/${id}`);
-    
+
   //   if(response.data.success){
   //     console.log('Deleted')
   //   }
@@ -52,61 +52,64 @@ export default function rBasicTable({ }) {
   }, []);
 
   console.log(value)
-  var i =0;
+  var i = 0;
   return (
     <Stack>
 
-      <Stack >
-        <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px', minWidth:{lg:'100%', sm:'70%'}, mr:{md:'4rem', sm:'4rem'}}}  >
-          <Table aria-label="simple table" stickyHeader={true} >
-            <TableHead>
-              <TableRow>    
-                <TableCell><b>Student No.</b></TableCell>
-                <TableCell align='left'><b>Student Name</b></TableCell>
-                <TableCell align="left"><b>StudentID&nbsp;(email)</b></TableCell>
-                <TableCell align="left"><b>Level</b></TableCell>
-                <TableCell align="center"><b>Status</b></TableCell>
-                <TableCell align="center"><b>Options</b></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {value?.data.map((curElem) => {i++
-                return (
-                  <TableRow
-                    key='row'
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="curElement" align='center' >
-                      {i}
-                    </TableCell>
-                    <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.studentName}</TableCell>
-                    <TableCell align="left" sx={{fontFamily:'inherit'}}>{curElem.studentId}</TableCell>
-                    <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.level}</TableCell>
-                    <TableCell align="left" sx={{fontFamily:"inherit"}}><Button disabled={false} variant="outlined" onClick={changebutton}>{active}</Button></TableCell>
-                    <TableCell align="left" sx={{fontFamily:"inherit"}}>
-                      <Stack flexDirection='row'>
-                        <Button href='/users/editPage'><EditIcon sx={{ color: '#430089' }} /></Button>
 
-                        {/* <Button color="tertiary" /> */}
-                      </Stack>
-                    </TableCell>
+      <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px', minWidth: { lg: '100%', sm: '70%' }, mr: { md: '4rem', sm: '4rem' } }}  >
+        <Table aria-label="simple table" stickyHeader={true} >
+          <TableHead>
+            <TableRow>
+              <TableCell><b>Student No.</b></TableCell>
+              <TableCell align='left'><b>Student Name</b></TableCell>
+              <TableCell align="left"><b>StudentID&nbsp;(email)</b></TableCell>
+              <TableCell align="left"><b>Level</b></TableCell>
+              <TableCell align="center"><b>Status</b></TableCell>
+              <TableCell align="center"><b>Options</b></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {value?.data.map((curElem) => {
+              i++
+              return (
+                <TableRow
+                  key='row'
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="curElement" align='center' >
+                    {i}
+                  </TableCell>
+                  <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.studentName}</TableCell>
+                  <TableCell align="left" sx={{ fontFamily: 'inherit' }}>{curElem.studentId}</TableCell>
+                  <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.level}</TableCell>
+                  <TableCell align="left" sx={{ fontFamily: "inherit" }}><Button disabled={false} variant="outlined" onClick={changebutton}>{active}</Button></TableCell>
+                  <TableCell align="left" sx={{ fontFamily: "inherit" }}>
+                    <Stack flexDirection='row'>
+                      <Button href='/users/editPage'><EditIcon sx={{ color: '#430089' }} /></Button>
 
-                  </TableRow>
-                )
+                      {/* <Button color="tertiary" /> */}
+                    </Stack>
+                  </TableCell>
 
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination 
-          rowsPerPageOptions={[10, 25, 100]}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Stack>
+                </TableRow>
+              )
+
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={value?.data.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Stack>
+
   );
 }
 // BasicTable.getInitialProps = async ctx => {

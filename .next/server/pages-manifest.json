@@ -2,5 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/users/createUser": "pages/users/createUser.js"
+  "/api/levels": "pages/api/levels.js",
+  "/content/contentList": "pages/content/contentList.js",
+  "/api/userList": "pages/api/userList.js",
+  "/content/uploadFiles": "pages/content/uploadFiles.js",
+  "/api/teachers": "pages/api/teachers.js"
 }

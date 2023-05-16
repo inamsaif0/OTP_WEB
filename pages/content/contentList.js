@@ -30,11 +30,10 @@ export default function Dashboard(){
                     />
                     {/* <Button onClick={handleOpen} sx={{width:'150px',height:'50px'}}>Add New</Button> */}
                     <Button
-                    
+                        href='/content/uploadFiles'
                         style={{ background: 'linear-gradient(to right top, #430089, #82ffa1)', color: '#FFFFFF', width: '150px', height: '50px' }}
                     >Add New</Button></Stack></Stack>
             <ContentTable/>
-            {/* <AddFiles/> */}
             
             </Stack>
         </Layout>

@@ -35,8 +35,12 @@ const CreateUserForm = (props) => {
     const [student, setStudent] = React.useState(null);
     const [level, setLevel] = React.useState(null);
     const [value, setValue] = React.useState('');
+    const [value1, setValue1] = React.useState('');
+    const [value2, setValue2] = React.useState('');
+
+
     const [date, setDate] = React.useState(new Date())
-    const [image, setImage]  = React.useState(null);
+    const [image, setImage] = React.useState(null);
     const [imageinput, setImageinput] = React.useState(null);
     // console.log(teacher, student, level, value)
     const paperStyle = { padding: 20, height: 'auto', margin: "0 auto", marginTop: '5rem', borderRadius: '15px 15px 15px 15px' }
@@ -46,40 +50,27 @@ const CreateUserForm = (props) => {
 
 
     const initialValues = {
-        student: '',
-        teacher: '',
-        level: '',
-        value: '',
+        Student: '',
+        Teacher: '',
+        Level: '',
+        Value: '',
     }
-    // const validationSchema = Yup.object().shape({
-    //     Student: Yup.string().required("Required"),
-    //     Teacher: Yup.string().required("Required"),
-    //     Level: Yup.string().required('Required'),
-    //     Value: Yup.string().required('Required')
-    // })
+    const validationSchema = Yup.object().shape({
+        Student: Yup.string().min(2).max(40),
+        Teacher: Yup.string().min(2).max(40),
+        Level: Yup.string().min(2).max(40),
+        Value: Yup.string().min(2).max(40)
+    })
     //FUNCTION TO LOGIN
-    const onSubmit = (values, props) => {
-        console.log(values) //this is to print the form values
-        setTimeout(() => {
-            props.resetForm()
-            props.setSubmitting(false)
-        }, 2000)
 
-    }
+    const AddingFiles = async (props) => {
 
-    const AddingFiles = async () => {
-        // console.log(teacher.teacher)
-        // console.log(student.student)
-        // console.log(level.level)
-        // console.log(date)}
-        
-        console.log(imageinput);
         const response = await axios.post('http://localhost:3000/api/content', {
-            filename:imageinput,
-            student:student.student,
-            teacher:teacher.teacher,
-            level:level.level,
-            date:date
+            filename: imageinput.name,
+            student: student.studentName,
+            teacher: teacher.teacherName,
+            level: level.level,
+            date: date
 
         })
         console.log(response)
@@ -91,32 +82,43 @@ const CreateUserForm = (props) => {
 
     }
     useEffect(() => {
-        fetch('http://localhost:3000/api/content')
+        fetch('http://localhost:3000/api/teachers')
             .then((response) => response.json())
             .then((data) => setValue(data))
     }, []);
 
 
+    useEffect(() => {
+        fetch('http://localhost:3000/api/userList')
+            .then((response) => response.json())
+            .then((data) => setValue1(data))
+    }, []);
+
+    useEffect(() => {
+        fetch('http://localhost:3000/api/levels')
+            .then((response) => response.json())
+            .then((data) => setValue2(data))
+    }, []);
 
     const defaultProps = {
         options: value.data,
-        getOptionLabel: (option) => option.teacher,
+        getOptionLabel: (option) => option.teacherName,
     };
     const defaultProps2 = {
-        options: value.data,
-        getOptionLabel: (option) => option.student,
+        options: value1.data,
+        getOptionLabel: (option) => option.studentName,
     };
     const defaultProps3 = {
-        options: value.data,
+        options: value2.data,
         getOptionLabel: (option) => option.level,
     };
     const handleChange = (e) => {
         const File = e.target.files[0];
         console.log(File)
         setImageinput(File)
-    
+
         const fileReader = new FileReader();
-        fileReader.onload = function(e){
+        fileReader.onload = function (e) {
             setImage(e.target.result)
         }
         fileReader.readAsDataURL(File);
@@ -130,11 +132,11 @@ const CreateUserForm = (props) => {
                     <h4>Upload Files</h4>
                 </Grid>
                 <Grid item>
-                    <Formik initialValues={initialValues} onSubmit={onSubmit} >
+                    <Formik initialValues={initialValues} onSubmit={AddingFiles}  validationSchema={validationSchema}>
                         {(props) => (
                             <Form>
                                 <Stack gap='1rem'>
-                                    <Field as={Autocomplete} name="Teacher"
+                                    <Field as={Autocomplete} name="Teacher" 
                                         {...defaultProps}
                                         value={teacher}
                                         onChange={(event, newValue) => {
@@ -146,11 +148,15 @@ const CreateUserForm = (props) => {
                                         }}
                                         id="controllable-states-demo"
 
-                                        renderInput={(params) => <TextField {...params} placeholder='Teacher' />}
+                                        renderInput={(params) => <TextField {...params} placeholder='Teacher'                                         required
+                                        helperText={<ErrorMessage name="Teacher" />} />}
                                         fullWidth
+
+                                        
                                     />
-                                    <Field as={Autocomplete} name="Student"
-                                    
+
+                                    <Field as={Autocomplete} name="Student" 
+
                                         {...defaultProps2}
                                         value={student}
                                         onChange={(event, newValue) => {
@@ -162,47 +168,43 @@ const CreateUserForm = (props) => {
                                         }}
                                         id="controllable-states-demo"
 
-                                        renderInput={(params) => <TextField {...params} placeholder='Student' />}
+                                        renderInput={(params) => <TextField  {...params} placeholder='Student' required helperText={<ErrorMessage name="Student" />} />}
                                         fullWidth
+
                                     />
-                                    <Field as={Autocomplete} name="Level"
+                                    <Field as={Autocomplete} name="Level" 
                                         {...defaultProps3}
                                         value={level}
                                         onChange={(event, newValue) => {
                                             setLevel(newValue);
-                                        }} 
+                                        }}
                                         inputValue={inputvalue2}
                                         onInputChange={(event, newInputValue) => {
                                             setInputvalue2(newInputValue);
                                         }}
                                         id="controllable-states-demo"
 
-                                        renderInput={(params) => <TextField {...params} placeholder='Level' />}
+                                        renderInput={(params) => <TextField {...params} placeholder='Level' helperText={<ErrorMessage name="Level" />}  required/>}
                                         fullWidth
+
                                     />
-                                    {/* </Field> */}
-                                    <Field as={LocalizationProvider} dateAdapter={AdapterDayjs} name='Date'>
+    
+                                    <Field as={LocalizationProvider} dateAdapter={AdapterDayjs} name='Value'  >
 
-                                        <DatePicker format="YYYY-MM-DD" selected={date} onChange={(newValue)=>{setDate(newValue)}} />
+                                        <Field as={DatePicker} format="YYYY-MM-DD" selected={date} name="Value" onChange={(newValue) => { setDate(newValue) }} renderInput={(params) => <TextField {...params} helperText={<ErrorMessage name="Value" />}  required/>} />
                                     </Field>
-                                        
-                                            <input
-                                            style={{backgroundColor:'ActiveCaption',color:'#FFF'}}
-                                            id="upload-photo"
-                                            name="upload-photo"
-                                            type="file"
-                                            onChange={handleChange}
-                                        />
-                                        
-                                        
 
-                                        {/* <Button color="secondary" variant="contained" component="span" fullWidth>
-                                            Upload Files
-                                        </Button>{" "} */}
-                                        
-                                   
+                                    <input
+                                        required
+                                        style={{ backgroundColor: 'ActiveCaption', color: '#FFF' }}
+                                        id="upload-photo"
+                                        name="upload-photo"
+                                        type="file"
+                                        onChange={handleChange}
+                                    />
+
                                     <Button type='submit' color='secondary' variant="contained" disabled={props.isSubmitting}
-                                        style={btnstyle} fullWidth onClick={AddingFiles}>{props.isSubmitting ? "Loading" : "Add Content"}</Button>
+                                        style={btnstyle} fullWidth >{props.isSubmitting ? "Loading" : "Add Content"}</Button>
                                 </Stack>
 
                             </Form>

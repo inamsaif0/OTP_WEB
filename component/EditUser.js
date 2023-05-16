@@ -25,6 +25,7 @@ const CreateUserForm = (props) => {
     const [value, setValue]= React.useState('');
     const [inputvalue, setInputvalue] = React.useState('')
 
+    
     const handleChange = (event) => {
         setAge(event.target.value);
     };
@@ -53,7 +54,7 @@ const CreateUserForm = (props) => {
   
     const login = async () => {
     if(validationSchema){
-        const response = await axios.post('http://localhost:3000/api/userList',{
+        const response = await axios.put('http://localhost:3000/api/userList',{
             studentName: name,
             studentId: email,
             password: password,
@@ -69,20 +70,12 @@ const CreateUserForm = (props) => {
 
     }}
     useEffect(() => {
-        fetch('http://localhost:3000/api/content')
+        fetch('http://localhost:3000/api/userList')
             .then((response) => response.json())
             .then((data) => setValue(data))
     }, []);
-    const editUser = async () =>{
-        const response = await axios.post(`http://localhost:3000/api/userList/${id}`,{
-            studentName: name,
-            studentId: email,
-            password: password,
-            level: level.level,
-            status: true
-        })
-        console.log(response)
-    }
+    
+    
     const defaultProps = {
         options: value.data,
         getOptionLabel: (option) => option.level,
@@ -100,7 +93,7 @@ const CreateUserForm = (props) => {
                             <Stack gap="1rem">
 
                             <Field as={TextField} label='Name' name="name"
-                                    placeholder='Enter Name'  fullWidth required value={name} onChange={(e)=>{setName(e.target.value)}}
+                                    placeholder='Enter Name'  fullWidth required value={value.studentName} onChange={(e)=>{setName(e.target.value)}}
                                     helperText={<ErrorMessage name="name" />} >
                                         {errors.firstName && touched.firstName ? (
              <div>{errors.firstName}</div>
@@ -138,7 +131,7 @@ const CreateUserForm = (props) => {
                                         <div>{errors.level}</div>
                                       ) : null}</Field>
                             <Button type='submit' color='primary' variant="contained" 
-                                style={btnstyle} fullWidth validationSchema={validationSchema} onClick={login} >Create User</Button>
+                                style={btnstyle} >Create User</Button>
                         </Stack>
                         </Form>
                     )}

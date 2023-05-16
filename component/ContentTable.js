@@ -203,6 +203,8 @@ export default function BasicTable({ }) {
   const [active, setActive] = React.useState('active')
 
   const [value, setValue] = React.useState();
+  const [value1, setValue1] = React.useState();
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -225,6 +227,9 @@ export default function BasicTable({ }) {
       .then((response) => response.json())
       .then((data) => setValue(data))
   }, []);
+
+  
+
 
   console.log(value)
   var i=0;
@@ -259,7 +264,7 @@ export default function BasicTable({ }) {
                       {i}
                     </TableCell>
                     <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.filename}</TableCell>
-                    <TableCell align="left" sx={{fontFamily:"inherit"}}>file</TableCell>
+                    <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.filename.substr(curElem. filename.lastIndexOf('.') + 1)}</TableCell>
                     <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.student}</TableCell>
                     <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.teacher}</TableCell>
                     <TableCell align="left" sx={{fontFamily:"inherit"}}>
@@ -278,10 +283,12 @@ export default function BasicTable({ }) {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
+          count={value?.data.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+        
         />
       </Grid>
     </Grid>
