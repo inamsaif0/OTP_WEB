@@ -2,12 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/userList": "pages/api/userList.js",
-  "/users/userList": "pages/users/userList.js",
   "/content/contentList": "pages/content/contentList.js",
-  "/api/levels": "pages/api/levels.js",
-  "/content/uploadFiles": "pages/content/uploadFiles.js",
-  "/Dashboard": "pages/Dashboard.js",
-  "/api/teachers": "pages/api/teachers.js",
   "/api/content": "pages/api/content.js"
 }

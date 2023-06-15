@@ -20,7 +20,7 @@ const uploadFileSchema = new mongoose.Schema({
 
     date:{
         type:String
-    }
+    },
 
     })
 

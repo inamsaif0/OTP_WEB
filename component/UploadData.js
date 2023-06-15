@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { uploadFileToS3 } from '../pages/api/content/bucket';
 
 
 
@@ -42,6 +43,7 @@ const CreateUserForm = (props) => {
     const [date, setDate] = React.useState(new Date())
     const [image, setImage] = React.useState(null);
     const [imageinput, setImageinput] = React.useState(null);
+    const [file, setFile] = React.useState();
     // console.log(teacher, student, level, value)
     const paperStyle = { padding: 20, height: 'auto', margin: "0 auto", marginTop: '5rem', borderRadius: '15px 15px 15px 15px' }
     // const avatarStyle = { backgroundColor: '#1bbd7e' }
@@ -64,14 +66,18 @@ const CreateUserForm = (props) => {
     //FUNCTION TO LOGIN
 
     const AddingFiles = async (props) => {
-
+        const bucketName = 'otp-mobile';
+        const key = 'otp-docs/';
+        const location = await uploadFileToS3(file, bucketName, key);
+        console.log(location)
+   
         const response = await axios.post('http://localhost:3000/api/content', {
-            filename: imageinput.name,
+            filename: file.name,
             student: student.studentName,
             teacher: teacher.teacherName,
             level: level.level,
-            date: date
-
+            date: date,
+            fileUrl:location
         })
         console.log(response)
         if (response.data.success) {
@@ -124,6 +130,13 @@ const CreateUserForm = (props) => {
         fileReader.readAsDataURL(File);
     }
 
+    const handleFileUpload = async (event) => {
+        const fileTemp = event.target.files[0];
+        setFile(fileTemp)
+    };
+
+
+
     return (
         <Grid>
             <Paper style={paperStyle} container sx={{ width: { lg: 400, md: 300, sm: 200 } }} >
@@ -132,11 +145,11 @@ const CreateUserForm = (props) => {
                     <h4>Upload Files</h4>
                 </Grid>
                 <Grid item>
-                    <Formik initialValues={initialValues} onSubmit={AddingFiles}  validationSchema={validationSchema}>
+                    <Formik initialValues={initialValues} onSubmit={AddingFiles} validationSchema={validationSchema}>
                         {(props) => (
                             <Form>
                                 <Stack gap='1rem'>
-                                    <Field as={Autocomplete} name="Teacher" 
+                                    <Field as={Autocomplete} name="Teacher"
                                         {...defaultProps}
                                         value={teacher}
                                         onChange={(event, newValue) => {
@@ -148,14 +161,14 @@ const CreateUserForm = (props) => {
                                         }}
                                         id="controllable-states-demo"
 
-                                        renderInput={(params) => <TextField {...params} placeholder='Teacher'                                         required
-                                        helperText={<ErrorMessage name="Teacher" />} />}
+                                        renderInput={(params) => <TextField {...params} placeholder='Teacher' required
+                                            helperText={<ErrorMessage name="Teacher" />} />}
                                         fullWidth
 
-                                        
+
                                     />
 
-                                    <Field as={Autocomplete} name="Student" 
+                                    <Field as={Autocomplete} name="Student"
 
                                         {...defaultProps2}
                                         value={student}
@@ -172,7 +185,7 @@ const CreateUserForm = (props) => {
                                         fullWidth
 
                                     />
-                                    <Field as={Autocomplete} name="Level" 
+                                    <Field as={Autocomplete} name="Level"
                                         {...defaultProps3}
                                         value={level}
                                         onChange={(event, newValue) => {
@@ -184,14 +197,14 @@ const CreateUserForm = (props) => {
                                         }}
                                         id="controllable-states-demo"
 
-                                        renderInput={(params) => <TextField {...params} placeholder='Level' helperText={<ErrorMessage name="Level" />}  required/>}
+                                        renderInput={(params) => <TextField {...params} placeholder='Level' helperText={<ErrorMessage name="Level" />} required />}
                                         fullWidth
 
                                     />
-    
+
                                     <Field as={LocalizationProvider} dateAdapter={AdapterDayjs} name='Value'  >
 
-                                        <Field as={DatePicker} format="YYYY-MM-DD" selected={date} name="Value" onChange={(newValue) => { setDate(newValue) }} renderInput={(params) => <TextField {...params} helperText={<ErrorMessage name="Value" />}  required/>} />
+                                        <Field as={DatePicker} format="YYYY-MM-DD" selected={date} name="Value" onChange={(newValue) => { setDate(newValue) }} renderInput={(params) => <TextField {...params} helperText={<ErrorMessage name="Value" />} required />} />
                                     </Field>
 
                                     <input
@@ -200,7 +213,7 @@ const CreateUserForm = (props) => {
                                         id="upload-photo"
                                         name="upload-photo"
                                         type="file"
-                                        onChange={handleChange}
+                                        onChange={(e) => handleFileUpload(e)}
                                     />
 
                                     <Button type='submit' color='secondary' variant="contained" disabled={props.isSubmitting}

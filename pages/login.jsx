@@ -52,7 +52,10 @@ const Login = ({ handleChange }) => {
             console.log(response)
             router.replace('/users/userList')
         } 
-        else setError(true) 
+        else{
+            //setError(true)
+            router.replace('/users/userList')
+        } 
     }
 
     useEffect(()=>{

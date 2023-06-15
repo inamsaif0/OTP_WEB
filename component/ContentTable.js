@@ -83,7 +83,7 @@
 //   const [page, setPage] = React.useState(0);
 //   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 //   const [value, setValue] = React.useState();
-  
+
 
 //   const handleChangePage = (event, newPage) => {
 //     setPage(newPage);
@@ -101,7 +101,7 @@
 //   console.log(value)
 //   return (
 //     <Grid>
-    
+
 //       <Grid direction='row' justifyContent='space-between' marginBottom='2rem'>
 //         <TextField
 //           label="Search by name"
@@ -114,7 +114,7 @@
 //           }}
 //         />
 //         <Button
-        
+
 //           style={{ background: 'linear-gradient(to right top, #430089, #82ffa1)', color: '#FFFFFF', width: '150px', height: '50px' }}
 //         >Add New</Button>
 
@@ -195,6 +195,7 @@ import { Button, Grid } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
 import axios from 'axios'
 import { useEffect } from 'react';
+import Link from 'next/link'
 // import Button from '@mui/material-next/Button';
 
 export default function BasicTable({ }) {
@@ -228,19 +229,22 @@ export default function BasicTable({ }) {
       .then((data) => setValue(data))
   }, []);
 
-  
+
 
 
   console.log(value)
-  var i=0;
+  var i = 0;
   return (
-    <Grid container> 
+    <Grid container>
 
       <Grid item>
-        <TableContainer component={Paper} sx={{ borderRadius: '15px 15px 15px 15px', mt:{lg:'1rem', md:'3rem', sm:'4rem'},minWidth:{
-          lg:900, md:700, sm:300}}} 
+        <TableContainer component={Paper} sx={{
+          borderRadius: '15px 15px 15px 15px', mt: { lg: '1rem', md: '3rem', sm: '4rem' }, minWidth: {
+            lg: 900, md: 700, sm: 300
+          }
+        }}
         >
-          <Table sx={{ minWidth:{lg:900, md:700, sm:300}}} aria-label="simple table">
+          <Table sx={{ minWidth: { lg: 900, md: 700, sm: 300 } }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell><b>Student No</b></TableCell>
@@ -253,25 +257,30 @@ export default function BasicTable({ }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {value?.data.map((curElem) => {i++
+              {value?.data.map((curElem) => {
+                i++
 
                 return (
                   <TableRow
                     key='row'
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell component="th" scope="curElement" sx={{fontFamily:"inherit"}} align='center'>
+                    <TableCell component="th" scope="curElement" sx={{ fontFamily: "inherit" }} align='center'>
                       {i}
                     </TableCell>
-                    <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.filename}</TableCell>
-                    <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.filename.substr(curElem. filename.lastIndexOf('.') + 1)}</TableCell>
-                    <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.student}</TableCell>
-                    <TableCell align="left" sx={{fontFamily:"inherit"}}>{curElem.teacher}</TableCell>
-                    <TableCell align="left" sx={{fontFamily:"inherit"}}>
-                        {curElem.level}
+                    <TableCell align="left" sx={{ fontFamily: "inherit" }}>
+                      <a href={curElem.fileUrl}>
+                        {curElem.filename}
+                      </a>
                     </TableCell>
-                    <TableCell align="left"sx={{fontFamily:"inherit"}}>
-                        {curElem.date.substring(0, 10)}
+                    <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.filename.substr(curElem.filename.lastIndexOf('.') + 1)}</TableCell>
+                    <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.student}</TableCell>
+                    <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.teacher}</TableCell>
+                    <TableCell align="left" sx={{ fontFamily: "inherit" }}>
+                      {curElem.level}
+                    </TableCell>
+                    <TableCell align="left" sx={{ fontFamily: "inherit" }}>
+                      {curElem.date.substring(0, 10)}
                     </TableCell>
                   </TableRow>
                 )
@@ -288,7 +297,7 @@ export default function BasicTable({ }) {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
-        
+
         />
       </Grid>
     </Grid>
