@@ -20,8 +20,16 @@ const userLists = async (req, res) => {
 
         case 'POST':
             try {
-                const list = await userList.create(req.body);
-                res.status(201).json({ success: true, data: list})
+                const userEmail = await userList.findOne({ studenId:req.body.studenId });
+                const userName = await userList.findOne({studentName:req.body.studentName})
+                if(userEmail||userName){
+                    res.status(202).json({success:false,exists:true })
+                }
+                else{
+
+                    const list = await userList.create(req.body);
+                    res.status(201).json({ success: true, data: list})
+                }
             }    
             catch (error){
             
