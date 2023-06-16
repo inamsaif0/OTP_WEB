@@ -1,7 +1,10 @@
 {
-  "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/_app": "pages/_app.js",
+  "/content/uploadFiles": "pages/content/uploadFiles.js",
   "/content/contentList": "pages/content/contentList.js",
-  "/api/content": "pages/api/content.js"
+  "/api/teachers": "pages/api/teachers.js",
+  "/api/userList": "pages/api/userList.js",
+  "/api/levels": "pages/api/levels.js"
 }
