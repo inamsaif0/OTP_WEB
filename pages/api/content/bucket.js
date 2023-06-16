@@ -12,6 +12,7 @@ export const uploadFileToS3 = (file, bucketName, key) => {
       Bucket: bucketName,
       Key: key+file.name,
       Body: file,
+      ContentType:'application/pdf'
     };
   
     return new Promise((resolve, reject) => {
