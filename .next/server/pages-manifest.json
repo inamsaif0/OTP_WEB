@@ -3,5 +3,10 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/content/contentList": "pages/content/contentList.js",
-  "/api/content": "pages/api/content.js"
+  "/Dashboard": "pages/Dashboard.js",
+  "/content/uploadFiles": "pages/content/uploadFiles.js",
+  "/api/levels": "pages/api/levels.js",
+  "/api/content": "pages/api/content.js",
+  "/api/teachers": "pages/api/teachers.js",
+  "/api/userList": "pages/api/userList.js"
 }
