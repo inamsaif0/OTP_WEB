@@ -2,7 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/api/login/login": "pages/api/login/login.js",
-  "/Dashboard": "pages/Dashboard.js"
+  "/users/editPage": "pages/users/editPage.js",
+  "/api/levels": "pages/api/levels.js",
+  "/api/getCredentials": "pages/api/getCredentials.js"
 }
