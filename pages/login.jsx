@@ -48,7 +48,8 @@ const Login = ({ handleChange }) => {
             email :  values.username,
             password: values.password
         })
-        if(response.data.success&&response.data.data.status===true) {
+        console.log(response)
+        if(response.data.success) {
             console.log(response)
             router.replace('/Dashboard')
         } 

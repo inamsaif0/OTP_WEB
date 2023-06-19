@@ -2,8 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/content/uploadFiles": "pages/content/uploadFiles.js",
-  "/api/userList": "pages/api/userList.js",
-  "/users/userList": "pages/users/userList.js",
-  "/api/active": "pages/api/active.js"
+  "/": "pages/index.js",
+  "/api/login/login": "pages/api/login/login.js",
+  "/Dashboard": "pages/Dashboard.js"
 }
