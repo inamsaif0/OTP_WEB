@@ -25,10 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/users/editPage": [
+    "/users/userList": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/users/editPage.js"
+      "static/chunks/pages/users/userList.js"
     ]
   },
   "ampFirstPages": []

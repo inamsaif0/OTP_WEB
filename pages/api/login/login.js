@@ -69,7 +69,8 @@ export default async function AdminAuth(req,res){
                 httpOnly : true
             })
             res.json({
-                success : true
+                success : true,
+                data:result
             })
         }
         else res.json({

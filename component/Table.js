@@ -26,7 +26,7 @@ export default function rBasicTable({ }) {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [active, setActive] = React.useState(true)
+  const [active, setActive] = React.useState()
 
   const [value, setValue] = React.useState();
   const handleChangePage = (event, newPage) => {
@@ -75,12 +75,28 @@ export default function rBasicTable({ }) {
   //   //   console.log(res.data)
   //   // }
   // };
-console.log(active)
-  useEffect(() => {
-    fetch('http://localhost:3000/api/userList')
-      .then((response) => response.json())
-      .then((data) => setValue(data))
-  }, []);
+
+  async function getData(){
+      await fetch('http://localhost:3000/api/userList')
+        .then((response) => response.json())
+        .then((data) => setValue(data))
+   
+  }
+
+async function handleActive(index){
+  console.log(value.data[index])
+  const response = await axios.post('http://localhost:3000/api/active', {
+            status:!(value.data[index].status),
+            studentId:value.data[index].studentId
+        }).then({
+          
+        })
+       // console.log(response)
+       getData()
+}
+
+useEffect(()=>getData(),[])
+
 
   var i = 0;
   return (
@@ -98,7 +114,7 @@ console.log(active)
             </TableRow>
           </TableHead>
           <TableBody>
-            {value?.data.map((curElem) => {
+            {value?.data.map((curElem,index) => {
               i++
               return (
                 <TableRow
@@ -111,7 +127,7 @@ console.log(active)
                   <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.studentName}</TableCell>
                   <TableCell align="left" sx={{ fontFamily: 'inherit' }}>{curElem.studentId}</TableCell>
                   <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.level}</TableCell>
-                  <TableCell align="left" sx={{ fontFamily: "inherit" }}><Button disabled={false} variant="outlined"  >{curElem.status == true ? "Active" : "InActive" }</Button></TableCell>
+                  <TableCell align="left" sx={{ fontFamily: "inherit" }}><Button disabled={false} variant="outlined" onClick={()=>handleActive(index)}  >{curElem.status == true ? "Active" : "InActive" }</Button></TableCell>
                   <TableCell align="left" sx={{ fontFamily: "inherit" }}>
                     <Stack flexDirection='row'>
                       <Button onClick={()=>handleEdit(curElem.studentId)}><EditIcon sx={{ color: '#430089' }} /></Button>

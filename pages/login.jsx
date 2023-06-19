@@ -48,18 +48,18 @@ const Login = ({ handleChange }) => {
             email :  values.username,
             password: values.password
         })
-        if(response.data.success) {
+        if(response.data.success&&response.data.data.status===true) {
             console.log(response)
-            router.replace('/users/userList')
+            router.replace('/Dashboard')
         } 
         else{
             //setError(true)
-            router.replace('/users/userList')
+           //router.replace('/Dashboard')
         } 
     }
 
     useEffect(()=>{
-        router.prefetch('/users/userList')
+        router.prefetch('/Dashboard')
     },[])
 
     return (
