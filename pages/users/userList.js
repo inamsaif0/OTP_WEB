@@ -4,6 +4,7 @@ import Table from '../../component/Table'
 import Button from '@mui/material/Button';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
+import EditIcon from '@mui/icons-material/Edit'
 
 
 export default function UserList(){

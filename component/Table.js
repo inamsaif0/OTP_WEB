@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 // import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, Stack } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
@@ -105,7 +106,7 @@ console.log(active)
                   <TableCell align="left" sx={{ fontFamily: "inherit" }}><Button disabled={false} variant="outlined"  >{curElem.status == true ? "Active" : "InActive" }</Button></TableCell>
                   <TableCell align="left" sx={{ fontFamily: "inherit" }}>
                     <Stack flexDirection='row'>
-                      <Button href='/users/editPage'><AccessAlarmIcon sx={{ color: '#430089' }} /></Button>
+                      <Button href='/users/editPage'><EditIcon sx={{ color: '#430089' }} /></Button>
                     </Stack>
                   </TableCell>
 
