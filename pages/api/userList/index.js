@@ -36,6 +36,14 @@ const userLists = async (req, res) => {
                 res.status(400).json({success:false});
             }
             break;
+        case 'PUT':
+            try{
+                const list= await userList.replaceOne({studenId:req.body.studentId},req.body)
+                res.status(200).json({success:true,data:list})
+            }
+            catch (error){
+                res.status(400).json({success:false})
+            }
         default: 
             res.status(400).json({success:false});
             break;

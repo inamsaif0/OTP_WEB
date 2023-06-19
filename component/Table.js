@@ -14,8 +14,16 @@ import { Button, Stack } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
 import axios from 'axios'
 import { useEffect } from 'react';
+import {useRouter} from 'next/router'
 
 export default function rBasicTable({ }) {
+
+  const router=useRouter()
+
+  const handleEdit=(additionalProp)=>{
+    router.push(`/users/editPage?additionalProp=${additionalProp}`);
+  }
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [active, setActive] = React.useState(true)
@@ -106,7 +114,7 @@ console.log(active)
                   <TableCell align="left" sx={{ fontFamily: "inherit" }}><Button disabled={false} variant="outlined"  >{curElem.status == true ? "Active" : "InActive" }</Button></TableCell>
                   <TableCell align="left" sx={{ fontFamily: "inherit" }}>
                     <Stack flexDirection='row'>
-                      <Button href='/users/editPage'><EditIcon sx={{ color: '#430089' }} /></Button>
+                      <Button onClick={()=>handleEdit(curElem.studentId)}><EditIcon sx={{ color: '#430089' }} /></Button>
                     </Stack>
                   </TableCell>
 
