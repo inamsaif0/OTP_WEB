@@ -37,7 +37,7 @@ const EditUser = (props) => {
     // console.log('Data:', Datas);
     const paperStyle = { padding: 20, height: 'auto', width: 400, margin: "0 auto", marginTop: '5rem', borderRadius: '15px 15px 15px 15px' }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
-    const btnstyle = { margin: '8px 0', background: 'linear-gradient(to right bottom, #430089, #82ffa1)', color: '#FFFF' }
+    const btnstyle = { margin: '8px 0', background: '#5c0931',color:'white' }
     //STATE
     const initialValues = {
         name: '',
@@ -118,7 +118,7 @@ const EditUser = (props) => {
         <Grid container lg='12' sm='8' md="10" shrink={false}>
             <Paper style={paperStyle}>
                 <Grid align='center' item>
-                    <h2 style={{ color: 'purple' }}>{props.title}</h2>
+                    <h2 style={{ color: '#5c0931' }}>{props.title}</h2>
                 </Grid>
                 <Grid item>
                     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={login}>

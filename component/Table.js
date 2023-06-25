@@ -37,45 +37,12 @@ export default function BasicTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  // const deleted = async (id) => {
-  //   const response =  await axios.delete(`http://localhost:3000/api/userList/${id}`);
-
-  //   if(response.data.success){
-  //     console.log('Deleted')
-  //   }
-
-  // const changebutton = () => {
-  //   if (active == "active") {
-  //     setActive('Inactive')
-  //   }
-  //   else {
-  //     setActive('active')
-  //   }
-  // }
-
-  // const handleDelete = async (post) => {
-  //   if (post.status == true) {
-  //     setActive(false)
-  //     console.log(active)
-  //   }
-  //   else {
-  //     setActive(true)
-  //     console.log(active)
-  //   }
-
-  //   // setValue(value.data.filter((p) => p._id !== post._id));
-  //   // const res= await axios.put(`http://localhost:3000/api/userList/${post._id}`,{
-  //   //   no:post.no,
-  //   //   studentName:post.studentName,
-  //   //   studentId:post.studentId,
-  //   //   level:post.level,
-  //   //   status:active
-  //   // });
-  //   // if(res.data.success){
-  //   //   console.log(res.data)
-  //   // }
-  // };
-
+ 
+  async function getData() {
+    await fetch('http://localhost:3000/api/userList')
+      .then((response) => response.json())
+      .then((data) => setValue(data))
+  }
 
   async function handleActive(index) {
     console.log(value.data[index])
@@ -90,11 +57,7 @@ export default function BasicTable() {
   }
 
   useEffect(() => {
-    async function getData() {
-      await fetch('http://localhost:3000/api/userList')
-        .then((response) => response.json())
-        .then((data) => setValue(data))
-    }
+  
 
     getData()
   }, [])
@@ -129,7 +92,7 @@ export default function BasicTable() {
                     <TableCell align="left" sx={{ fontFamily: 'inherit' }}>{curElem.studentId}</TableCell>
                     <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.level}</TableCell>
                     <TableCell align="left" sx={{ fontFamily: "inherit" }}>
-                      <Button disabled={false} variant="outlined" onClick={() => handleActive(index)}>
+                      <Button disabled={false} variant="outlined" style={{color:"#5c0931",borderColor:"#5c0931"}} onClick={() => handleActive(index)}>
                         {curElem.status ? "Active" : "Inactive"}
                       </Button>
                     </TableCell>

@@ -275,7 +275,7 @@ export default function ContentTable() {
                       {i}
                     </TableCell>
                     <TableCell align="left" sx={{ fontFamily: "inherit" }}>
-                      <a href={curElem.fileUrl}>
+                      <a style={{color:'#5c0931'}} href={curElem.fileUrl}>
                         {curElem.filename}
                       </a>
                     </TableCell>

@@ -22,8 +22,8 @@ const userLists = async (req, res) => {
             try {
                 const userEmail = await userList.find({ studenId:req.body.studentId });
                 const userName = await userList.find({studentName:req.body.studentName})
-                console.log(userName)
-                if(userEmail===[]||userName===[]){
+                console.log(userName+"server check")
+                if(userEmail!==null||userName!==null){
                     res.status(202).json({success:false,exists:true })
                 }
                 else{

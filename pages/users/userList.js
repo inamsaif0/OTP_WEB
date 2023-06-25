@@ -22,6 +22,7 @@ export default function UserList(){
                             <Stack direction={'column'} alignItems='center' justifyContent='center'>
                 <Stack flexDirection='row' justifyContent='space-between' sx={{gap:{lg:'30rem', md:'30rem', sm:'30rem'}}}>
                     <TextField
+                        color='error'
                         label="Search by name"
                         InputProps={{
                             endAdornment: (

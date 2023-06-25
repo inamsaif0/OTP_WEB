@@ -48,7 +48,7 @@ const CreateUserForm = (props) => {
     // console.log(teacher, student, level, value)
     const paperStyle = { padding: 20, height: 'auto', margin: "0 auto", marginTop: '5rem', borderRadius: '15px 15px 15px 15px' }
     // const avatarStyle = { backgroundColor: '#1bbd7e' }
-    const btnstyle = { margin: '8px 0',backgroundColor:'#5c0931' }
+    const btnstyle = { margin: '8px 0',backgroundColor:'#5c0931',color:'white' }
     //STATE
     const formats=['doc', 'docx', 'docm', 'dot', 'dotx', 'dotm', 'rtf','pdf']
 

@@ -18,7 +18,7 @@ const Login = ({ handleChange }) => {
     // console.log('Data:', Datas);
     const paperStyle = { padding: 20, height: 'auto', width: 300, margin: "0 auto", marginTop:'5rem', borderRadius:'15px 15px 15px 15px' }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
-    const btnstyle = { margin: '8px 0',backgroundColor:'#5c0931' }
+    const btnstyle = { margin: '8px 0',backgroundColor:'#5c0931',color:'white' }
     //STATE
     const validationSchema = Yup.object().shape({
         username: Yup.string().email('please enter valid email').required("Required"),
