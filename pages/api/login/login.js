@@ -44,8 +44,6 @@ import { setCookie } from 'cookies-next'
 export default async function AdminAuth(req,res){
     if(req.method === 'POST'){
         const client = await connect();
-        // const db = client.db('test');
-        // const admin = db.collection('users');
 
         const { email , password } = req.body;
         // const hashPassword = pbkdf2Sync(password,'f844b09ff50c',1000,64,'sha256').toString('hex')

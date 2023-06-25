@@ -54,14 +54,14 @@ const Login = ({ handleChange }) => {
             router.replace('/Dashboard')
         } 
         else{
-            //setError(true)
-           //router.replace('/Dashboard')
+            setError(true)
+        //    router.replace('/')
         } 
     }
 
-    useEffect(()=>{
-        router.prefetch('/Dashboard')
-    },[])
+    // useEffect(()=>{
+    //     // router.prefetch('/Dashboard')
+    // },[])
 
     return (
         <Grid>

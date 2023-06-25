@@ -38,6 +38,7 @@ const CreateUserForm = (props) => {
     const [value, setValue] = React.useState('');
     const [value1, setValue1] = React.useState('');
     const [value2, setValue2] = React.useState('');
+    const [checkType,setCheckType] =React.useState(false)
 
 
     const [date, setDate] = React.useState(new Date())
@@ -49,6 +50,7 @@ const CreateUserForm = (props) => {
     // const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btnstyle = { margin: '8px 0' }
     //STATE
+    const formats=['doc', 'docx', 'docm', 'dot', 'dotx', 'dotm', 'rtf','pdf']
 
 
     const initialValues = {
@@ -66,28 +68,37 @@ const CreateUserForm = (props) => {
     //FUNCTION TO LOGIN
 
     const AddingFiles = async (props) => {
-        const bucketName = 'otp-mobile';
-        const key = 'otp-docs/';
-        const location = await uploadFileToS3(file, bucketName, key);
-        console.log(location)
-   
-        const response = await axios.post('http://localhost:3000/api/content', {
-            filename: file.name,
-            student: student.studentName,
-            teacher: teacher.teacherName,
-            level: level.level,
-            date: date,
-            fileUrl:location
-        })
-        console.log(response)
-        if (response.data.success) {
-            console.log(response)
-            router.replace('/content/contentList')
-        }
-        else setError(true)
+        if(formats.includes(file.name.split('.').pop())){
 
+
+            const bucketName = 'otp-mobile';
+            const key = 'otp-docs/';
+            const location = await uploadFileToS3(file, bucketName, key);
+            console.log(location)
+            
+            const response = await axios.post('http://localhost:3000/api/content', {
+                filename: file.name,
+                student: student.studentName,
+                teacher: teacher.teacherName,
+                level: level.level,
+                date: date,
+                fileUrl:location
+            })
+            console.log(response)
+            if (response.data.success) {
+                console.log(response)
+                router.replace('/content/contentList')
+            }
+            else setError(true)
+            
+        }
+        else{
+            setCheckType(true);
+        }
     }
-    useEffect(() => {
+
+
+        useEffect(() => {
         fetch('http://localhost:3000/api/teachers')
             .then((response) => response.json())
             .then((data) => setValue(data))
@@ -215,6 +226,9 @@ const CreateUserForm = (props) => {
                                         type="file"
                                         onChange={(e) => handleFileUpload(e)}
                                     />
+                                    {
+                                        checkType&&<p style={{color:'red'}}>Please use the correct format for documents either use a word document or pdf</p>
+                                    }
 
                                     <Button type='submit' color='secondary' variant="contained" disabled={props.isSubmitting}
                                         style={btnstyle} fullWidth >{props.isSubmitting ? "Loading" : "Add Content"}</Button>

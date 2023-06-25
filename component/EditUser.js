@@ -77,11 +77,9 @@ const EditUser = (props) => {
     //         .then((response) => response.json())
     //         .then((data) => setValue(data))
     // }, []);
-
-        async function getCreds() {
-
-            console.log(props.email + " Props email")
-            await fetch('http://localhost:3000/api/getCredentials', {
+    useEffect(() => {    
+        console.log(props.email + " Props email")
+            fetch('http://localhost:3000/api/getCredentials', {
                 headers: {
                     "Content-Type": "application/json",
 
@@ -93,13 +91,32 @@ const EditUser = (props) => {
                 .then((response) => response.json())
                 .then((res) => setCredentials(res.data))
             console.log(value)
-        }
+    }, []);
+        // async function getCreds() {
+
+        //     console.log(props.email + " Props email")
+        //     await fetch('http://localhost:3000/api/getCredentials', {
+        //         headers: {
+        //             "Content-Type": "application/json",
+
+        //         },
+
+        //         method: 'POST',
+        //         body: JSON.stringify({ studentId: props.email })
+        //     })
+        //         .then((response) => response.json())
+        //         .then((res) => setCredentials(res.data))
+        //     console.log(value)
+        // }
 
     useEffect(() => {
         fetch('http://localhost:3000/api/levels')
             .then((response) => response.json())
             .then((data) => setValue(data))
-        getCreds()
+        // getCreds();   
+
+        
+
 
     }, []);
 

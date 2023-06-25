@@ -3,6 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/content/uploadFiles": "pages/content/uploadFiles.js",
-  "/api/content": "pages/api/content.js",
-  "/content/contentList": "pages/content/contentList.js"
+  "/api/teachers": "pages/api/teachers.js",
+  "/api/levels": "pages/api/levels.js",
+  "/api/userList": "pages/api/userList.js"
 }
