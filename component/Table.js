@@ -14,13 +14,13 @@ import { Button, Stack } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
 import axios from 'axios'
 import { useEffect } from 'react';
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
-export default function rBasicTable({ }) {
+export default function BasicTable() {
 
-  const router=useRouter()
+  const router = useRouter()
 
-  const handleEdit=(additionalProp)=>{
+  const handleEdit = (additionalProp) => {
     router.push(`/users/editPage?additionalProp=${additionalProp}`);
   }
 
@@ -52,7 +52,7 @@ export default function rBasicTable({ }) {
   //     setActive('active')
   //   }
   // }
-  
+
   // const handleDelete = async (post) => {
   //   if (post.status == true) {
   //     setActive(false)
@@ -62,7 +62,7 @@ export default function rBasicTable({ }) {
   //     setActive(true)
   //     console.log(active)
   //   }
-    
+
   //   // setValue(value.data.filter((p) => p._id !== post._id));
   //   // const res= await axios.put(`http://localhost:3000/api/userList/${post._id}`,{
   //   //   no:post.no,
@@ -76,26 +76,28 @@ export default function rBasicTable({ }) {
   //   // }
   // };
 
-  async function getData(){
+
+  async function handleActive(index) {
+    console.log(value.data[index])
+    const response = await axios.post('http://localhost:3000/api/active', {
+      status: !(value.data[index].status),
+      studentId: value.data[index].studentId
+    }).then({
+
+    })
+    // console.log(response)
+    getData()
+  }
+
+  useEffect(() => {
+    async function getData() {
       await fetch('http://localhost:3000/api/userList')
         .then((response) => response.json())
         .then((data) => setValue(data))
-   
-  }
+    }
 
-async function handleActive(index){
-  console.log(value.data[index])
-  const response = await axios.post('http://localhost:3000/api/active', {
-            status:!(value.data[index].status),
-            studentId:value.data[index].studentId
-        }).then({
-          
-        })
-       // console.log(response)
-       getData()
-}
-
-useEffect(()=>getData(),[])
+    getData()
+  }, [])
 
 
   var i = 0;
@@ -114,36 +116,41 @@ useEffect(()=>getData(),[])
             </TableRow>
           </TableHead>
           <TableBody>
-            {value?.data.map((curElem,index) => {
-              i++
-              return (
-                <TableRow
-                  key='row'
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="curElement" align='center' >
-                    {i}
-                  </TableCell>
-                  <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.studentName}</TableCell>
-                  <TableCell align="left" sx={{ fontFamily: 'inherit' }}>{curElem.studentId}</TableCell>
-                  <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.level}</TableCell>
-                  <TableCell align="left" sx={{ fontFamily: "inherit" }}><Button disabled={false} variant="outlined" onClick={()=>handleActive(index)}  >{curElem.status == true ? "Active" : "InActive" }</Button></TableCell>
-                  <TableCell align="left" sx={{ fontFamily: "inherit" }}>
-                    <Stack flexDirection='row'>
-                      <Button onClick={()=>handleEdit(curElem.studentId)}><EditIcon sx={{ color: '#430089' }} /></Button>
-                    </Stack>
-                  </TableCell>
-
-                </TableRow>
-              )
-            })}
+            {value?.data
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((curElem, index) => {
+                const rowIndex = page * rowsPerPage + index + 1;
+                return (
+                  <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                    <TableCell component="th" scope="curElement" align='center'>
+                      {rowIndex}
+                    </TableCell>
+                    <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.studentName}</TableCell>
+                    <TableCell align="left" sx={{ fontFamily: 'inherit' }}>{curElem.studentId}</TableCell>
+                    <TableCell align="left" sx={{ fontFamily: "inherit" }}>{curElem.level}</TableCell>
+                    <TableCell align="left" sx={{ fontFamily: "inherit" }}>
+                      <Button disabled={false} variant="outlined" onClick={() => handleActive(index)}>
+                        {curElem.status ? "Active" : "Inactive"}
+                      </Button>
+                    </TableCell>
+                    <TableCell align="left" sx={{ fontFamily: "inherit" }}>
+                      <Stack flexDirection='row'>
+                        <Button onClick={() => handleEdit(curElem.studentId)}>
+                          <EditIcon sx={{ color: '#430089' }} />
+                        </Button>
+                      </Stack>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
+
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[5, 25, 100]}
         component="div"
-        count={value?.data.length}
+        count={value && value.data ? value.data.length : 0}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

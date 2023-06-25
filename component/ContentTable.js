@@ -198,7 +198,7 @@ import { useEffect } from 'react';
 import Link from 'next/link'
 // import Button from '@mui/material-next/Button';
 
-export default function BasicTable({ }) {
+export default function ContentTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [active, setActive] = React.useState('active')
@@ -224,9 +224,13 @@ export default function BasicTable({ }) {
   }
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/content')
+   async function getData(){
+      
+      await fetch('http://localhost:3000/api/content')
       .then((response) => response.json())
       .then((data) => setValue(data))
+    }
+    getData();
   }, []);
 
 
@@ -257,12 +261,14 @@ export default function BasicTable({ }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {value?.data.map((curElem) => {
+              {value?.data
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((curElem,index) => {
                 i++
 
                 return (
                   <TableRow
-                    key='row'
+                    key={index}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="curElement" sx={{ fontFamily: "inherit" }} align='center'>
@@ -290,9 +296,9 @@ export default function BasicTable({ }) {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
+          rowsPerPageOptions={[5, 25, 100]}
           component="div"
-          count={value?.data.length}
+          count={value && value.data ? value.data.length : 0}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

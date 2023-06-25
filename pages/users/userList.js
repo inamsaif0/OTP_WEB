@@ -1,6 +1,6 @@
 import { Stack, Typography, Grid,TextField } from '@mui/material'
 import Layout from '../Layout'
-import Table from '../../component/Table'
+import BasicTable from '../../component/Table';
 import Button from '@mui/material/Button';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
@@ -36,7 +36,7 @@ export default function UserList(){
                         href='/users/createUser'
                         style={{ background: 'linear-gradient(to right top, #430089, #82ffa1)', color: '#FFFFFF', width: '150px', height: '50px' }}
                     >Add New</Button></Stack></Stack>
-                    <Stack><Table/></Stack>
+                    <Stack><BasicTable/></Stack>
                 
             </Stack>  
         </Layout>

@@ -3,7 +3,7 @@ import { Grid, Paper, Avatar, TextField, Button, Typography, Link, Stack, Autoco
 import Checkbox from '@mui/material/Checkbox';
 import { FormControlLabel } from '@mui/material';
 import { useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik'
 import * as Yup from 'yup'
 import { redirect } from 'next/dist/server/api-utils';
 import axios from 'axios';
@@ -14,6 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 const CreateUserForm = (props) => {
+
     //STYLING
     const router = useRouter();
     const [password, setPassword] = React.useState('')
@@ -45,12 +46,11 @@ const CreateUserForm = (props) => {
     }
     //VALIDATION 
     const validationSchema = Yup.object().shape({
-        name: Yup.string().min(2).max(60),
-        email: Yup.string().min(2).max(60),
-        password: Yup.string().min(2).max(50),
-        level: Yup.string().min(2).max(50),
-
-    })
+        name: Yup.string().required('Name is required'),
+        email: Yup.string().email('Invalid email').required('Email is required'),
+        password: Yup.string().required('Password is required'),
+        level: Yup.string().required('Level is required'),
+    });
     //FUNCTION TO LOGIN
     const formdata = {
         name: name,
@@ -59,7 +59,12 @@ const CreateUserForm = (props) => {
         level: level
     }
 
-    const login = async () => {
+    const handleCancel = () => {
+        // Handle cancellation logic here
+        router.push('/users/userList');
+      };
+
+    const handleSubmit = async () => {
 
 
         const response = await axios.post('http://localhost:3000/api/userList', {
@@ -93,67 +98,58 @@ const CreateUserForm = (props) => {
         getOptionLabel: (option) => option.level,
     };
     return (
-        <Grid container lg='12' sm='8' md="10">
+        <Grid container lg={12} sm={8} md={10}>
             <Paper style={paperStyle}>
-                <Grid align='center' item>
-                    <h2 style={{ color: 'purple' }}>{props.title}</h2>
+                <Grid align="center" item>
+                    <h2 style={{ color: 'purple' }}>Create User</h2>
                 </Grid>
                 <Grid item>
-                    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={login}>
-                        {(props) => (
+                    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+                        {({ isSubmitting, isValid }) => (
                             <Form>
                                 <Stack gap="1rem">
-
-                                    <Field as={TextField} label='Name' name="name"
-                                        placeholder='Enter Name' fullWidth value={name} onChange={(e) => { setName(e.target.value) }}
+                                    <Field
+                                        as={TextField}
+                                        label="Name"
+                                        name="name"
+                                        placeholder="Enter Name"
+                                        fullWidth
                                         required
-                                        helperText={<ErrorMessage name="name" />} >
-
-
-                                    </Field>
-                                    <Field as={TextField} label='Email' name="email"
-                                        placeholder='Enter email' fullWidth value={email} onChange={(e) => { setEmail(e.target.value) }}
+                                        helperText={<ErrorMessage name="name" />}
+                                    />
+                                    <Field
+                                        as={TextField}
+                                        label="Email"
+                                        name="email"
+                                        placeholder="Enter email"
+                                        fullWidth
                                         required
                                         helperText={<ErrorMessage name="email" />}
-                                    ></Field>
-
-                                    <Field as={TextField} label='Password' name="password"
-                                        placeholder='Enter password' type='password' fullWidth value={password} onChange={(e) => { setPassword(e.target.value) }}
+                                    />
+                                    <Field
+                                        as={TextField}
+                                        label="Password"
+                                        name="password"
+                                        placeholder="Enter password"
+                                        type="password"
+                                        fullWidth
                                         required
-                                        helperText={<ErrorMessage name="password" />} ></Field>
-
-                                    <Field as={Autocomplete} name="level" isOptionEqualToValue={(option) => option.level}
-                                        {...defaultProps}
-                                        value={level}
-                                        onChange={(event, newValue) => {
-                                            setLevel(newValue);
-                                        }}
-                                        inputValue={inputvalue}
-                                        onInputChange={(event, newInputValue) => {
-                                            setInputvalue(newInputValue);
-                                        }}
-                                        getOptionLabel={(option) => option && option.level}
-                                        renderInput={(params) => <TextField {...params} placeholder='Level' required
-                                            helperText={<ErrorMessage name="level" />} />}
-                                        fullWidth  ></Field>
-                                    <Grid>
-                                        {
-                                            exists && <p style={{ color: "red" }}>* A user with the same email or username already exists please try again</p>
-
-                                        }
-                                    </Grid>
-                                    <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
-
-                                        style={btnstyle} fullWidth onSubmit={login}>{props.isSubmitting ? "Loading" : "Create User"}</Button>
+                                        helperText={<ErrorMessage name="password" />}
+                                    />
+                                    <Field as={Autocomplete} name="level" isOptionEqualToValue={(option) => option.level} {...defaultProps} value={level} onChange={(event, newValue) => { setLevel(newValue); }} inputValue={inputvalue} onInputChange={(event, newInputValue) => { setInputvalue(newInputValue); }} getOptionLabel={(option) => option && option.level} renderInput={(params) => <TextField {...params} placeholder='Level' required helperText={<ErrorMessage name="level" />} />} fullWidth  ></Field>
+                                    <Button type="submit" color="primary" variant="contained" disabled={isSubmitting || !isValid} fullWidth>
+                                        {isSubmitting ? 'Loading' : 'Create User'}
+                                    </Button>
+                                    <Button variant="outlined" color="secondary" fullWidth onClick={handleCancel}>
+                                        Cancel
+                                    </Button>
                                 </Stack>
                             </Form>
                         )}
-
                     </Formik>
-
                 </Grid>
             </Paper>
-        </Grid >
+        </Grid>
     )
 
 }
