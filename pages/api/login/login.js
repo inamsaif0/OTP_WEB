@@ -59,7 +59,7 @@ export default async function AdminAuth(req,res){
             ]
         })
         console.log(result)
-        if(result!=={}){
+        if(result!==null){
             const token = jwt.sign({ email : email , password : password },'secretKey')
             setCookie('token',token,{
                 req,
