@@ -167,7 +167,7 @@ export default function MiniDrawer() {
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} sx={{ background: 'linear-gradient(to right bottom, #430089, #82ffa1)' }}>
+      <AppBar position="fixed" open={open} sx={{ background: '#5c0931' }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -220,7 +220,7 @@ export default function MiniDrawer() {
 
                 }}
               >
-                <DashboardIcon sx={{ color: '#430089' }} />
+                <DashboardIcon sx={{ color: '#5c0931' }} />
               </ListItemIcon>
               <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
 
@@ -257,7 +257,7 @@ export default function MiniDrawer() {
                 }}
               >
 
-                <PeopleOutlinedIcon sx={{ color: '#430089' }} />
+                <PeopleOutlinedIcon sx={{ color: '#5c0931' }} />
                 
               </ListItemIcon>
               <ListItemText primary="Users" sx={{ opacity: open ? 1 : 0 }} />
@@ -268,14 +268,14 @@ export default function MiniDrawer() {
 
                 <ListItemButton sx={{ pl: 4 }} href='/users/userList'>
                   <ListItemIcon>
-                    <ClearAllOutlinedIcon sx={{ color: '#430089' }} />
+                    <ClearAllOutlinedIcon sx={{ color: '#5c0931' }} />
                   </ListItemIcon>
                   <ListItemText primary="User List" />
                 </ListItemButton>
 
                 <ListItemButton sx={{ pl: 4 }} href='/users/createUser'>
                   <ListItemIcon>
-                  <GroupAddIcon sx={{color: '#430089'}} />
+                  <GroupAddIcon sx={{color: '#5c0931'}} />
                   </ListItemIcon>
                   <ListItemText primary="Create User" />
                 </ListItemButton>
@@ -312,7 +312,7 @@ export default function MiniDrawer() {
                 }}
               >
 
-                < ContentPasteGoOutlinedIcon sx={{ color: '#430089' }} />
+                < ContentPasteGoOutlinedIcon sx={{ color: '#5c0931' }} />
               </ListItemIcon>
               <ListItemText primary="Content" sx={{ opacity: open ? 1 : 0 }} />
 
@@ -321,7 +321,7 @@ export default function MiniDrawer() {
               <List component="div" disablePadding>
                 <ListItemButton sx={{ pl: 4 }} href='/content/contentList'>
                   <ListItemIcon>
-                    <ChecklistOutlinedIcon sx={{ color: '#430089' }} />
+                    <ChecklistOutlinedIcon sx={{ color: '#5c0931' }} />
                   </ListItemIcon>
                   <ListItemText primary="List" />
 
@@ -329,7 +329,7 @@ export default function MiniDrawer() {
                 <ListItemButton sx={{ pl: 4 }} href='/content/uploadFiles'>
 
                   <ListItemIcon>
-                    <FileOpenIcon sx={{ color: '#430089' }} />
+                    <FileOpenIcon sx={{ color: '#5c0931' }} />
                   </ListItemIcon>
                   <ListItemText primary="Add Files" />
 
@@ -365,7 +365,7 @@ export default function MiniDrawer() {
                   justifyContent: 'center',
                 }}
               >
-                <LogoutIcon sx={{ color: '#430089' }} />
+                <LogoutIcon sx={{ color: '#5c0931' }} />
               </ListItemIcon>
               <ListItemText primary="Log Out" sx={{ opacity: open ? 1 : 0 }} />
 

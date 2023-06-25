@@ -18,7 +18,7 @@ export default function UserList(){
              mb:{lg:'2rem', md:'1rem',sm:'1rem'},
    
              }}>
-                <Stack alignItems='center' justifyContent="center"><Typography variant='h4' sx={{color:'purple'}}><b>USERS LIST</b></Typography></Stack>
+                <Stack alignItems='center' justifyContent="center"><Typography variant='h4' sx={{color:'#5c0931'}}><b>USERS LIST</b></Typography></Stack>
                             <Stack direction={'column'} alignItems='center' justifyContent='center'>
                 <Stack flexDirection='row' justifyContent='space-between' sx={{gap:{lg:'30rem', md:'30rem', sm:'30rem'}}}>
                     <TextField
@@ -34,7 +34,7 @@ export default function UserList(){
                     {/* <Button onClick={handleOpen} sx={{width:'150px',height:'50px'}}>Add New</Button> */}
                     <Button
                         href='/users/createUser'
-                        style={{ background: 'linear-gradient(to right top, #430089, #82ffa1)', color: '#FFFFFF', width: '150px', height: '50px' }}
+                        style={{ background: '#5c0931', color: '#FFFFFF', width: '150px', height: '50px' }}
                     >Add New</Button></Stack></Stack>
                     <Stack><BasicTable/></Stack>
                 

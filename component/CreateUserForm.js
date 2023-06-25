@@ -101,7 +101,7 @@ const CreateUserForm = (props) => {
         <Grid container lg={12} sm={8} md={10}>
             <Paper style={paperStyle}>
                 <Grid align="center" item>
-                    <h2 style={{ color: 'purple' }}>Create User</h2>
+                    <h2 style={{ color: '#5c0931' }}>Create User</h2>
                 </Grid>
                 <Grid item>
                     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
@@ -137,7 +137,7 @@ const CreateUserForm = (props) => {
                                         helperText={<ErrorMessage name="password" />}
                                     />
                                     <Field as={Autocomplete} name="level" isOptionEqualToValue={(option) => option.level} {...defaultProps} value={level} onChange={(event, newValue) => { setLevel(newValue); }} inputValue={inputvalue} onInputChange={(event, newInputValue) => { setInputvalue(newInputValue); }} getOptionLabel={(option) => option && option.level} renderInput={(params) => <TextField {...params} placeholder='Level' required helperText={<ErrorMessage name="level" />} />} fullWidth  ></Field>
-                                    <Button type="submit" color="primary" variant="contained" disabled={isSubmitting || !isValid} fullWidth>
+                                    <Button type="submit" style={{backgroundColor:'#5c0931'}} color="primary" variant="contained" disabled={isSubmitting || !isValid} fullWidth>
                                         {isSubmitting ? 'Loading' : 'Create User'}
                                     </Button>
                                     <Button variant="outlined" color="secondary" fullWidth onClick={handleCancel}>

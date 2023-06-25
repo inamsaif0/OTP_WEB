@@ -136,7 +136,7 @@ export default function BasicTable() {
                     <TableCell align="left" sx={{ fontFamily: "inherit" }}>
                       <Stack flexDirection='row'>
                         <Button onClick={() => handleEdit(curElem.studentId)}>
-                          <EditIcon sx={{ color: '#430089' }} />
+                          <EditIcon sx={{ color: '#5c0931' }} />
                         </Button>
                       </Stack>
                     </TableCell>
