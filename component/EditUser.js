@@ -154,7 +154,7 @@ const EditUser = (props) => {
                                     ) : null}</Field>
 
                                     <Field autoComplete='off' as={TextField} label='Password' name="password"
-                                        placeholder='Enter password' type='password' fullWidth required value={password} 
+                                        placeholder='Enter password' type='password' fullWidth required value={credentials.password}
                                         onChange={(e) => {
                                             setCredentials((prev) => ({
                                               ...prev,
