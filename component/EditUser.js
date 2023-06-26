@@ -50,7 +50,7 @@ const EditUser = (props) => {
         name: Yup.string().min(4, 'too Short').max(50, 'too long').required("Required"),
         email: Yup.string().required('Required'),
         password: Yup.string().min(4, 'too Short').max(50, 'too long').required("Required"),
-        password: Yup.string().required("Required"),
+        level: Yup.string().required("Required"),
     })
     //FUNCTION TO LOGIN
 
@@ -60,7 +60,7 @@ const EditUser = (props) => {
                 studentName: name,
                 studentId: email,
                 password: password,
-                level: level.level,
+                level: level,
                 status: true
             })
             console.log(response)
@@ -198,7 +198,7 @@ const EditUser = (props) => {
                                         ) : null}
                                     </Field>
 
-                                    <Button type='submit' color='primary' variant="contained"
+                                    <Button type='submit' color='primary' variant="contained" onClick={login}
                                         style={btnstyle} >Edit User</Button>
                                 </Stack>
                             </Form>
