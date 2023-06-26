@@ -152,6 +152,7 @@ const CreateUserForm = (props) => {
                                         helperText={<ErrorMessage name="password" />}
                                     />
                                     {/* <Field as={Select} name="level" value={level} onChange={(event, newValue) => { setLevel(newValue); }} inputValue={inputvalue} onInputChange={(event, newInputValue) => { setInputvalue(newInputValue); }} getOptionLabel={(option) => option && option.level} renderInput={(params) => <TextField {...params} placeholder='Level' required helperText={<ErrorMessage name="level" />} />} fullWidth  ></Field> */}
+                                    <label htmlFor="level">Level</label>
                                     <Field
                                         as={Select}
                                         name="level"
