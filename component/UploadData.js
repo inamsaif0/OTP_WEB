@@ -81,7 +81,7 @@ const CreateUserForm = (props) => {
                 student: student.studentName,
                 teacher: teacher.teacherName,
                 level: level.level,
-                date: date,
+                date: new Date(),
                 fileUrl:location
             })
             console.log(response)
@@ -213,10 +213,7 @@ const CreateUserForm = (props) => {
 
                                     />
 
-                                    <Field as={LocalizationProvider} dateAdapter={AdapterDayjs} name='Value'  >
-
-                                        <Field as={DatePicker} format="YYYY-MM-DD" selected={date} name="Value" onChange={(newValue) => { setDate(newValue) }} renderInput={(params) => <TextField {...params} helperText={<ErrorMessage name="Value" />} required />} />
-                                    </Field>
+                                
 
                                     <input
                                         required
