@@ -20,15 +20,16 @@ const userLists = async (req, res) => {
 
         case 'POST':
             try {
-                const userEmail = await userList.find({ studenId:req.body.studentId });
-                const userName = await userList.find({studentName:req.body.studentName})
-                console.log(userName+"server check")
-                if(userEmail!==null||userName!==null){
-                    res.status(202).json({success:false,exists:true })
-                }
-                else{
+                const userEmail = await userList.findOne({ studenId:req.body.studentId });
+                const userName = await userList.findOne({studentName:req.body.studentName})
+                console.log(userEmail+"server check")
+                console.log(userEmail+"server check")
+                if(userEmail===null&&userName===null){
                     const list = await userList.create(req.body);
                     res.status(201).json({ success: true, data: list})
+                }
+                else{
+                    res.status(202).json({success:false,exists:true })
                 }
             }    
             catch (error){
