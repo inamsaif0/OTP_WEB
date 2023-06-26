@@ -24,7 +24,7 @@ const EditUser = (props) => {
     const [error, setError] = React.useState(false);
     const [value, setValue] = React.useState('');
     const [inputvalue, setInputvalue] = React.useState('')
-    const [credentials,setCredentials]=React.useState({});
+    const [credentials, setCredentials] = React.useState({});
 
 
 
@@ -37,7 +37,7 @@ const EditUser = (props) => {
     // console.log('Data:', Datas);
     const paperStyle = { padding: 20, height: 'auto', width: 400, margin: "0 auto", marginTop: '5rem', borderRadius: '15px 15px 15px 15px' }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
-    const btnstyle = { margin: '8px 0', background: '#5c0931',color:'white' }
+    const btnstyle = { margin: '8px 0', background: '#5c0931', color: 'white' }
     //STATE
     const initialValues = {
         name: '',
@@ -77,26 +77,26 @@ const EditUser = (props) => {
     //         .then((response) => response.json())
     //         .then((data) => setValue(data))
     // }, []);
-    useEffect(() => {    
+    useEffect(() => {
         getCreds();
 
     }, []);
-        async function getCreds() {
+    async function getCreds() {
 
-            console.log(props.email + " Props email")
-            await fetch('http://localhost:3000/api/getCredentials', {
-                headers: {
-                    "Content-Type": "application/json",
+        console.log(props.email + " Props email")
+        await fetch('http://localhost:3000/api/getCredentials', {
+            headers: {
+                "Content-Type": "application/json",
 
-                },
+            },
 
-                method: 'POST',
-                body: JSON.stringify({ studentId: props.email })
-            })
-                .then((response) => response.json())
-                .then((res) => setCredentials(res.data))
-            console.log(value)
-        }
+            method: 'POST',
+            body: JSON.stringify({ studentId: props.email })
+        })
+            .then((response) => response.json())
+            .then((res) => setCredentials(res.data))
+        console.log(value)
+    }
 
     useEffect(() => {
         fetch('http://localhost:3000/api/levels')
@@ -104,7 +104,7 @@ const EditUser = (props) => {
             .then((data) => setValue(data))
         // getCreds();   
 
-        
+
 
 
     }, []);
@@ -126,27 +126,27 @@ const EditUser = (props) => {
                             <Form >
                                 <Stack gap="1rem">
 
-                                    <Field  autoComplete='off' as={TextField} label='Name' name="name"
-                                        placeholder='Enter Name' fullWidth required value={credentials.studentName} 
+                                    <Field autoComplete='off' as={TextField} label='Name' name="name"
+                                        placeholder='Enter Name' fullWidth required value={credentials.studentName}
                                         onChange={(e) => {
                                             setCredentials((prev) => ({
-                                              ...prev,
-                                              studentName: e.target.value
+                                                ...prev,
+                                                studentName: e.target.value
                                             }));
-                                          }}
+                                        }}
                                         helperText={<ErrorMessage name="name" />} >
                                         {errors.firstName && touched.firstName ? (
                                             <div>{errors.firstName}</div>
                                         ) : null}
                                     </Field>
                                     <Field autoComplete='off' as={TextField} label='Email' name="email"
-                                        placeholder='Enter email' fullWidth required value={credentials.studentId} 
+                                        placeholder='Enter email' fullWidth required value={credentials.studentId}
                                         onChange={(e) => {
                                             setCredentials((prev) => ({
-                                              ...prev,
-                                              studentId: e.target.value
+                                                ...prev,
+                                                studentId: e.target.value
                                             }));
-                                          }}
+                                        }}
 
                                         helperText={<ErrorMessage name="email" />}
                                     >{errors.firstName && touched.firstName ? (
@@ -157,37 +157,47 @@ const EditUser = (props) => {
                                         placeholder='Enter password' type='password' fullWidth required value={credentials.password}
                                         onChange={(e) => {
                                             setCredentials((prev) => ({
-                                              ...prev,
-                                              password: e.target.value
+                                                ...prev,
+                                                password: e.target.value
                                             }));
-                                          }}
+                                        }}
 
                                         helperText={<ErrorMessage name="password" />} >{errors.password && touched.password ? (
                                             <div>{errors.password}</div>
                                         ) : null}</Field>
 
-                                    <Field autoComplete='off' as={Autocomplete} name="level"
+                                    <Field
+                                        autoComplete='off'
+                                        as={Autocomplete}
+                                        name="level"
+                                        value={credentials.level}
                                         {...defaultProps}
-                                        value={level}
                                         onChange={(e) => {
                                             setCredentials((prev) => ({
-                                              ...prev,
-                                              studentName: e.target.value
+                                                ...prev,
+                                                level: e.target.value
                                             }));
-                                          }}
-
-                                        inputValue={credentials.level}
+                                        }}
+                                        inputValue={inputvalue}
                                         onInputChange={(event, newInputValue) => {
                                             setInputvalue(newInputValue);
                                         }}
                                         id="controllable-states-demo"
                                         getOptionLabel={(option) => option && option.level}
-
-                                        renderInput={(params) => <TextField {...params} placeholder='Level' />}
+                                        renderInput={(params) => (
+                                            <TextField
+                                                {...params}
+                                                placeholder='Level'
+                                                value={credentials.level}
+                                            />
+                                        )}
                                         fullWidth
-                                    >{errors.level && touched.level ? (
-                                        <div>{errors.level}</div>
-                                    ) : null}</Field>
+                                    >
+                                        {errors.level && touched.level ? (
+                                            <div>{errors.level}</div>
+                                        ) : null}
+                                    </Field>
+
                                     <Button type='submit' color='primary' variant="contained"
                                         style={btnstyle} >Edit User</Button>
                                 </Stack>
