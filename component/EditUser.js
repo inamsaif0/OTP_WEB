@@ -113,90 +113,85 @@ const EditUser = (props) => {
         getOptionLabel: (option) => option.level,
     };
     return (
-        <Grid container lg='12' sm='8' md="10" shrink={false}>
-            <Paper style={paperStyle}>
-                <Grid align='center' item>
-                    <h2 style={{ color: '#5c0931' }}>{props.title}</h2>
-                </Grid>
-                <Grid item>
-                    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={updateUser}>
-                        {({ props, errors, touched }) => (
-                            <Form >
-                                <Stack gap="1rem">
+        <>
+            {credentials && <Grid container lg='12' sm='8' md="10" shrink={false}>
+                <Paper style={paperStyle}>
+                    <Grid align='center' item>
+                        <h2 style={{ color: '#5c0931' }}>{props.title}</h2>
+                    </Grid>
+                    <Grid item>
+                        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={updateUser}>
+                            {({ props, errors, touched }) => (
+                                <Form >
+                                    <Stack gap="1rem">
 
-                                    <Field autoComplete='off' as={TextField} label='Name' name="name"
-                                        placeholder='Enter Name' fullWidth required value={credentials.studentName}
-                                        onChange={(e) => {
-                                            setCredentials((prev) => ({
-                                                ...prev,
-                                                studentName: e.target.value
-                                            }));
-                                        }}
-                                        helperText={<ErrorMessage name="name" />} >
-                                        {errors.firstName && touched.firstName ? (
+                                        <Field autoComplete='off' as={TextField} label='Name' name="name"
+                                            placeholder='Enter Name' fullWidth required value={credentials.studentName}
+                                            onChange={(e) => {
+                                                setCredentials((prev) => ({
+                                                    ...prev,
+                                                    studentName: e.target.value
+                                                }));
+                                            }}
+                                            helperText={<ErrorMessage name="name" />} >
+                                            {errors.firstName && touched.firstName ? (
+                                                <div>{errors.firstName}</div>
+                                            ) : null}
+                                        </Field>
+                                        <Field autoComplete='off' as={TextField} label='Email' name="email"
+                                            placeholder='Enter email' fullWidth required value={credentials.studentId}
+                                            onChange={(e) => {
+                                                setCredentials((prev) => ({
+                                                    ...prev,
+                                                    studentId: e.target.value
+                                                }));
+                                            }}
+
+                                            helperText={<ErrorMessage name="email" />}
+                                        >{errors.firstName && touched.firstName ? (
                                             <div>{errors.firstName}</div>
-                                        ) : null}
-                                    </Field>
-                                    <Field autoComplete='off' as={TextField} label='Email' name="email"
-                                        placeholder='Enter email' fullWidth required value={credentials.studentId}
-                                        onChange={(e) => {
-                                            setCredentials((prev) => ({
-                                                ...prev,
-                                                studentId: e.target.value
-                                            }));
-                                        }}
-
-                                        helperText={<ErrorMessage name="email" />}
-                                    >{errors.firstName && touched.firstName ? (
-                                        <div>{errors.firstName}</div>
-                                    ) : null}</Field>
-
-                                    <Field autoComplete='off' as={TextField} label='Password' name="password"
-                                        placeholder='Enter password' type='password' fullWidth required value={credentials.password}
-                                        onChange={(e) => {
-                                            setCredentials((prev) => ({
-                                                ...prev,
-                                                password: e.target.value
-                                            }));
-                                        }}
-
-                                        helperText={<ErrorMessage name="password" />} >{errors.password && touched.password ? (
-                                            <div>{errors.password}</div>
                                         ) : null}</Field>
 
-                                {credentials.level&&<Autocomplete
-                                    label="level"
-                                        name={"level"}
-                                        options={value.data?.map(option => option.level)}
-                                        value={credentials.level}
-                                        onChange={(e) => {
-                                            setCredentials((prev) => ({
-                                                ...prev,
-                                                password: e.target.value
-                                            }));
-                                        }}
-                                        
-                                        inputValue={credentials.level}
-                                        onInputChange={(e) => {
-                                            setCredentials((prev) => ({
-                                                ...prev,
-                                                password: e.target.value
-                                            }));
-                                        }}
-                                        renderInput={(params) => (
-                                            <TextField className="autoCompleteTxt"{...params} label="Level" />
-                                        )}
-                                    />}
+                                        <Field autoComplete='off' as={TextField} label='Password' name="password"
+                                            placeholder='Enter password' type='password' fullWidth required value={credentials.password}
+                                            onChange={(e) => {
+                                                setCredentials((prev) => ({
+                                                    ...prev,
+                                                    password: e.target.value
+                                                }));
+                                            }}
 
-                                    <Button type='submit' color='primary' variant="contained"
-                                        style={btnstyle} >Edit User</Button>
-                                </Stack>
-                            </Form>
-                        )}
-                    </Formik>
-                </Grid>
-            </Paper>
-        </Grid >
+                                            helperText={<ErrorMessage name="password" />} >{errors.password && touched.password ? (
+                                                <div>{errors.password}</div>
+                                            ) : null}</Field>
+
+                                        {value&&value.data&&credentials.level && <Autocomplete
+                                            label="level"
+                                            name="level"
+                                            options={value.data?.map(option => option.level)}
+                                            value={credentials.level}
+                                            onChange={(e, newValue) => {
+                                                setCredentials((prev) => ({
+                                                    ...prev,
+                                                    level: newValue || '' // Set the selected value or an empty string if newValue is null or undefined
+                                                }));
+                                            }}
+                                            renderInput={(params) => (
+                                                <TextField className="autoCompleteTxt" {...params} label="Level" />
+                                            )}
+                                        />
+                                        }
+
+                                        <Button type='submit' color='primary' variant="contained"
+                                            style={btnstyle} >Edit User</Button>
+                                    </Stack>
+                                </Form>
+                            )}
+                        </Formik>
+                    </Grid>
+                </Paper>
+            </Grid >}
+        </>
     )
 
 }
