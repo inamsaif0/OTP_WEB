@@ -96,11 +96,11 @@ const EditUser = (props) => {
     }
 
     useEffect(() => {
-        async function getLevels(){
+        async function getLevels() {
 
-           await fetch('http://localhost:3000/api/levels')
-            .then((response) => response.json())
-            .then((data) => setValue(data))
+            await fetch('http://localhost:3000/api/levels')
+                .then((response) => response.json())
+                .then((data) => setValue(data))
         }
         // getCreds();   
         getLevels();
@@ -164,25 +164,31 @@ const EditUser = (props) => {
                                             <div>{errors.password}</div>
                                         ) : null}</Field>
 
-                                    <Field
-                                        autoComplete='off'
-                                        as={TextField}
-                                        required
+                                {credentials.level&&<Autocomplete
+                                    label="level"
+                                        name={"level"}
+                                        options={value.data?.map(option => option.level)}
                                         value={credentials.level}
-                                        name="level"
-                                        id="controllable-states-demo"
-                                        onChange={(e)=>{
+                                        onChange={(e) => {
                                             setCredentials((prev) => ({
                                                 ...prev,
-                                                level: e.target.value
+                                                password: e.target.value
                                             }));
-                                    }
-                                    }
-                                        fullWidth
-                                    >
-                                    </Field>
+                                        }}
+                                        
+                                        inputValue={credentials.level}
+                                        onInputChange={(e) => {
+                                            setCredentials((prev) => ({
+                                                ...prev,
+                                                password: e.target.value
+                                            }));
+                                        }}
+                                        renderInput={(params) => (
+                                            <TextField className="autoCompleteTxt"{...params} label="Level" />
+                                        )}
+                                    />}
 
-                                    <Button type='submit' color='primary' variant="contained" 
+                                    <Button type='submit' color='primary' variant="contained"
                                         style={btnstyle} >Edit User</Button>
                                 </Stack>
                             </Form>

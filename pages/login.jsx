@@ -90,6 +90,7 @@ const Login = ({ handleChange }) => {
                                 }
                                 label="Remember me"
                             />
+                            {error&&<p style={{color:"red"}}>please enter the correct credentials</p>}
                             <Button type='submit' variant="contained" disabled={props.isSubmitting}
                                 style={btnstyle} fullWidth  onClick = {login}>{props.isSubmitting ? "Loading" : "Log in"}  </Button>
                         </Stack>
