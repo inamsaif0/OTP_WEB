@@ -170,9 +170,10 @@ const EditUser = (props) => {
                                         required
                                         value={credentials.level}
                                         name="level"
-                                       
                                         id="controllable-states-demo"
-                                    
+                                        onChange={(e)=>{setCredentials({
+                                            level: e.target.value
+                                        })}}
                                         fullWidth
                                     >
                                     </Field>
