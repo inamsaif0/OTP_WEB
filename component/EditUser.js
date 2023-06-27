@@ -57,6 +57,7 @@ const EditUser = (props) => {
     const updateUser = async () => {
         if (validationSchema) {
             const response = await axios.put('http://localhost:3000/api/userList', {
+                _id:credentials._id,
                 studentName: credentials.studentName,
                 studentId: credentials.studentId,
                 password: credentials.password,
