@@ -17,7 +17,7 @@ export default function Dashboard(){
              }}>
                 <Stack alignItems='center' justifyContent="center"><Typography variant='h4' sx={{color:'#5c0931'}}><b>NOTE LIST</b></Typography></Stack>
                             <Stack direction={'column'} alignItems='center' justifyContent='center'>
-                <Stack flexDirection='row' justifyContent='right' ml={'600px'}>
+                <Stack flexDirection='row' justifyContent='right' ml={'700px'}>
 
                     {/* <Button onClick={handleOpen} sx={{width:'150px',height:'50px'}}>Add New</Button> */}
                     <Button

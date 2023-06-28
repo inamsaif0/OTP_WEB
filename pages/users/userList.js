@@ -20,18 +20,8 @@ export default function UserList(){
              }}>
                 <Stack alignItems='center' justifyContent="center"><Typography variant='h4' sx={{color:'#5c0931'}}><b>USERS LIST</b></Typography></Stack>
                             <Stack direction={'column'} alignItems='center' justifyContent='center'>
-                <Stack flexDirection='row' justifyContent='space-between' sx={{gap:{lg:'30rem', md:'30rem', sm:'30rem'}}}>
-                    <TextField
-                        color='error'
-                        label="Search by name"
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment>
-                                    <SearchIcon />
-                                </InputAdornment>
-                            )
-                        }}
-                    />
+                <Stack flexDirection='row' justifyContent='space-between' ml={'700px'}>
+
                     {/* <Button onClick={handleOpen} sx={{width:'150px',height:'50px'}}>Add New</Button> */}
                     <Button
                         href='/users/createUser'
