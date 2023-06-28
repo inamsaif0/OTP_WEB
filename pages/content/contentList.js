@@ -15,7 +15,7 @@ export default function Dashboard(){
              ml:{lg:'5rem', md:'15rem', sm:'1rem'},
              mb:{lg:'2rem', md:'1rem',sm:'1rem'},
              }}>
-                <Stack alignItems='center' justifyContent="center"><Typography variant='h4' sx={{color:'#5c0931'}}><b>CONTENT LIST</b></Typography></Stack>
+                <Stack alignItems='center' justifyContent="center"><Typography variant='h4' sx={{color:'#5c0931'}}><b>NOTE LIST</b></Typography></Stack>
                             <Stack direction={'column'} alignItems='center' justifyContent='center'>
                 <Stack flexDirection='row' justifyContent='space-between'  sx={{gap:{lg:'30rem', md:'20rem',sm:'20rem'}}} >
                     <TextField
