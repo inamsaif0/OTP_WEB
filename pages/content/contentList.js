@@ -17,18 +17,8 @@ export default function Dashboard(){
              }}>
                 <Stack alignItems='center' justifyContent="center"><Typography variant='h4' sx={{color:'#5c0931'}}><b>NOTE LIST</b></Typography></Stack>
                             <Stack direction={'column'} alignItems='center' justifyContent='center'>
-                <Stack flexDirection='row' justifyContent='space-between'  sx={{gap:{lg:'30rem', md:'20rem',sm:'20rem'}}} >
-                    <TextField
-                        color="error"
-                        label="Search by name"
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment>
-                                    <SearchIcon />
-                                </InputAdornment>
-                            )
-                        }}
-                    />
+                <Stack flexDirection='row' justifyContent='right' ml={'600px'}>
+
                     {/* <Button onClick={handleOpen} sx={{width:'150px',height:'50px'}}>Add New</Button> */}
                     <Button
                         href='/content/uploadFiles'
