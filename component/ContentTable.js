@@ -253,7 +253,7 @@ export default function ContentTable() {
               <TableRow>
                 <TableCell><b>Student No</b></TableCell>
                 <TableCell align='left'><b>File Name</b></TableCell>
-                <TableCell align="left"><b>File Type&nbsp;(PDF)</b></TableCell>
+                <TableCell align="left"><b>File Type</b></TableCell>
                 <TableCell align="left"><b>Student</b></TableCell>
                 <TableCell align="left"><b>Teacher</b></TableCell>
                 <TableCell align="left"><b>Level</b></TableCell>
