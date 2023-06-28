@@ -153,7 +153,7 @@ const CreateUserForm = (props) => {
             <Paper style={paperStyle} container sx={{ width: { lg: 400, md: 300, sm: 200 } }} >
                 <Grid align='center' item>
 
-                    <h4>Upload Files</h4>
+                    <h4>Upload Notes</h4>
                 </Grid>
                 <Grid item>
                     <Formik initialValues={initialValues} onSubmit={AddingFiles} validationSchema={validationSchema}>
@@ -228,7 +228,7 @@ const CreateUserForm = (props) => {
                                     }
 
                                     <Button type='submit' color='secondary' variant="contained" disabled={props.isSubmitting}
-                                        style={btnstyle} fullWidth >{props.isSubmitting ? "Loading" : "Add Content"}</Button>
+                                        style={btnstyle} fullWidth >{props.isSubmitting ? "Loading" : "Upload"}</Button>
                                 </Stack>
 
                             </Form>
