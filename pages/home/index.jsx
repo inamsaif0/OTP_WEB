@@ -314,7 +314,7 @@ export default function MiniDrawer() {
 
                 < ContentPasteGoOutlinedIcon sx={{ color: '#5c0931' }} />
               </ListItemIcon>
-              <ListItemText primary="Content" sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary="Notes" sx={{ opacity: open ? 1 : 0 }} />
 
             </ListItemButton>
             <Collapse in={col} timeout="auto" unmountOnExit>
