@@ -60,20 +60,17 @@ export default async function AdminAuth(req,res){
         })
         console.log(result)
         if(result!==null){
-            const token = jwt.sign({ email : email , password : password },'secretKey')
-            setCookie('token',token,{
-                req,
-                res,
-                maxAge : 60 * 60 * 24 * 1 ,
-                httpOnly : true
-            })
             res.json({
                 success : true,
                 data:result
             })
+            return;
         }
-        else res.json({
+        else {
+            res.json({
             success : false
         })
+        return;
+    }
     }
 }

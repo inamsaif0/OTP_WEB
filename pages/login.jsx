@@ -14,6 +14,8 @@ const Login = ({ handleChange }) => {
     //STYLING
     const router = useRouter();
     const [Datas, setDatas] = useState([]);
+    const [error,setError] = useState(false)
+
    
     // console.log('Data:', Datas);
     const paperStyle = { padding: 20, height: 'auto', width: 300, margin: "0 auto", marginTop:'5rem', borderRadius:'15px 15px 15px 15px' }
@@ -42,7 +44,6 @@ const Login = ({ handleChange }) => {
 
     }
     // const router = useRouter()
-    const [error,setError] = useState(false)
     const login = async (values, props) => {
         const response = await axios.post('http://localhost:3000/api/login/login',{
             email :  values.username,
@@ -50,10 +51,11 @@ const Login = ({ handleChange }) => {
         })
         console.log(response)
         if(response.data.success) {
-            console.log(response)
+            console.log(response.data.success)
             router.replace('/Dashboard')
         } 
-        else{
+        else if(!response.data.success){
+            console.log(response.data.success)
             setError(true)
         } 
     }
@@ -90,13 +92,14 @@ const Login = ({ handleChange }) => {
                                 }
                                 label="Remember me"
                             />
-                            {error&&<p style={{color:"red"}}>please enter the correct credentials</p>}
+                           
                             <Button type='submit' variant="contained" disabled={props.isSubmitting}
-                                style={btnstyle} fullWidth  onClick = {login}>{props.isSubmitting ? "Loading" : "Log in"}  </Button>
+                                style={btnstyle} fullWidth>{props.isSubmitting ? "Loading" : "Log in"}  </Button>
                         </Stack>
                         </Form>
                     )}
                 </Formik>
+                {error?<p style={{color:"red"}}>please enter the correct credentials</p>:null}
             </Paper>
         </Grid>
     )
